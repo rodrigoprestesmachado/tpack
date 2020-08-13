@@ -1,0 +1,37 @@
+INSERT INTO `SESSION` (`ID`,`TITLE`) VALUES (2,'Classifique as seguintes informações');
+INSERT INTO `SESSION` (`ID`,`TITLE`) VALUES (3,'Avalie as seguintes afirmações em relação ao conteúdo em que você escreveu o plano de aula');
+INSERT INTO `SESSION` (`ID`,`TITLE`) VALUES (4,'Avalie as seguintes afirmações sobre tecnologias digitais (computadores, tablets, telefones celulares, Internet etc.)');
+INSERT INTO `SESSION` (`ID`,`TITLE`) VALUES (5,'Avalie as seguintes afirmações com relação ao ensino em que você não usa nenhuma tecnologia ou mídia especial');
+INSERT INTO `SESSION` (`ID`,`TITLE`) VALUES (6,'Classifique as seguintes afirmações');
+INSERT INTO `SESSION` (`ID`,`TITLE`) VALUES (7,'Avalie as seguintes afirmações em relação ao conteúdo em que você escreveu o plano de aula');
+INSERT INTO `SESSION` (`ID`,`TITLE`) VALUES (8,'Avalie as seguintes afirmações em relação ao conteúdo em que você escreveu o plano de aula');
+
+
+INSERT INTO `QUESTION` (`ID`,`TEXT`,`TYPE`,`SESSION_ID`) VALUES (1,'Posso adaptar minha abordagem de ensino com base no que os estudantes atualmente entendem',1,2);
+INSERT INTO `QUESTION` (`ID`,`TEXT`,`TYPE`,`SESSION_ID`) VALUES (2,'Posso adaptar meu método de ensino para diferentes estudantes',1,2);
+INSERT INTO `QUESTION` (`ID`,`TEXT`,`TYPE`,`SESSION_ID`) VALUES (3,'Posso usar uma ampla variedade de abordagens de ensino em sala de aula',1,2);
+INSERT INTO `QUESTION` (`ID`,`TEXT`,`TYPE`,`SESSION_ID`) VALUES (4,'Posso avaliar a aprendizagem dos estudantes de várias maneiras',1,2);
+INSERT INTO `QUESTION` (`ID`,`TEXT`,`TYPE`,`SESSION_ID`) VALUES (5,'Tenho conhecimento suficiente sobre o meu conteúdo de ensino',1,3);
+INSERT INTO `QUESTION` (`ID`,`TEXT`,`TYPE`,`SESSION_ID`) VALUES (6,'Posso usar uma maneira específica de pensar no meu conteúdo de ensino',1,3);
+INSERT INTO `QUESTION` (`ID`,`TEXT`,`TYPE`,`SESSION_ID`) VALUES (7,'Conheço as teorias e conceitos básicos do meu conteúdo de ensino',1,3);
+INSERT INTO `QUESTION` (`ID`,`TEXT`,`TYPE`,`SESSION_ID`) VALUES (8,'Conheço a história e o desenvolvimento de teorias importantes do meu conteúdo de ensino',1,3);
+INSERT INTO `QUESTION` (`ID`,`TEXT`,`TYPE`,`SESSION_ID`) VALUES (9,'Acompanho novas tecnologias importantes',1,4);
+INSERT INTO `QUESTION` (`ID`,`TEXT`,`TYPE`,`SESSION_ID`) VALUES (10,'Frequentemente uso tecnologia',1,4);
+INSERT INTO `QUESTION` (`ID`,`TEXT`,`TYPE`,`SESSION_ID`) VALUES (11,'Conheço muitas tecnologias diferentes',1,4);
+INSERT INTO `QUESTION` (`ID`,`TEXT`,`TYPE`,`SESSION_ID`) VALUES (12,'Tenho habilidades técnicas necessárias para usar tecnologia',1,4);
+INSERT INTO `QUESTION` (`ID`,`TEXT`,`TYPE`,`SESSION_ID`) VALUES (13,'Eu sei como selecionar abordagens de ensino eficazes para orientar o pensamento e a aprendizagem do meu conteúdo de ensino',1,5);
+INSERT INTO `QUESTION` (`ID`,`TEXT`,`TYPE`,`SESSION_ID`) VALUES (14,'Eu sei como desenvolver tarefas apropriadas para possibilitar aos estudantes um pensamento complexo do meu conteúdo de ensino',1,5);
+INSERT INTO `QUESTION` (`ID`,`TEXT`,`TYPE`,`SESSION_ID`) VALUES (15,'Eu sei como desenvolver exercícios com os quais os estudantes podem consolidar seus conhecimentos sobre o meu conteúdo de ensino',1,5);
+INSERT INTO `QUESTION` (`ID`,`TEXT`,`TYPE`,`SESSION_ID`) VALUES (16,'Eu sei como avaliar o desempenho dos estudantes no meu conteúdo de ensino ',1,5);
+INSERT INTO `QUESTION` (`ID`,`TEXT`,`TYPE`,`SESSION_ID`) VALUES (17,'Posso escolher tecnologias que aprimorem as abordagens de ensino para uma aula',1,6);
+INSERT INTO `QUESTION` (`ID`,`TEXT`,`TYPE`,`SESSION_ID`) VALUES (18,'Posso escolher tecnologias que aprimoram o aprendizado dos estudantes para uma aula',1,6);
+INSERT INTO `QUESTION` (`ID`,`TEXT`,`TYPE`,`SESSION_ID`) VALUES (19,'Posso adaptar o uso das tecnologias que estou aprendendo a diferentes atividades de ensino',1,6);
+INSERT INTO `QUESTION` (`ID`,`TEXT`,`TYPE`,`SESSION_ID`) VALUES (20,'Estou pensando criticamente sobre como usar tecnologia na minha sala de aula',1,6);
+INSERT INTO `QUESTION` (`ID`,`TEXT`,`TYPE`,`SESSION_ID`) VALUES (21,'Eu sei como os desenvolvimentos tecnológicos mudaram a área do meu assunto',1,7);
+INSERT INTO `QUESTION` (`ID`,`TEXT`,`TYPE`,`SESSION_ID`) VALUES (22,'Posso explicar quais tecnologias foram usadas em pesquisas na minha área',1,7);
+INSERT INTO `QUESTION` (`ID`,`TEXT`,`TYPE`,`SESSION_ID`) VALUES (23,'Eu sei quais novas tecnologias estão sendo desenvolvidas atualmente na área do meu assunto',1,7);
+INSERT INTO `QUESTION` (`ID`,`TEXT`,`TYPE`,`SESSION_ID`) VALUES (24,'Eu sei como usar tecnologias para participar de debates científicos na minha área',1,7);
+INSERT INTO `QUESTION` (`ID`,`TEXT`,`TYPE`,`SESSION_ID`) VALUES (25,'Posso usar estratégias que combinam conteúdo, tecnologias e abordagens de ensino que aprendi em meus cursos na sala de aula',1,8);
+INSERT INTO `QUESTION` (`ID`,`TEXT`,`TYPE`,`SESSION_ID`) VALUES (26,'Posso escolher tecnologias que aprimoram o conteúdo de uma aula',1,8);
+INSERT INTO `QUESTION` (`ID`,`TEXT`,`TYPE`,`SESSION_ID`) VALUES (27,'Posso selecionar tecnologias para uso em minha sala de aula que aprimoram o que eu ensino, como ensino e o que os estudantes aprendem',1,8);
+INSERT INTO `QUESTION` (`ID`,`TEXT`,`TYPE`,`SESSION_ID`) VALUES (28,'Posso ensinar lições que combinem adequadamente o meu conteúdo de ensino, tecnologias e abordagens de ensino',1,8);

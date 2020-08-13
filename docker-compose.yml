@@ -1,0 +1,38 @@
+version: '3.7'
+volumes:
+    database:
+services:
+    db:
+        image: mysql:latest
+        container_name: tpack-mysql
+        ports:
+            - 3306:3306
+        volumes:
+            - database:/var/lib/mysql
+        environment:
+            - MYSQL_ROOT_PASSWORD=tpack
+            - MYSQL_DATABASE=tpack
+            - MYSQL_USER=tpack
+            - MYSQL_PASSWORD=tpack
+    phpMyAdmin:
+        image: phpmyadmin/phpmyadmin:latest
+        container_name: tpack-phpmyadmin
+        environment:
+            - PMA_ARBITRARY=1
+        links:
+            - "db"
+        ports:
+            - 80:80
+        volumes:
+            - /sessions
+    app:
+        build: .
+        container_name: tpack-app
+        links:
+            - "db"
+        depends_on: 
+            - "db"
+            - "phpMyAdmin"
+        ports:
+            - 9080:9080
+            - 9443:9443
