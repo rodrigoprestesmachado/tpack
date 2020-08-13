@@ -2,7 +2,7 @@ language: java
 services:
     - docker
 jdk:
-    - oraclejdk8
+    - oraclejdk11
 script: mvn verify
 after_success:
     - wget https://raw.githubusercontent.com/DiscordHooks/travis-ci-discord-webhook/master/send.sh
