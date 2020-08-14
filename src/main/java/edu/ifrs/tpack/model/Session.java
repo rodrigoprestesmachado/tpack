@@ -16,6 +16,7 @@
  */
 package edu.ifrs.tpack.model;
 
+import java.util.List;
 import java.util.Set;
 
 import javax.json.bind.annotation.JsonbTransient;
@@ -34,12 +35,11 @@ public class Session {
 
     @Id
     @GeneratedValue
-    @JsonbTransient
     private long id;
 
     private String title;
 
     @OneToMany(mappedBy = "session", cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
-    private Set<Question> questions;
+    private List<Question> questions;
 
 }

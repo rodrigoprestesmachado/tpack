@@ -24,18 +24,15 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
-import lombok.Data;
-
-@Data
 @Entity
 public class Question {
 
     @Id
     @GeneratedValue
-    @JsonbTransient
     private long id;
 
     private String text;
@@ -43,9 +40,56 @@ public class Question {
     private QuestionType type;
 
     @ManyToOne
+    @JoinColumn(name="SESSION_ID", nullable=false, updatable=false)
+    //@Getter(AccessLevel.NONE)
     private Session session;
 
     @OneToMany(mappedBy = "question", cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+    @JsonbTransient
     private Set<Answer> answers;
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+    }
+
+    public QuestionType getType() {
+        return type;
+    }
+
+    public void setType(QuestionType type) {
+        this.type = type;
+    }
+
+    @JsonbTransient
+    public Session getSession() {
+        return session;
+    }
+
+    public void setSession(Session session) {
+        this.session = session;
+    }
+
+    public Set<Answer> getAnswers() {
+        return answers;
+    }
+
+    public void setAnswers(Set<Answer> answers) {
+        this.answers = answers;
+    }
+
+    
+
 
 }

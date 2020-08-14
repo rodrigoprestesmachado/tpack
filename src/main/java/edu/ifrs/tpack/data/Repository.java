@@ -28,13 +28,18 @@ import javax.persistence.criteria.Root;
 public abstract class Repository<T> {
 
     @PersistenceContext(name = "TpackDS")
-    private EntityManager em;
+    protected EntityManager em;
 
     public T create(final T obj) {
         this.em.persist(obj);
         return obj;
     }
 
+    /**
+     * Returns all objetcs/registers from the base
+     * 
+     * @return A List of T objects
+     */
     public List<T> read() {
         final CriteriaBuilder builder = em.getCriteriaBuilder();
         final CriteriaQuery<T> criteria = builder.createQuery(this.genericClass());
@@ -43,19 +48,41 @@ public abstract class Repository<T> {
         return em.createQuery(criteria).getResultList();
     }
 
+    /**
+     * Updates the T object
+     * 
+     * @param The T object
+     */
     public void update(T obj) {
         this.em.merge(obj);
     }
 
+    /**
+     *  Deletes the object in the data base
+     * 
+     * @param The id of the object
+     */
     public void delete(Long id) {
         T obj = em.find(this.genericClass(), id);
         this.em.remove(obj);
     }
 
+    /**
+     * Finds a specific object by id
+     * 
+     * @param The id of teh object
+     * @return The T object
+     */
     public T find(Long id) {
         return em.find(this.genericClass(), id);
     }
 
+    /**
+     * Finds the value by colum 
+     * @param column
+     * @param value
+     * @return
+     */
     public T find(String column, String value) {
         final CriteriaBuilder builder = em.getCriteriaBuilder();
         final CriteriaQuery<T> criteria = builder.createQuery(this.genericClass());

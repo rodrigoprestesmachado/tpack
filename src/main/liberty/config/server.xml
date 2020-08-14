@@ -32,7 +32,7 @@
     <dataSource jndiName="jdbc/TpackDS">
         <jdbcDriver libraryRef="MySQLLib" />
         <!-- Dev mode use: serverName="localhost" -->
-        <properties serverName="db" portNumber="3306" user="tpack" password="tpack" databaseName="tpack" />
+        <properties serverName="localhost" portNumber="3306" user="tpack" password="tpack" databaseName="tpack" />
     </dataSource>
 
 </server>
