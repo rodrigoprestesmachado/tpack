@@ -1,18 +1,18 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="TPACK XS Application"/>
+    <img alt="Vue logo" src="../assets/logo.png" />
+    <Session/>
   </div>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
-import HelloWorld from '@/components/HelloWorld.vue'; // @ is an alias to /src
+import { Component, Vue } from "vue-property-decorator";
+import Session from "@/components/Session.vue"; // @ is an alias to /src
 
 @Component({
-  components: {
-    HelloWorld,
-  },
+  components: { 
+    Session
+  }
 })
 export default class Home extends Vue {}
 </script>
