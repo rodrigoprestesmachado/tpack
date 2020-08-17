@@ -4,19 +4,24 @@
     <div v-for="question of session.questions" :key="question.id">
       <v-subheader>{{question.text}}</v-subheader>
       <v-slider
-        :v-model="answer[question.id]"
+        :value="answer[question.id]"
         thumb-label="always"
-        :step="0.1"
         @change="onChange(question.id, $event)"
+        :step="0.1"
         :max="5"
         :min="1"
-        :value="answer[question.id]"
       />
     </div>
     <div v-if="backButton">
-      <v-btn small color="#D3EAE1" v-on:click="getSession(session.id - 1)">Voltar</v-btn>
+      <v-btn small fab color="#D3EAE1" v-on:click="getSession(session.id - 1)">
+        <v-icon dark>mdi-arrow-left</v-icon>
+      </v-btn>
     </div>
-    <v-btn small color="#D3EAE1" v-on:click="getSession(session.id + 1)">Continuar</v-btn>
+    <div v-if="fowardButton">
+     <v-btn small fab color="#D3EAE1" v-on:click="getSession(session.id + 1)">
+       <v-icon dark>mdi-arrow-right</v-icon>
+    </v-btn>
+    </div>
   </v-card>
 </template>
 
@@ -34,10 +39,13 @@ export default class Session extends Vue {
   private session: any = [];
   /** controls the button used to back the sessions */
   private backButton: boolean;
+  /** controls the button used to back the sessions */
+  private fowardButton: boolean;
   
   constructor() {
     super();
     this.backButton = false;
+    this.fowardButton = true;
     this.BASE = "http://localhost:9080/service/api/";
     this.getFirstSession(this.BASE);
   }
@@ -63,7 +71,20 @@ export default class Session extends Vue {
   getSession(id: string) {
     axios.get(this.BASE + "getSession/" + id).then(response => {
       this.backButton = true;
-      this.session = response.data;
+      if (response.data)
+        this.session = response.data;
+      else{
+          if (this.fowardButton){
+            this.fowardButton = false;
+            this.backButton = true;
+          }
+          else{
+            this.fowardButton = true;
+            this.backButton = false;
+          }
+
+      }
+      
     });
   }
 
