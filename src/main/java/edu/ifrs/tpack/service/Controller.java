@@ -16,10 +16,10 @@
  */
 package edu.ifrs.tpack.service;
 
+import java.util.List;
+
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
-import javax.json.bind.Jsonb;
-import javax.json.bind.JsonbBuilder;
 import javax.transaction.Transactional;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -28,9 +28,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import edu.ifrs.tpack.data.DAOSession;
-import edu.ifrs.tpack.data.DAOSubject;
 import edu.ifrs.tpack.model.Session;
-import edu.ifrs.tpack.model.Subject;
 
 /**
  * Implements the API of the Tpack XS App
@@ -40,19 +38,14 @@ import edu.ifrs.tpack.model.Subject;
 public class Controller {
 
     @Inject
-    private DAOSubject daoSubject;
-
-    @Inject
     private DAOSession daoSession;
 
     @GET
-    @Path("/createSubject")
+    @Path("/getSessions")
+    @Produces(MediaType.APPLICATION_JSON)
     @Transactional
-    public String test() {
-        Subject s = new Subject();
-        s.setFormation("aaaaa");
-        daoSubject.create(s);
-        return "Hello World";
+    public List<Session> getSessions() {
+        return daoSession.read();
     }
 
     @GET
