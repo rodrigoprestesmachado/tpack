@@ -1,21 +1,16 @@
 <template>
   <v-app id="inspire">
-
-    <v-app-bar
-      app
-      color="#139A65"
-      dark
-    >
+    <v-app-bar app color="#139A65" dark>
       <v-toolbar-title>Tpack</v-toolbar-title>
     </v-app-bar>
 
     <v-main>
-      <session/>
+      <session />
     </v-main>
-    <v-footer
-      color="#139A65"
-      app>
-      <span class="white--text">IFRS &copy; {{ new Date().getFullYear() }}</span>
+    <v-footer color="#139A65" app>
+      <span class="white--text"
+        >IFRS &copy; {{ new Date().getFullYear() }}</span
+      >
     </v-footer>
   </v-app>
 </template>

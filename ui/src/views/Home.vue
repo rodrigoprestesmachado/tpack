@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <img alt="Vue logo" src="../assets/logo.png" />
-    <Session/>
+    <Session />
   </div>
 </template>
 
@@ -10,7 +10,7 @@ import { Component, Vue } from "vue-property-decorator";
 import Session from "@/components/Session.vue"; // @ is an alias to /src
 
 @Component({
-  components: { 
+  components: {
     Session
   }
 })

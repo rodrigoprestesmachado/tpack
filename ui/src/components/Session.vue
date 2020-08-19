@@ -1,8 +1,8 @@
 <template>
   <v-card v-if="loaded" flat color="transparent">
-    {{sessions[current].title}}
+    {{ sessions[current].title }}
     <div v-for="question of sessions[current].questions" :key="question.id">
-      <v-subheader>{{question.text}}</v-subheader>
+      <v-subheader>{{ question.text }}</v-subheader>
       <v-slider
         :value="answer[question.id]"
         thumb-label="always"
@@ -12,16 +12,30 @@
         :min="1"
       />
     </div>
-    <v-btn v-if="previousButton" small fab color="#D3EAE1" v-on:click="checkButtonsState(-1)">
+    <v-btn
+      v-if="previousButton"
+      small
+      fab
+      color="#D3EAE1"
+      v-on:click="checkButtonsState(-1)"
+    >
       <v-icon dark>mdi-arrow-left</v-icon>
     </v-btn>
-    <v-btn v-if="nextButton" small fab color="#D3EAE1" v-on:click="checkButtonsState(1)">
+    <v-btn
+      v-if="nextButton"
+      small
+      fab
+      color="#D3EAE1"
+      v-on:click="checkButtonsState(1)"
+    >
       <v-icon dark>mdi-arrow-right</v-icon>
     </v-btn>
   </v-card>
 </template>
 
 <script lang="ts">
+// To use in Electron
+// https://medium.com/@bromix/electron-application-with-vue-js-and-vuetify-f2a1f9c749b8
 import axios from "axios";
 import { Component, Vue } from "vue-property-decorator";
 
@@ -42,7 +56,7 @@ export default class Session extends Vue {
   /** kust controls the load from server  */
   private loaded = false;
 
-  mounted(){
+  mounted() {
     this.getSessions();
   }
 
@@ -60,16 +74,14 @@ export default class Session extends Vue {
     });
   }
 
-  checkButtonsState(next:number){
-    if ((this.current + next) == (this.sessions.length - 1)){
+  checkButtonsState(next: number) {
+    if (this.current + next == this.sessions.length - 1) {
       this.nextButton = false;
       this.previousButton = true;
-    }
-    else if((this.current + next) == 0 ){
+    } else if (this.current + next == 0) {
       this.nextButton = true;
       this.previousButton = false;
-    }
-    else if((this.current + next) > 0 ){
+    } else if (this.current + next > 0) {
       this.nextButton = true;
       this.previousButton = true;
     }
