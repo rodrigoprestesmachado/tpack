@@ -18,7 +18,7 @@ package edu.ifrs.tpack.model;
 
 public enum QuestionType {
 
-    BINARY(0), SCALE(1), TEXT_SHORT(2), TEXT_LONG(3);
+    BINARY(0), SCALE(1), MULTIPLE(2), TEXT_SHORT(3), TEXT_LONG(4);
 
     private int value;
 

@@ -16,7 +16,7 @@
  */
 package edu.ifrs.tpack.model;
 
-import java.util.Set;
+import java.util.List;
 
 import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.CascadeType;
@@ -40,13 +40,14 @@ public class Question {
     private QuestionType type;
 
     @ManyToOne
-    @JoinColumn(name="SESSION_ID", nullable=false, updatable=false)
-    //@Getter(AccessLevel.NONE)
+    @JoinColumn(name = "SESSION_ID", nullable = false)
     private Session session;
 
     @OneToMany(mappedBy = "question", cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
-    @JsonbTransient
-    private Set<Answer> answers;
+    private List<Choice> choices;
+
+    @OneToMany(mappedBy = "question", cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+    private List<Answer> answers;
 
     public long getId() {
         return id;
@@ -81,15 +82,20 @@ public class Question {
         this.session = session;
     }
 
-    public Set<Answer> getAnswers() {
+    public List<Answer> getAnswers() {
         return answers;
     }
 
-    public void setAnswers(Set<Answer> answers) {
+    public void setAnswers(List<Answer> answers) {
         this.answers = answers;
     }
 
-    
+    public List<Choice> getChoices() {
+        return choices;
+    }
 
+    public void setChoices(List<Choice> choices) {
+        this.choices = choices;
+    }
 
 }

@@ -16,24 +16,17 @@
  */
 package edu.ifrs.tpack.model;
 
-import java.sql.Timestamp;
-import java.util.Calendar;
-
 import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
-import lombok.Data;
-
-@Data
 @Entity
 public class Answer {
 
     @Id
     @GeneratedValue
-    @JsonbTransient
     private long id;
 
     @ManyToOne
@@ -42,14 +35,39 @@ public class Answer {
     @ManyToOne
     private Question question;
 
-    private Timestamp moment;
+    private String answer;
 
-    private String response;
+    public long getId() {
+        return id;
+    }
 
-    // Constructor
-    public Answer() {
-        Calendar calendar = Calendar.getInstance();
-        this.moment = new Timestamp(calendar.getTimeInMillis());
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public Subject getSubject() {
+        return subject;
+    }
+
+    public void setSubject(Subject subject) {
+        this.subject = subject;
+    }
+
+    public Question getQuestion() {
+        return question;
+    }
+
+    public void setQuestion(Question question) {
+        this.question = question;
+    }
+
+    @JsonbTransient
+    public String getAnswer() {
+        return answer;
+    }
+
+    public void setAnswer(String answer) {
+        this.answer = answer;
     }
 
 }

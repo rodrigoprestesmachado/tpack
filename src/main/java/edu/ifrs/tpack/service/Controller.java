@@ -25,7 +25,9 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import edu.ifrs.tpack.data.DAOSession;
 import edu.ifrs.tpack.model.Session;
@@ -45,7 +47,13 @@ public class Controller {
     @Produces(MediaType.APPLICATION_JSON)
     @Transactional
     public List<Session> getSessions() {
-        return daoSession.read();
+        String errorMessage = null;
+        try {
+            return daoSession.read();
+        } catch (Exception e) {
+            errorMessage = "The database is out of service ";
+            throw new WebApplicationException(errorMessage, Response.Status.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @GET

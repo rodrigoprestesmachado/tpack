@@ -16,28 +16,46 @@
  */
 package edu.ifrs.tpack.model;
 
-import java.util.List;
-
-import javax.persistence.CascadeType;
+import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToOne;
 
-import lombok.Data;
-
-@Data
 @Entity
-public class Session {
+public class Choice {
 
     @Id
     @GeneratedValue
     private long id;
 
-    private String title;
+    private String text;
 
-    @OneToMany(mappedBy = "session", cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
-    private List<Question> questions;
+    @ManyToOne
+    private Question question;
 
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+    }
+
+    @JsonbTransient
+    public Question getQuestion() {
+        return question;
+    }
+
+    public void setQuestion(Question question) {
+        this.question = question;
+    }
 }
