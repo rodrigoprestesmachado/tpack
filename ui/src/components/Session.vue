@@ -42,6 +42,7 @@
                 elevation="5"
                 :color="active ? '#8DFF94' : ''"
                 height="50"
+                @load="test()"
                 @click="handleMultiple(question.id, choice.id)"
               >{{choice.text}}</v-card>
             </v-item>
@@ -119,6 +120,10 @@ export default class Session extends Vue {
   /** Indicates an app error */
   private errorMessage = "";
 
+  test() {
+    console.log("aaaa");
+  }
+
   mounted() {
     this.getSessions();
   }
@@ -134,13 +139,11 @@ export default class Session extends Vue {
       const resp = await axios.get(url);
       this.sessions = resp.data;
       this.loadFromLocalStorage();
-      this.loaded = true;
     } catch (error) {
       this.errorMessage = "Serviço indisponível no momento";
       console.log(this.errorMessage);
     }
   }
-
   /**
    * Controls the changes of the sessions
    *
@@ -201,9 +204,16 @@ export default class Session extends Vue {
    * Loads the data from local storage
    */
   loadFromLocalStorage() {
-    for (let i = 0; i < localStorage.length; i++) {
-      this.answer[i] = localStorage.getItem(i.toString());
+    const keys = Object.keys(localStorage);
+    let i = keys.length;
+    while (i--) {
+      const value = localStorage.getItem(keys[i]);
+      value.indexOf("[") === 0
+        ? (this.answer[keys[i]] = JSON.parse(value))
+        : (this.answer[keys[i]] = value);
     }
+    // loaded from localstorage
+    this.loaded = true;
   }
 }
 </script>
