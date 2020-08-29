@@ -24,9 +24,8 @@
         <!-- Scale queston  -->
         <v-slider
           v-if="question.type == 'SCALE'"
-          :value="answer[question.id]"
+          v-model="answer[question.id]"
           thumb-label="always"
-          @change="handleScale(question.id, $event)"
           :step="0.1"
           :max="5"
           :min="1"
@@ -35,18 +34,15 @@
 
         <!-- Multiple choice question -->
         <template v-if="question.type == 'MULTIPLE'">
-          <v-item-group v-for="choice of question.choices" :key="choice.id">
-            <v-item cols="12" v-slot:default="{ active }">
-              <v-card
-                class="ma-3"
-                elevation="5"
-                :color="active ? '#8DFF94' : ''"
-                height="50"
-                @load="test()"
-                @click="handleMultiple(question.id, choice.id)"
-              >{{choice.text}}</v-card>
-            </v-item>
-          </v-item-group>
+          <v-select
+            v-model="answer[question.id]"
+            :items="question.choices"
+            item-value="id"
+            multiple
+            eager="true"
+            hint="Opções"
+            aria-label="escolha uma ou mais opções"
+          ></v-select>
         </template>
       </div>
 
@@ -115,16 +111,16 @@ export default class Session extends Vue {
   private previousButton = false;
   /** controls the current session */
   private current = 0;
-  /** kust controls the load from server  */
+  /** controls if the data was loaded from server  */
   private loaded = false;
-  /** Indicates an app error */
+  /** indicates an app error */
   private errorMessage = "";
 
-  test() {
-    console.log("aaaa");
+  mounted() {
+    this.loadFromLocalStorage();
   }
 
-  mounted() {
+  created() {
     this.getSessions();
   }
 
@@ -138,12 +134,13 @@ export default class Session extends Vue {
     try {
       const resp = await axios.get(url);
       this.sessions = resp.data;
-      this.loadFromLocalStorage();
+      this.loaded = true;
     } catch (error) {
       this.errorMessage = "Serviço indisponível no momento";
       console.log(this.errorMessage);
     }
   }
+
   /**
    * Controls the changes of the sessions
    *
@@ -151,6 +148,9 @@ export default class Session extends Vue {
    * next=1 move to the next session and next=-1 moves to previus session
    */
   nextSession(next: number) {
+    // saves in local storage
+    this.saveLocalStorage();
+
     if (this.current + next == this.sessions.length - 1) {
       this.nextButton = false;
       this.previousButton = true;
@@ -164,39 +164,13 @@ export default class Session extends Vue {
     this.current = this.current + next;
   }
 
-  /**
-   * Registers in local storage the answer of the user for slider component
-   *
-   * @param idQuestion The identificator of the question
-   * @param response  The answer of the user
+  /***
+   * Saves the data from answer array in local storage
    */
-  handleScale(idQuestion: string, response: string) {
-    // this.answer only controls the user's interface
-    this.answer[idQuestion] = response;
-    // store the answers in the local storage
-    localStorage.setItem(idQuestion, response);
-  }
-
-  /**
-   * Registers in local storage the answer of the user for multiple complenent
-   *
-   * @param idQuestion The identificator of the question
-   * @param idChoice   The identificator of the choice (option)
-   */
-  handleMultiple(idQuestion: string, idChoice: string) {
-    const strJson = localStorage.getItem(idQuestion);
-    if (strJson === null) {
-      // Creates an entry in the local storage
-      const choices: string[] = [];
-      choices.push(idChoice);
-      localStorage.setItem(idQuestion, JSON.stringify(choices));
-    } else {
-      // Updates the local storage
-      const answers = JSON.parse(strJson);
-      const index = answers.indexOf(idChoice);
-      // -1 insert otherwise remove
-      index === -1 ? answers.push(idChoice) : answers.splice(index, 1);
-      localStorage.setItem(idQuestion, JSON.stringify(answers));
+  saveLocalStorage() {
+    for (const key in this.answer) {
+      const value = this.answer[key];
+      localStorage.setItem(key, value);
     }
   }
 
@@ -204,16 +178,22 @@ export default class Session extends Vue {
    * Loads the data from local storage
    */
   loadFromLocalStorage() {
-    const keys = Object.keys(localStorage);
-    let i = keys.length;
-    while (i--) {
-      const value = localStorage.getItem(keys[i]);
-      value.indexOf("[") === 0
-        ? (this.answer[keys[i]] = JSON.parse(value))
-        : (this.answer[keys[i]] = value);
+    if (localStorage.length !== 0) {
+      console.log("storage");
+      const keys = Object.keys(localStorage);
+      let i = keys.length;
+      while (i--) {
+        const value = localStorage.getItem(keys[i]);
+
+        if (value.indexOf(",") === -1) {
+          this.answer[keys[i]] = value;
+        } else {
+          this.answer[keys[i]] = value.split(",");
+        }
+      }
+    } else {
+      console.log("storage vazio");
     }
-    // loaded from localstorage
-    this.loaded = true;
   }
 }
 </script>
