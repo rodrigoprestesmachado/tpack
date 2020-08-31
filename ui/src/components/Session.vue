@@ -34,15 +34,15 @@
 
         <!-- Multiple choice question -->
         <template v-if="question.type == 'MULTIPLE'">
-          <v-select
-            v-model="answer[question.id]"
-            :items="question.choices"
-            item-value="id"
-            multiple
-            eager="true"
-            hint="Opções"
-            aria-label="escolha uma ou mais opções"
-          ></v-select>
+          <div v-for="choice of question.choices" :key="choice.id">
+            <v-checkbox
+              class="mx-5"
+              v-model="answer[question.id]"
+              :value="choice.id"
+              :label="choice.text"
+              multiple
+            ></v-checkbox>
+          </div>
         </template>
       </div>
 
@@ -116,10 +116,9 @@ export default class Session extends Vue {
   /** indicates an app error */
   private errorMessage = "";
 
-  mounted() {
-    this.loadFromLocalStorage();
-  }
-
+  /**
+   * Gets the sessions and questions from the server
+   */
   created() {
     this.getSessions();
   }
@@ -135,6 +134,7 @@ export default class Session extends Vue {
       const resp = await axios.get(url);
       this.sessions = resp.data;
       this.loaded = true;
+      this.loadFromLocalStorage();
     } catch (error) {
       this.errorMessage = "Serviço indisponível no momento";
       console.log(this.errorMessage);
@@ -179,21 +179,41 @@ export default class Session extends Vue {
    */
   loadFromLocalStorage() {
     if (localStorage.length !== 0) {
-      console.log("storage");
+      // gets all keys from local storage
       const keys = Object.keys(localStorage);
-      let i = keys.length;
-      while (i--) {
-        const value = localStorage.getItem(keys[i]);
-
-        if (value.indexOf(",") === -1) {
-          this.answer[keys[i]] = value;
+      let k = keys.length;
+      while (k--) {
+        // gets the value from local storage
+        const value = localStorage.getItem(keys[k]);
+        if (this.checkQuestionType(keys[k]) !== "MULTIPLE") {
+          this.answer[keys[k]] = value;
         } else {
-          this.answer[keys[i]] = value.split(",");
+          // When the answer is multiple we need to create a array of numbers
+          // from local storage to Vuetify render the interface
+          const strArray = value.split(",");
+          const numberArray = [];
+          for (const x in strArray) numberArray.push(Number(strArray[x]));
+          this.answer[keys[k]] = numberArray;
         }
       }
-    } else {
-      console.log("storage vazio");
     }
+  }
+
+  /**
+   * Verifies the type of the question
+   *
+   * @param idQuestion the question id that we want to check the type
+   */
+  checkQuestionType(idQuestion: string) {
+    //TODO make it faster
+    let type: string;
+    for (let index = 0; index < this.sessions.length; index++) {
+      const questions = this.sessions[index].questions;
+      for (const x in questions) {
+        if (questions[x].id == idQuestion) type = questions[x].type;
+      }
+    }
+    return type;
   }
 }
 </script>
