@@ -16,9 +16,12 @@
  */
 package edu.ifrs.tpack.model;
 
+/**
+ * Indicates the types of questions available
+ */
 public enum QuestionType {
 
-    BINARY(0), SCALE(1), MULTIPLE(2), TEXT_SHORT(3), TEXT_LONG(4);
+    BINARY(0), SCALE(1), MULTIPLE(2), UNIQUE(3), YEAR(4), AGE(5), REGION(6);
 
     private int value;
 

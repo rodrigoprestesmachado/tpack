@@ -26,10 +26,23 @@
           v-if="question.type == 'SCALE'"
           v-model="answer[question.id]"
           thumb-label="always"
+          thumb-size="25"
           :step="0.1"
           :max="5"
           :min="1"
           aria-label="classifique"
+        />
+
+        <!-- Age question -->
+        <v-slider
+          v-if="question.type == 'AGE'"
+          v-model="answer[question.id]"
+          thumb-label="always"
+          thumb-size="25"
+          :step="1"
+          :max="100"
+          :min="18"
+          aria-label="indique a sua idade"
         />
 
         <!-- Multiple choice question -->
@@ -43,6 +56,50 @@
               multiple
             ></v-checkbox>
           </div>
+        </template>
+
+        <!-- Unique choice question -->
+        <template v-if="question.type == 'UNIQUE'">
+          <v-radio-group
+            v-model="answer[question.id]"
+            :mandatory="false"
+            v-for="choice of question.choices"
+            :key="choice.id"
+          >
+            <v-radio class="mx-5" :value="choice.id" :label="choice.text"></v-radio>
+          </v-radio-group>
+        </template>
+
+        <!-- Year question -->
+        <v-date-picker
+          v-if="question.type == 'YEAR'"
+          v-model="answer[question.id]"
+          type="month"
+          show-current="2010-01"
+          landscape
+          no-title
+        ></v-date-picker>
+
+        <!-- Region question-->
+        <template v-if="question.type == 'REGION'">
+          <v-select
+            v-model="state"
+            :items="sortStates()"
+            item-text="nome"
+            item-value="sigla"
+            dense
+            label="Estado"
+            @change="getCities()"
+          ></v-select>
+          <v-select
+            v-if="(state != '') && (loadCities == true)"
+            v-model="answer[question.id]"
+            :items="sortCities()"
+            item-text="nome"
+            item-value="nome"
+            dense
+            label="Município"
+          ></v-select>
         </template>
       </div>
 
@@ -59,6 +116,9 @@
           >
             <v-icon dark>mdi-arrow-left</v-icon>
           </v-btn>
+        </v-col>
+        <v-col>
+          <v-progress-linear :value="progress"></v-progress-linear>
         </v-col>
         <v-col>
           <v-btn
@@ -81,9 +141,6 @@
 // TODO remove the comments
 // To use with Electron
 // https://medium.com/@bromix/electron-application-with-vue-js-and-vuetify-f2a1f9c749b8
-
-//API localidades
-//https://servicodados.ibge.gov.br/api/docs/localidades?versao=1#api-Distritos-estadosUFDistritosGet
 import axios from "axios";
 import { Component, Vue } from "vue-property-decorator";
 import installExtension from "electron-devtools-installer";
@@ -115,12 +172,71 @@ export default class Session extends Vue {
   private loaded = false;
   /** indicates an app error */
   private errorMessage = "";
+  /** indicates the progress */
+  private progress = 0;
+  /** stores the states of Brazil */
+  private states: [];
+  /** stores the state of the user */
+  private state = "";
+  /** stores the cities of Brazil */
+  private cities: [];
+  /** Indicates when the cities is loaded  */
+  private loadCities = false;
 
   /**
    * Gets the sessions and questions from the server
    */
   created() {
+    this.getStates();
     this.getSessions();
+  }
+
+  /**
+   * Gets the states from IBGE API
+   */
+  async getStates() {
+    const url = "https://servicodados.ibge.gov.br/api/v1/localidades/estados";
+    try {
+      const resp = await axios.get(url);
+      this.states = resp.data;
+    } catch (error) {
+      this.errorMessage = "Não foi possível recuperar os estados do país";
+      console.log(this.errorMessage);
+    }
+  }
+
+  /**
+   * Gets the cities of a state from IBGE API
+   */
+  async getCities() {
+    this.loadCities = false;
+    const url =
+      "https://servicodados.ibge.gov.br/api/v1/localidades/estados/" +
+      this.state +
+      "/municipios";
+    try {
+      const resp = await axios.get(url);
+      this.cities = resp.data;
+      // inform to the interface thar the cities were loaded
+      this.loadCities = true;
+    } catch (error) {
+      this.errorMessage = "Não foi possível recuperar as cidades de um estado";
+      console.log(this.errorMessage);
+    }
+  }
+
+  /**
+   * Sort the list of Braziliam states
+   */
+  sortStates() {
+    return this.states.sort((x: any, y: any) => (x.nome > y.nome ? 1 : -1));
+  }
+
+  /**
+   * Sort the list of Braziliam states
+   */
+  sortCities() {
+    return this.cities.sort((x: any, y: any) => (x.nome > y.nome ? 1 : -1));
   }
 
   /**
@@ -133,7 +249,6 @@ export default class Session extends Vue {
     try {
       const resp = await axios.get(url);
       this.sessions = resp.data;
-      this.loaded = true;
       this.loadFromLocalStorage();
     } catch (error) {
       this.errorMessage = "Serviço indisponível no momento";
@@ -162,6 +277,7 @@ export default class Session extends Vue {
       this.previousButton = true;
     }
     this.current = this.current + next;
+    this.progress = (this.current * 100) / this.sessions.length;
   }
 
   /***
@@ -197,6 +313,7 @@ export default class Session extends Vue {
         }
       }
     }
+    this.loaded = true;
   }
 
   /**
