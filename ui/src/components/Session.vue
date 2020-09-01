@@ -175,11 +175,11 @@ export default class Session extends Vue {
   /** indicates the progress */
   private progress = 0;
   /** stores the states of Brazil */
-  private states: [];
+  private states = [];
   /** stores the state of the user */
   private state = "";
   /** stores the cities of Brazil */
-  private cities: [];
+  private cities = [];
   /** Indicates when the cities is loaded  */
   private loadCities = false;
 
@@ -306,7 +306,7 @@ export default class Session extends Vue {
         } else {
           // When the answer is multiple we need to create a array of numbers
           // from local storage to Vuetify render the interface
-          const strArray = value.split(",");
+          const strArray = value!.split(",");
           const numberArray = [];
           for (const x in strArray) numberArray.push(Number(strArray[x]));
           this.answer[keys[k]] = numberArray;
@@ -323,7 +323,7 @@ export default class Session extends Vue {
    */
   checkQuestionType(idQuestion: string) {
     //TODO make it faster
-    let type: string;
+    let type = "";
     for (let index = 0; index < this.sessions.length; index++) {
       const questions = this.sessions[index].questions;
       for (const x in questions) {
