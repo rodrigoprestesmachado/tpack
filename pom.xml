@@ -2,7 +2,7 @@
 <project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
   <groupId>edu.ifrs.tpack</groupId>
-  <artifactId>tpack-app</artifactId>
+  <artifactId>tpack</artifactId>
   <version>1.0</version>
   <packaging>war</packaging>
 
@@ -24,7 +24,7 @@
     <maven.compiler.source>1.8</maven.compiler.source>
     <failOnMissingWebXml>false</failOnMissingWebXml>
     <openliberty.version>[19.0.0.9,)</openliberty.version>
-    <final.name>tpack-app</final.name>
+    <final.name>tpack</final.name>
   </properties>
 
   <dependencies>
@@ -96,7 +96,7 @@
     </dependency>
   </dependencies>
   <build>
-    <finalName>tpack-app</finalName>
+    <finalName>tpack</finalName>
   </build>
   <profiles>
     <profile>

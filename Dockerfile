@@ -11,7 +11,7 @@ COPY --chown=1001:0 src/main/liberty/config/resources/mysql-connector-java-8.0.1
 COPY --chown=1001:0 src/main/liberty/config /config/
 
 # Deploy the application
-COPY --chown=1001:0 target/tpack-app.war /config/dropins/ 
+COPY --chown=1001:0 target/tpack.war /config/dropins/ 
 
 # Running configuration 
 RUN configure.sh

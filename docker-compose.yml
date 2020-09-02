@@ -27,7 +27,7 @@ services:
             - /sessions
     app:
         build: .
-        container_name: tpack-app
+        container_name: tpack-service
         links:
             - "db"
         depends_on: 
