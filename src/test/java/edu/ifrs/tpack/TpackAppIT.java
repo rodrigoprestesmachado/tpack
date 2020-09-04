@@ -52,8 +52,6 @@ public class TpackAppIT {
             // Mounting URL
             String url = "http://" + host + ":" + port + API + "createSubject";
 
-            System.out.println(">>>>>>>>>>>>" + url);
-
             // Creating a http get
             HttpGet get = new HttpGet(url);
             // execute and getting the response

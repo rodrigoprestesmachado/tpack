@@ -28,9 +28,9 @@ public class DAOSession extends Repository<Session> {
     /**
      * Returns the first session object/register
      * 
-     * @return A Session object 
+     * @return A Session object
      */
-    public Session getFirstSession(){
+    public Session getFirstSession() {
 
         final CriteriaBuilder builder = em.getCriteriaBuilder();
         final CriteriaQuery<Session> criteria = builder.createQuery(Session.class);
@@ -38,9 +38,8 @@ public class DAOSession extends Repository<Session> {
         // Order by id
         criteria.orderBy(builder.asc(root.get("id")));
         // Get the first register
-        Query query = em.createQuery(criteria).setMaxResults(1); 
+        Query query = em.createQuery(criteria).setMaxResults(1);
         return (Session) query.getResultList().get(0);
     }
-
 
 }

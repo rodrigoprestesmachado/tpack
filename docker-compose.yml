@@ -25,7 +25,7 @@ services:
             - 80:80
         volumes:
             - /sessions
-    app:
+    tpack:
         build: .
         container_name: tpack-service
         links:

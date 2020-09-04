@@ -19,6 +19,7 @@ package edu.ifrs.tpack.model;
 import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.Set;
+import java.util.UUID;
 
 import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.CascadeType;
@@ -39,17 +40,20 @@ public class Subject {
     @JsonbTransient
     private long id;
 
-    private String formation;
+    private String token;
 
     private Timestamp moment;
 
     @OneToMany(mappedBy = "subject", cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     private Set<Answer> answers;
 
-    // Constructor
+    /**
+     * Construtor
+     */
     public Subject() {
         Calendar calendar = Calendar.getInstance();
         this.moment = new Timestamp(calendar.getTimeInMillis());
+        this.token = UUID.randomUUID().toString();
     }
 
     /**
