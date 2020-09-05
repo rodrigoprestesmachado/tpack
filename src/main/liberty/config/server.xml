@@ -3,7 +3,7 @@
 
     <featureManager>
         <feature>microProfile-3.2</feature>
-        <feature>jpaContainer-2.2</feature>
+        <feature>jpa-2.2</feature>
         <feature>ejb-3.2</feature>
     </featureManager>
 
@@ -34,5 +34,10 @@
         <!-- Dev mode use: serverName="localhost" -->
         <properties serverName="db" portNumber="3306" user="tpack" password="tpack" databaseName="tpack" />
     </dataSource>
+
+    <!-- Basic user register -->
+    <basicRegistry id="basic" realm="WebRealm">
+        <user name="tpack" password="tpack" />
+    </basicRegistry>
 
 </server>
