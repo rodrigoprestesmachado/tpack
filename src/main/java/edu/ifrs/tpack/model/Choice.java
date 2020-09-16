@@ -16,11 +16,16 @@
  */
 package edu.ifrs.tpack.model;
 
+import java.util.List;
+
 import javax.json.bind.annotation.JsonbTransient;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Choice {
@@ -33,6 +38,10 @@ public class Choice {
 
     @ManyToOne
     private Question question;
+
+    @OneToMany(mappedBy = "choice", cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+    @JsonbTransient
+    private List<Answer> answers;
 
     public long getId() {
         return id;
@@ -57,5 +66,13 @@ public class Choice {
 
     public void setQuestion(Question question) {
         this.question = question;
+    }
+
+    public List<Answer> getAnswers() {
+        return answers;
+    }
+
+    public void setAnswers(List<Answer> answers) {
+        this.answers = answers;
     }
 }

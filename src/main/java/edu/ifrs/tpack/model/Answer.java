@@ -36,6 +36,9 @@ public class Answer {
     @ManyToOne(cascade = CascadeType.PERSIST)
     private Question question;
 
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    private Choice choice;
+
     private String answer;
 
     public long getId() {
@@ -69,6 +72,14 @@ public class Answer {
 
     public void setAnswer(String answer) {
         this.answer = answer;
+    }
+
+    public Choice getChoice() {
+        return choice;
+    }
+
+    public void setChoice(Choice choice) {
+        this.choice = choice;
     }
 
 }
