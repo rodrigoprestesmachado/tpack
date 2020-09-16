@@ -6,10 +6,12 @@ This repository implements a Web application for Tpack XS application
 
 The easiest way to install and execute the Tpack XS application is to use docker-composer command. Once [Maven](https://maven.apache.org) and [Docker](https://www.docker.com) Compose installed, you can run the bellow commands:
 
-   git clone https://github.com/rodrigoprestesmachado/tpack
-   cd tpack
-   mvn clean package
-   docker-compose up -d
+```shell
+git clone https://github.com/rodrigoprestesmachado/tpack
+cd tpack
+mvn clean package
+docker-compose up -d
+```
 
 The Web application will run at 9080 door. We put a PhpMyAdmin running at 80 door, the default database user and password is: tpack. For more information, please, take a look in docker-compose.yml file in the project’s root directory.
 
@@ -17,14 +19,18 @@ The Web application will run at 9080 door. We put a PhpMyAdmin running at 80 doo
 
 To create a Docker image for Tpack XS application:
 
-   git clone https://github.com/rodrigoprestesmachado/tpack
-   mvn clean package
-   cd tpack
-   docker build -t tpack-image .
+```shell
+git clone https://github.com/rodrigoprestesmachado/tpack
+mvn clean package
+cd tpack
+docker build -t tpack-image .
+```
 
 To execute the container:
 
-   docker run -d --name tpack -p 9080:9080 -p 9443:9443 tpack-image
+```shell
+docker run -d --name tpack -p 9080:9080 -p 9443:9443 tpack-image
+```
 
 ### Development mode
 

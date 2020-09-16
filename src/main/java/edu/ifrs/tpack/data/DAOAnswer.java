@@ -14,22 +14,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package edu.ifrs.tpack.model;
+package edu.ifrs.tpack.data;
 
-/**
- * Indicates the types of questions available
- */
-public enum QuestionType {
+import edu.ifrs.tpack.model.Answer;
 
-    BINARY(0), SCALE(1), MULTIPLE(2), UNIQUE(3), YEAR(4), AGE(5), REGION(6), LABEL(7), SAVE(8);
+public class DAOAnswer extends Repository<Answer> {
 
-    private int value;
-
-    private QuestionType(int value) {
-        this.value = value;
-    }
-
-    public int getValue() {
-        return value;
-    }
 }

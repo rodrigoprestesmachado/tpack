@@ -17,6 +17,7 @@
 package edu.ifrs.tpack.model;
 
 import javax.json.bind.annotation.JsonbTransient;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -29,10 +30,10 @@ public class Answer {
     @GeneratedValue
     private long id;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private Subject subject;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private Question question;
 
     private String answer;

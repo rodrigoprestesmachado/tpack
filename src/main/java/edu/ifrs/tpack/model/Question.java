@@ -37,6 +37,8 @@ public class Question {
 
     private String text;
 
+    private String note;
+
     private QuestionType type;
 
     @ManyToOne
@@ -47,6 +49,7 @@ public class Question {
     private List<Choice> choices;
 
     @OneToMany(mappedBy = "question", cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+    @JsonbTransient
     private List<Answer> answers;
 
     public long getId() {
@@ -63,6 +66,14 @@ public class Question {
 
     public void setText(String text) {
         this.text = text;
+    }
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
     }
 
     public QuestionType getType() {

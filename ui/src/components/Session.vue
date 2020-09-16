@@ -1,125 +1,169 @@
 <template>
-  <div>
-    <!-- error Message -->
-    <template>{{errorMessage}}</template>
-
+  <v-container>
     <!--
       load feedback
     -->
-    <v-progress-circular
-      align="center"
-      justify="center"
-      indeterminate
-      color="primary"
-      v-if="(loaded === false) && (errorMessage === '')"
-    ></v-progress-circular>
+    <v-row justify="center">
+      <v-progress-circular
+        indeterminate
+        color="primary"
+        v-if="(loaded === false) && (errorMessage === '')"
+      ></v-progress-circular>
+    </v-row>
+
+    <!-- error Message -->
+    <v-row align="center" justify="center">
+      <template>{{errorMessage}}</template>
+    </v-row>
+
+    <!-- save message -->
+    <template v-if="(token !== null) && (loaded === true)">
+      <v-row align="center" justify="center">Obrigado por ter respondido essa pesquisa</v-row>
+    </template>
 
     <!-- main container -->
-    <v-container v-if="loaded" align="center" justify="center">
-      {{errorMessage}}
-      {{ sessions[current].title }}
-      <div v-for="question of sessions[current].questions" :key="question.id">
-        <v-subheader>{{ question.text }}</v-subheader>
+    <template v-if="loaded">
+      <v-row justify="center">{{errorMessage}}</v-row>
+      <v-row align="center" justify="center">
+        <div class="headline">{{ sessions[current].title }}</div>
+      </v-row>
+      <v-container v-for="(question) of sessions[current].questions" :key="question.id">
+        <v-row class="ma-8" align="center" justify="center">
+          <div>{{ question.text }}</div>
+        </v-row>
 
         <!-- Scale queston  -->
-        <v-slider
-          v-if="question.type == 'SCALE'"
-          v-model="answer[question.id]"
-          thumb-label="always"
-          thumb-size="25"
-          :step="0.1"
-          :max="5"
-          :min="1"
-          aria-label="classifique"
-        />
+        <template v-if="question.type == 'SCALE'">
+          <v-row class="ma-8">
+            <v-slider
+              v-model="answer[question.id]"
+              thumb-label="always"
+              thumb-size="30"
+              :step="0.1"
+              :max="5"
+              :min="1"
+              aria-label="classifique"
+            />
+          </v-row>
+        </template>
 
         <!-- Age question -->
         <template v-if="question.type == 'AGE'">
-          <v-alert type="error" :value="validation[question.id]" dense outlined>Informe sua idade</v-alert>
-          <v-select v-model="answer[question.id]" value="30" :items="ages" outlined></v-select>
+          <v-row align="center" justify="center">
+            <v-alert type="error" :value="validation[question.id]" dense outlined>Informe sua idade</v-alert>
+          </v-row>
+          <v-row>
+            <v-select v-model="answer[question.id]" :items="ages" dense outlined></v-select>
+          </v-row>
         </template>
 
         <!-- Multiple choice question -->
         <template v-if="question.type == 'MULTIPLE'">
-          <v-alert
-            type="error"
-            dense
-            outlined
-            :value="validation[question.id]"
-          >Escolha pelo menos uma das opções abaixo</v-alert>
-          <div v-for="choice of question.choices" :key="choice.id">
-            <v-checkbox
-              class="mx-5"
-              v-model="answer[question.id]"
-              :value="choice.id"
-              :label="choice.text"
-              multiple
-            ></v-checkbox>
-          </div>
+          <v-row align="center" justify="center">
+            <v-alert
+              type="error"
+              dense
+              outlined
+              :value="validation[question.id]"
+            >Escolha pelo menos uma das opções abaixo</v-alert>
+          </v-row>
+          <v-row class="ml-5">
+            <v-col v-for="choice of question.choices" :key="choice.id">
+              <v-checkbox
+                v-model="answer[question.id]"
+                :value="choice.id"
+                :label="choice.text"
+                multiple
+              ></v-checkbox>
+            </v-col>
+          </v-row>
         </template>
 
         <!-- Unique choice question -->
         <template v-if="question.type == 'UNIQUE'">
-          <v-alert
-            type="error"
-            dense
-            outlined
-            :value="validation[question.id]"
-          >Escolha uma das opções abaixo</v-alert>
-          <v-radio-group
-            v-model="answer[question.id]"
-            v-for="choice of question.choices"
-            :key="choice.id"
-          >
-            <v-radio class="mx-5" :value="choice.id" :label="choice.text"></v-radio>
-          </v-radio-group>
+          <v-row align="center" justify="center">
+            <v-alert
+              type="error"
+              dense
+              outlined
+              :value="validation[question.id]"
+            >Escolha uma das opções abaixo</v-alert>
+          </v-row>
+          <v-row class="ml-5">
+            <v-radio-group
+              v-model="answer[question.id]"
+              v-for="choice of question.choices"
+              :key="choice.id"
+            >
+              <v-col>
+                <v-radio :value="choice.id" :label="choice.text"></v-radio>
+              </v-col>
+            </v-radio-group>
+          </v-row>
         </template>
 
         <!-- Year question -->
         <template v-if="question.type == 'YEAR'">
-          <v-alert type="error" :value="validation[question.id]" dense outlined>Informe uma data</v-alert>
-          <v-date-picker
-            v-model="answer[question.id]"
-            type="month"
-            show-current="2010-01"
-            landscape
-            no-title
-          ></v-date-picker>
+          <v-row align="center" justify="center">
+            <v-alert type="error" :value="validation[question.id]" dense outlined>Informe uma data</v-alert>
+          </v-row>
+          <v-row align="center" justify="center">
+            <v-date-picker
+              v-model="answer[question.id]"
+              type="month"
+              show-current="2010-01"
+              landscape
+              no-title
+              class="ml-8"
+            ></v-date-picker>
+          </v-row>
         </template>
 
         <!-- Region question-->
         <template v-if="question.type == 'REGION'">
-          <v-alert
-            type="error"
-            :value="validation[question.id]"
-            dense
-            outlined
-          >Escolha o estado e cidade</v-alert>
-          <v-select
-            v-model="state"
-            :items="states"
-            item-text="nome"
-            item-value="sigla"
-            dense
-            label="Estado"
-            @change="getCities()"
-            outlined
-          ></v-select>
-          <v-select
-            v-if="(state != '') && (loadCities == true)"
-            v-model="answer[question.id]"
-            :items="cities"
-            item-text="nome"
-            item-value="nome"
-            dense
-            label="Município"
-            outlined
-          ></v-select>
+          <v-row align="center" justify="center">
+            <v-alert
+              type="error"
+              :value="validation[question.id]"
+              dense
+              outlined
+            >Escolha seu estado e cidade</v-alert>
+          </v-row>
+          <v-row>
+            <v-select
+              v-model="state"
+              :items="states"
+              item-text="nome"
+              item-value="sigla"
+              label="Estado"
+              dense
+              outlined
+              class="ml-8"
+              @change="getCities()"
+            ></v-select>
+            <v-select
+              v-if="(state != null) && (loadCities == true)"
+              v-model="answer[question.id]"
+              :items="cities"
+              item-text="nome"
+              item-value="nome"
+              dense
+              label="Município"
+              outlined
+            ></v-select>
+          </v-row>
         </template>
-      </div>
+
+        <!-- Save button -->
+        <template v-if="(question.type === 'SAVE') && (token === null)">
+          <v-row align="center" justify="center">
+            <v-btn small color="primary" v-on:click.native="save()">{{question.text}}</v-btn>
+          </v-row>
+        </template>
+      </v-container>
 
       <!-- Next and previus buttons -->
-      <v-row no-gutters>
+      <v-row no-gutters class="mu-16">
         <v-col>
           <v-btn
             v-if="previousButton"
@@ -148,15 +192,17 @@
           </v-btn>
         </v-col>
       </v-row>
+
+      <!-- Alert snack bar -->
       <v-row>
         <v-snackbar v-model="openSnackbar">
-          Para que possamos completar a pesquisa, necessitamos que você
-          responda todas as questões.
+          Necessitamos que você responda todas as questões
+          Para que possamos completar a pesquisa, .
           <v-btn color="indigo" text @click="openSnackbar = false">Fechar</v-btn>
         </v-snackbar>
       </v-row>
-    </v-container>
-  </div>
+    </template>
+  </v-container>
 </template>
 
 <script lang="ts">
@@ -199,7 +245,7 @@ export default class Session extends Vue {
   /** stores the states of Brazil */
   private states = [];
   /** stores the selected state */
-  private state = "";
+  private state = null;
   /** stores the selected cities */
   private cities = [];
   /** indicates when the cities is loaded  */
@@ -207,40 +253,43 @@ export default class Session extends Vue {
   /** stores if a user answered a question or not */
   private validation: Array<boolean> = [];
   /** stores the array of ages */
-  private ages: Array<number> = [];
+  private ages: Array<string> = [];
   /** the default color of navigation buttons */
   private navigationColor = "#D3EAE1";
   /** sets the snack bar to false (or closed) */
   private openSnackbar = false;
+  /** sores the token/id of a user */
+  private token = null;
 
   /**
    * When the component is created (Vue created) then init
    */
   created() {
     this.initAges();
-    this.getStates();
-    this.getSessions();
+    this.initApplication();
   }
 
   /** initalize the ages array  */
   initAges() {
     for (let age = 18; age <= 100; age++) {
-      this.ages.push(age);
+      this.ages.push(age.toString());
     }
   }
 
   /**
-   * Gets the sessions from the service
+   * Inits the application
    *
    * @param base The URL base of the service
    */
-  async getSessions() {
+  async initApplication() {
     const url = this.BASE + "getSessions";
     try {
       const resp = await axios.get(url);
       this.sessions = resp.data;
       this.loadFromLocalStorage();
       this.initNotNullValidation();
+      this.getStates();
+      this.getCities();
       this.loaded = true;
     } catch (error) {
       this.errorMessage = "Serviço indisponível no momento";
@@ -267,21 +316,24 @@ export default class Session extends Vue {
    * Gets the cities of a state from IBGE API
    */
   async getCities() {
-    this.loadCities = false;
-    const url =
-      "https://servicodados.ibge.gov.br/api/v1/localidades/estados/" +
-      this.state +
-      "/municipios";
-    try {
-      const resp = await axios.get(url);
-      this.cities = resp.data;
-      // Sort the cities
-      this.cities.sort((x: any, y: any) => (x.nome > y.nome ? 1 : -1));
-      // inform to the interface thar the cities were loaded
-      this.loadCities = true;
-    } catch (error) {
-      this.errorMessage = "Não foi possível recuperar as cidades de um estado";
-      console.log(this.errorMessage);
+    if (this.state != null) {
+      this.loadCities = false;
+      const url =
+        "https://servicodados.ibge.gov.br/api/v1/localidades/estados/" +
+        this.state +
+        "/municipios";
+      try {
+        const resp = await axios.get(url);
+        this.cities = resp.data;
+        // Sort the cities
+        this.cities.sort((x: any, y: any) => (x.nome > y.nome ? 1 : -1));
+        // inform to the interface thar the cities were loaded
+        this.loadCities = true;
+      } catch (error) {
+        this.errorMessage =
+          "Não foi possível recuperar as cidades de um estado";
+        console.log(this.errorMessage);
+      }
     }
   }
 
@@ -324,7 +376,7 @@ export default class Session extends Vue {
       // move to the next session
       this.current = this.current + next;
       // calculate to update the progress bar
-      this.progress = (this.current * 100) / this.sessions.length;
+      this.progress = ((this.current + 1) * 100) / this.sessions.length;
       // init not null validation to the next session
       this.initNotNullValidation();
     } else {
@@ -340,26 +392,31 @@ export default class Session extends Vue {
    */
   notNullValidation() {
     let go = true;
-    const session = this.sessions[this.current];
-    const questions = session.questions;
 
-    for (const x in questions) {
-      const idQuestion = questions[x].id;
+    // if token ins't empty so we can stop the not null validation
+    if (this.token === null) {
+      const session = this.sessions[this.current];
+      const questions = session.questions;
 
-      // checks if the user answered the question
-      if (
-        localStorage.getItem(idQuestion) == null ||
-        this.answer[idQuestion].length === 0
-      ) {
-        // do not allow to change the session
-        go = false;
-        this.validation[idQuestion] = true;
-      } else {
-        this.validation[idQuestion] = false;
+      for (const x in questions) {
+        const idQuestion = questions[x].id;
+
+        // checks if the user answered the question
+        if (
+          localStorage.getItem(idQuestion) == null ||
+          this.answer[idQuestion].length === 0
+        ) {
+          // do not allow to change the session
+          go = false;
+          this.validation[idQuestion] = true;
+        } else {
+          this.validation[idQuestion] = false;
+        }
       }
+      // force the update to show the erros to the users
+      this.$forceUpdate();
     }
-    // show the errors the erros to the users
-    this.$forceUpdate();
+
     return go;
   }
 
@@ -371,6 +428,8 @@ export default class Session extends Vue {
       const value = this.answer[key];
       localStorage.setItem(key, value);
     }
+    // save the selected state for region component
+    localStorage.setItem("state", this.state);
   }
 
   /**
@@ -399,6 +458,11 @@ export default class Session extends Vue {
           this.answer[keys[k]] = value;
         }
       }
+      // gets the user token if it exists
+      this.token = localStorage.getItem("token");
+
+      // gets the selected state
+      this.state = localStorage.getItem("state");
     }
   }
 
@@ -417,6 +481,40 @@ export default class Session extends Vue {
       }
     }
     return type;
+  }
+
+  /**
+   * Saves the answers in the service
+   */
+  async save() {
+    const data = {};
+    // Creates a JS object from local storage
+    const keys = Object.keys(localStorage);
+    const result = keys.forEach(function(element, index, keys) {
+      data[element] = localStorage.getItem(element);
+    });
+    // verifies if the user already send an answer
+    if (!localStorage.getItem("token")) {
+      // converts from JS object fo string
+      const answers = JSON.stringify(data);
+      try {
+        // sends the data to the service
+        const url = this.BASE + "save";
+        const resp = await axios.post(url, answers, {
+          headers: {
+            "Content-Type": "application/json"
+          }
+        });
+        // stores the user token
+        this.token = resp.data.token;
+        localStorage.setItem("token", this.token);
+      } catch (error) {
+        this.errorMessage = "Não foi possível salvar os dados no serviço";
+        console.log(this.errorMessage);
+      }
+    } else {
+      console.log("data already saved");
+    }
   }
 }
 </script>

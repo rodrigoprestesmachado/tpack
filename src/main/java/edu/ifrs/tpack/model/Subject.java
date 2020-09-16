@@ -18,6 +18,7 @@ package edu.ifrs.tpack.model;
 
 import java.sql.Timestamp;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
@@ -44,8 +45,8 @@ public class Subject {
 
     private Timestamp moment;
 
-    @OneToMany(mappedBy = "subject", cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
-    private Set<Answer> answers;
+    @OneToMany(mappedBy = "subject", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    private List<Answer> answers;
 
     /**
      * Construtor

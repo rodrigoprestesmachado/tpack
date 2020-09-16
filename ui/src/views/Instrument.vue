@@ -7,7 +7,7 @@
       <session />
     </v-main>
     <v-footer color="#139A65" app dark>
-      <span class="white--text">ifrs &copy;</span>
+      <span class="white--text">ifrs.edu.br</span>
     </v-footer>
   </v-app>
 </template>

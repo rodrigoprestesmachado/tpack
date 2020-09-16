@@ -37,7 +37,7 @@ public class Session {
 
     private String title;
 
-    @OneToMany(mappedBy = "session", cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "session", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     private List<Question> questions;
 
 }
