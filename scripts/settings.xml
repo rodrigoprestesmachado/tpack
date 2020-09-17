@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd">
+    <profiles>
+        <profile>
+            <id>tpack</id>
+            <properties>
+                <replace.host>localhost</replace.host>
+                <replace.api>tpack/service/api/</replace.api>
+                <replace.db>db</replace.db>
+            </properties>
+        </profile>
+        <profile>
+            <id>tpack-dev</id>
+            <properties>
+                <replace.host>localhost</replace.host>
+                <replace.api>service/api/</replace.api>
+                <replace.db>localhostb</replace.db>
+            </properties>
+        </profile>
+    </profiles>
+    <activeProfiles>
+        <activeProfile>tpack</activeProfile>
+    </activeProfiles>
+</settings>
