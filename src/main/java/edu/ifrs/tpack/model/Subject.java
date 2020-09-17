@@ -19,7 +19,6 @@ package edu.ifrs.tpack.model;
 import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.List;
-import java.util.Set;
 import java.util.UUID;
 
 import javax.json.bind.annotation.JsonbTransient;

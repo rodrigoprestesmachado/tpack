@@ -25,7 +25,7 @@ public enum QuestionType {
 
     private int value;
 
-    private QuestionType(int value) {
+    QuestionType(int value) {
         this.value = value;
     }
 

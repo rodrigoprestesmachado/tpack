@@ -225,7 +225,7 @@ import multiple from "./Multiple.vue";
 })
 export default class Session extends Vue {
   /** sets base URL */
-  private readonly BASE = "http://localhost:9080/service/api/";
+  private readonly BASE = "http://REPLACE-HOST:9080/REPLACE-API";
   /** ttores the answer of the users to only sync with the interface */
   private answer: any = [];
   /** the session with the questions */
@@ -282,6 +282,9 @@ export default class Session extends Vue {
    * @param base The URL base of the service
    */
   async initApplication() {
+    //TODO
+    this.answer[1] = 1;
+
     const url = this.BASE + "getSessions";
     try {
       const resp = await axios.get(url);

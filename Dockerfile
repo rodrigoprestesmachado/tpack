@@ -1,4 +1,4 @@
-FROM open-liberty:20.0.0.3-full-java8-openj9
+FROM open-liberty:20.0.0.9-full-java8-openj9
 
 LABEL \
     org.opencontainers.image.authors="Rodrigo Prestes Machado" \

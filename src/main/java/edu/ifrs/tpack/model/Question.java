@@ -20,6 +20,7 @@ import java.util.List;
 
 import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -35,6 +36,7 @@ public class Question {
     @GeneratedValue
     private long id;
 
+    @Column(name = "TEXT", length = 1500)
     private String text;
 
     private String note;
