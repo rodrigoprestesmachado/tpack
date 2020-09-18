@@ -28,11 +28,9 @@ services:
     tpack:
         build: .
         container_name: tpack-service
-        links:
-            - "db"
         depends_on: 
-            - "db"
             - "phpMyAdmin"
+            - "db"
         ports:
             - 9080:9080
             - 9443:9443
