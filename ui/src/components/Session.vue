@@ -7,7 +7,7 @@
       <v-progress-circular
         indeterminate
         color="primary"
-        v-if="(loaded === false) && (errorMessage === '')"
+        v-if="loaded === false && errorMessage === ''"
       ></v-progress-circular>
     </v-row>
 
@@ -17,7 +17,7 @@
     </v-row>
 
     <!-- save message -->
-    <template v-if="(token !== null) && (loaded === true)">
+    <template v-if="token !== null && loaded === true">
       <v-row align="center" justify="center">Obrigado por ter respondido essa pesquisa</v-row>
     </template>
 
@@ -27,7 +27,7 @@
       <v-row align="center" justify="center">
         <div class="headline">{{ sessions[current].title }}</div>
       </v-row>
-      <v-container v-for="(question) of sessions[current].questions" :key="question.id">
+      <v-container v-for="question of sessions[current].questions" :key="question.id">
         <v-row class="ma-8" align="center" justify="center">
           <div>{{ question.text }}</div>
         </v-row>
@@ -142,7 +142,7 @@
               @change="getCities()"
             ></v-select>
             <v-select
-              v-if="(state != null) && (loadCities == true)"
+              v-if="state != null && loadCities == true"
               v-model="answer[question.id]"
               :items="cities"
               item-text="nome"
@@ -155,7 +155,7 @@
         </template>
 
         <!-- Save button -->
-        <template v-if="(question.type === 'SAVE') && (token === null)">
+        <template v-if="question.type === 'SAVE' && token === null">
           <v-row align="center" justify="center">
             <v-btn small color="primary" v-on:click.native="save()">{{question.text}}</v-btn>
           </v-row>
@@ -245,7 +245,7 @@ export default class Session extends Vue {
   /** stores the states of Brazil */
   private states = [];
   /** stores the selected state */
-  private state = null;
+  private state: any = null;
   /** stores the selected cities */
   private cities = [];
   /** indicates when the cities is loaded  */
@@ -259,7 +259,7 @@ export default class Session extends Vue {
   /** sets the snack bar to false (or closed) */
   private openSnackbar = false;
   /** sores the token/id of a user */
-  private token = null;
+  private token: any = null;
 
   /**
    * When the component is created (Vue created) then init
@@ -462,10 +462,16 @@ export default class Session extends Vue {
         }
       }
       // gets the user token if it exists
-      this.token = localStorage.getItem("token");
+      this.token =
+        localStorage.getItem("token") != null
+          ? localStorage.getItem("token")
+          : "";
 
       // gets the selected state
-      this.state = localStorage.getItem("state");
+      this.state =
+        localStorage.getItem("state") != null
+          ? localStorage.getItem("state")
+          : "";
     }
   }
 
@@ -490,7 +496,10 @@ export default class Session extends Vue {
    * Saves the answers in the service
    */
   async save() {
-    const data = {};
+    interface DataMap {
+      [key: string]: any;
+    }
+    const data: DataMap = {};
     // Creates a JS object from local storage
     const keys = Object.keys(localStorage);
     const result = keys.forEach(function(element, index, keys) {
