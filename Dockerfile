@@ -1,5 +1,10 @@
 FROM open-liberty:20.0.0.9-full-java8-openj9
 
+# Sending wait-for-it.sh script
+COPY scripts/wait-for-it.sh /wait-for-it.sh
+USER root
+RUN chmod +x /wait-for-it.sh
+
 LABEL \
     org.opencontainers.image.authors="Rodrigo Prestes Machado" \
     description="Image for TPACK XS Application"
