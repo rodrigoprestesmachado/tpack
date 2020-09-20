@@ -30,6 +30,7 @@ services:
         container_name: tpack-service
         depends_on:
             - db
+            - phpMyAdmin
         command: ["./wait-for-it.sh", "db:3306", "--", "liberty/bin/server", "run", "defaultServer"]
         ports:
             - 80:9080
