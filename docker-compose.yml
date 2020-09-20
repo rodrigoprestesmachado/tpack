@@ -22,7 +22,7 @@ services:
         links:
             - "db"
         ports:
-            - 80:80
+            - 8080:80
         volumes:
             - /sessions
     tpack:
@@ -32,5 +32,5 @@ services:
             - db
         command: ["./wait-for-it.sh", "db:3306", "--", "liberty/bin/server", "run", "defaultServer"]
         ports:
-            - 9080:9080
+            - 80:9080
             - 9443:9443
