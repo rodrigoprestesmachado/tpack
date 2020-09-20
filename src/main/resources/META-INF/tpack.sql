@@ -11,13 +11,22 @@ INSERT INTO `SESSION` (`ID`,`TITLE`) VALUES (10,'Uso de Tecnologia Digital de In
 INSERT INTO `SESSION` (`ID`,`TITLE`) VALUES (11,'Caracterização do respondente');
 INSERT INTO `SESSION` (`ID`,`TITLE`) VALUES (12,'Encerramento');
 
-INSERT INTO `QUESTION` (`ID`,`NOTE`,`TEXT`,`TYPE`,`SESSION_ID`) VALUES (1,NULL,'Esta pesquisa aborda as práticas pedagógicas e os impactos causados pela pandemia. Ao responder essa pesquisa, você contribui com a identificação de práticas utilizadas neste período e impacto que estas sofreram, identificando o surgimento de novas abordagens e adaptação de outras consolidadas entre professores e estudantes.</br></br>
-O tempo de preenchimento é de aproximadamente 8 minutos. Os seus dados de identificação não serão coletados e suas respostas serão confidenciais, permanecerão em sigilo de pesquisa e não serão divulgadas individualmente.</br></br>
-O IFRS e seus pesquisadores agradecem sua contribuição. A coleta de dados foi distribuída entre professores por meio de mídias sociais. Ampliando o retrato das alterações das práticas pedagógicas e seus impactos.</br></br>
-Sua opinião irá contribuir com a identificação de práticas pedagógicas pós-pandemia. Ao final da pesquisa, se tiver interesse em receber o relatório do estudo sem custo, deixe seu e-mail.
-O termo de consentimento livre e esclarecido se encontra disponível <a href="https://drive.google.com/file/d/1gENXo26_iqWtOCE3c7b-vvJ8zY0Q6A3c/view?usp=sharing">aqui</a>, ao clicar em prosseguir você aceita os termos de coleta dessa pesquisa.</br></br>
-Agradecemos sua contribuição! 
-',7,1);
+INSERT INTO `QUESTION` (`ID`,`NOTE`,`TEXT`,`TYPE`,`SESSION_ID`) VALUES (1,NULL,'Esta pesquisa aborda as práticas 
+pedagógicas e os impactos causados pela pandemia. Ao responder essa pesquisa, você contribui com a identificação 
+de práticas utilizadas neste período e impacto que estas sofreram, identificando o surgimento de novas abordagens 
+e adaptação de outras consolidadas entre professores e estudantes.
+</br></br>
+O tempo de preenchimento é de aproximadamente 8 minutos. Os seus dados de identificação não serão coletados e suas 
+respostas serão confidenciais, permanecerão em sigilo de pesquisa e não serão divulgadas individualmente.</br></br>
+O IFRS e seus pesquisadores agradecem sua contribuição. A coleta de dados foi distribuída entre professores por meio 
+de mídias sociais. Ampliando o retrato das alterações das práticas pedagógicas e seus impactos.</br></br>
+Sua opinião irá contribuir com a identificação de práticas pedagógicas pós-pandemia. Ao final da pesquisa, se tiver 
+interesse em receber o relatório do estudo sem custo, deixe seu e-mail.
+O termo de consentimento livre e esclarecido se encontra disponível 
+<a href="https://drive.google.com/file/d/1gENXo26_iqWtOCE3c7b-vvJ8zY0Q6A3c/view?usp=sharing">aqui</a>, ao clicar em 
+prosseguir você aceita os termos de coleta dessa pesquisa.
+</br></br>
+Agradecemos sua contribuição!',7,1);
 INSERT INTO `QUESTION` (`ID`,`NOTE`,`TEXT`,`TYPE`,`SESSION_ID`) VALUES (2,'<span class="font-weight-bold">Nota:</span> você pode marcar mais de uma alternativa','Qual o âmbito da instituição de ensino que você leciona?',2,2);
 INSERT INTO `QUESTION` (`ID`,`NOTE`,`TEXT`,`TYPE`,`SESSION_ID`) VALUES (3,'<span class="font-weight-bold">Nota:</span> você pode marcar mais de uma alternativa','Qual o nível de ensino que você atua? ',2,2);
 INSERT INTO `QUESTION` (`ID`,`NOTE`,`TEXT`,`TYPE`,`SESSION_ID`) VALUES (4,NULL,'Sobre a sua formação, selecione todas as concluídas:',2,2);
