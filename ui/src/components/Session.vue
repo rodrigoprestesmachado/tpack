@@ -17,24 +17,34 @@
     </v-row>
 
     <!-- save message -->
-    <template v-if="token !== null && loaded === true">
-      <v-row align="center" justify="center">Obrigado por ter respondido essa pesquisa</v-row>
+    <template v-if="token != null && loaded === true">
+      <v-row
+        align="center"
+        justify="center"
+        class="ma-5 indigo--text text-h5"
+      >Obrigado por ter respondido essa pesquisa</v-row>
     </template>
 
     <!-- main container -->
-    <template v-if="loaded">
-      <v-row justify="center">{{errorMessage}}</v-row>
+    <template v-if="loaded == true ">
       <v-row align="center" justify="center">
         <div class="headline">{{ sessions[current].title }}</div>
       </v-row>
       <v-container v-for="question of sessions[current].questions" :key="question.id">
-        <v-row class="ma-8" align="center" justify="center">
-          <div>{{ question.text }}</div>
+        <v-row class="mb-1 pa-0" align="center" justify="center">
+          <v-col class="text-justify">
+            <span v-html="question.text"></span>
+          </v-col>
+        </v-row>
+        <v-row class="ml-10 body-2" align="center" justify="center">
+          <v-col class="text-justify">
+            <span v-html="question.note"></span>
+          </v-col>
         </v-row>
 
         <!-- Scale queston  -->
         <template v-if="question.type == 'SCALE'">
-          <v-row class="ma-8">
+          <v-row class="mx-1">
             <v-slider
               v-model="answer[question.id]"
               thumb-label="always"
@@ -53,7 +63,7 @@
             <v-alert type="error" :value="validation[question.id]" dense outlined>Informe sua idade</v-alert>
           </v-row>
           <v-row>
-            <v-select v-model="answer[question.id]" :items="ages" dense outlined></v-select>
+            <v-select v-model="answer[question.id]" :items="ages" dense outlined class="ml-8 mr-8"></v-select>
           </v-row>
         </template>
 
@@ -67,13 +77,14 @@
               :value="validation[question.id]"
             >Escolha pelo menos uma das opções abaixo</v-alert>
           </v-row>
-          <v-row class="ml-5">
+          <v-row class="mt-1">
             <v-col v-for="choice of question.choices" :key="choice.id">
               <v-checkbox
                 v-model="answer[question.id]"
                 :value="choice.id"
                 :label="choice.text"
                 multiple
+                dense
               ></v-checkbox>
             </v-col>
           </v-row>
@@ -89,11 +100,12 @@
               :value="validation[question.id]"
             >Escolha uma das opções abaixo</v-alert>
           </v-row>
-          <v-row class="ml-5">
+          <v-row class="ma-5 pa-0">
             <v-radio-group
               v-model="answer[question.id]"
               v-for="choice of question.choices"
               :key="choice.id"
+              dense
             >
               <v-col>
                 <v-radio :value="choice.id" :label="choice.text"></v-radio>
@@ -138,9 +150,11 @@
               label="Estado"
               dense
               outlined
-              class="ml-8"
+              class="ml-8 mr-8"
               @change="getCities()"
             ></v-select>
+          </v-row>
+          <v-row>
             <v-select
               v-if="state != null && loadCities == true"
               v-model="answer[question.id]"
@@ -148,8 +162,9 @@
               item-text="nome"
               item-value="nome"
               dense
-              label="Município"
               outlined
+              label="Município"
+              class="ml-8 mr-8"
             ></v-select>
           </v-row>
         </template>
@@ -157,7 +172,12 @@
         <!-- Save button -->
         <template v-if="question.type === 'SAVE' && token === null">
           <v-row align="center" justify="center">
-            <v-btn small color="primary" v-on:click.native="save()">{{question.text}}</v-btn>
+            <v-btn
+              small
+              color="teal lighten-2"
+              class="ma-10"
+              v-on:click.native="save()"
+            >Enviar suas respostas</v-btn>
           </v-row>
         </template>
       </v-container>
@@ -217,6 +237,7 @@ import { createProtocol } from "vue-cli-plugin-electron-builder/lib";
 
 //Components
 import multiple from "./Multiple.vue";
+import Vuetify from "vuetify/lib";
 
 @Component({
   components: {
@@ -225,7 +246,7 @@ import multiple from "./Multiple.vue";
 })
 export default class Session extends Vue {
   /** sets base URL */
-  private readonly BASE = "http://REPLACE-HOST:9080/REPLACE-API";
+  private readonly BASE = "http://localhost:9080/service/api/";
   /** ttores the answer of the users to only sync with the interface */
   private answer: any = [];
   /** the session with the questions */
@@ -255,7 +276,7 @@ export default class Session extends Vue {
   /** stores the array of ages */
   private ages: Array<string> = [];
   /** the default color of navigation buttons */
-  private navigationColor = "#D3EAE1";
+  private navigationColor = "#80CBC4";
   /** sets the snack bar to false (or closed) */
   private openSnackbar = false;
   /** sores the token/id of a user */
@@ -282,7 +303,7 @@ export default class Session extends Vue {
    * @param base The URL base of the service
    */
   async initApplication() {
-    //TODO
+    //TODO It is a way to pass the first "question"
     this.answer[1] = 1;
 
     const url = this.BASE + "getSessions";
@@ -295,7 +316,8 @@ export default class Session extends Vue {
       this.getCities();
       this.loaded = true;
     } catch (error) {
-      this.errorMessage = "Serviço indisponível no momento";
+      this.loaded = false;
+      this.errorMessage = "Sistema indisponível";
       console.log(this.errorMessage);
     }
   }
@@ -310,7 +332,11 @@ export default class Session extends Vue {
       this.states = resp.data;
       this.states.sort((x: any, y: any) => (x.nome > y.nome ? 1 : -1));
     } catch (error) {
-      this.errorMessage = "Não foi possível recuperar os estados do país";
+      this.loaded = false;
+      this.scrollTop();
+      // Sets error message
+      this.errorMessage =
+        "Problemas com a rede: não foi possível carregar os estados";
       console.log(this.errorMessage);
     }
   }
@@ -333,8 +359,10 @@ export default class Session extends Vue {
         // inform to the interface thar the cities were loaded
         this.loadCities = true;
       } catch (error) {
+        this.loaded = false;
+        this.scrollTop();
         this.errorMessage =
-          "Não foi possível recuperar as cidades de um estado";
+          "Problema com a rede: as cidades não foram carregadas";
         console.log(this.errorMessage);
       }
     }
@@ -365,7 +393,7 @@ export default class Session extends Vue {
     // Cheks empty answer
     const go = await this.notNullValidation();
     if (go) {
-      this.navigationColor = "#D3EAE1";
+      this.navigationColor = "#80CBC4";
       if (this.current + next == this.sessions.length - 1) {
         this.nextButton = false;
         this.previousButton = true;
@@ -382,11 +410,13 @@ export default class Session extends Vue {
       this.progress = ((this.current + 1) * 100) / this.sessions.length;
       // init not null validation to the next session
       this.initNotNullValidation();
+      // scroll to top
+      this.scrollTop();
     } else {
       // open the snack bar and change the color of the navigation
       //buttons
       this.openSnackbar = true;
-      this.navigationColor = "#FA6F37";
+      this.navigationColor = "#FF8A65";
     }
   }
 
@@ -465,13 +495,13 @@ export default class Session extends Vue {
       this.token =
         localStorage.getItem("token") != null
           ? localStorage.getItem("token")
-          : "";
+          : null;
 
       // gets the selected state
       this.state =
         localStorage.getItem("state") != null
           ? localStorage.getItem("state")
-          : "";
+          : null;
     }
   }
 
@@ -521,12 +551,24 @@ export default class Session extends Vue {
         this.token = resp.data.token;
         localStorage.setItem("token", this.token);
       } catch (error) {
-        this.errorMessage = "Não foi possível salvar os dados no serviço";
+        this.loaded = false;
+        this.scrollTop();
+        // error message
+        this.errorMessage =
+          "Problemas com a rede: não foi possível salvar as respostas";
         console.log(this.errorMessage);
       }
     } else {
       console.log("data already saved");
     }
+  }
+
+  /**
+   * Puts the scroll to the top
+   */
+  scrollTop() {
+    // Scroll to the top
+    window.scrollTo(0, 0);
   }
 }
 </script>
