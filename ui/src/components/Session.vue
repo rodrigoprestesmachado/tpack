@@ -246,7 +246,7 @@ import Vuetify from "vuetify/lib";
 })
 export default class Session extends Vue {
   /** sets base URL */
-  private readonly BASE = "http://localhost:9080/service/api/";
+  private readonly BASE = "http://REPLACE-HOST/REPLACE-API";
   /** ttores the answer of the users to only sync with the interface */
   private answer: any = [];
   /** the session with the questions */
