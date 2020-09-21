@@ -1,37 +1,46 @@
-version: '3.7'
+version: "3.7"
 volumes:
-    database:
+  database:
 services:
-    db:
-        image: mysql:latest
-        container_name: tpack-mysql
-        ports:
-            - 3306:3306
-        volumes:
-            - database:/var/lib/mysql
-        environment:
-            - MYSQL_ROOT_PASSWORD=tpack
-            - MYSQL_DATABASE=tpack
-            - MYSQL_USER=tpack
-            - MYSQL_PASSWORD=tpack
-    phpMyAdmin:
-        image: phpmyadmin/phpmyadmin:latest
-        container_name: tpack-phpmyadmin
-        environment:
-            - PMA_ARBITRARY=1
-        links:
-            - "db"
-        ports:
-            - 8080:80
-        volumes:
-            - /sessions
-    tpack:
-        build: .
-        container_name: tpack-service
-        depends_on:
-            - db
-            - phpMyAdmin
-        command: ["./wait-for-it.sh", "db:3306", "--", "liberty/bin/server", "run", "defaultServer"]
-        ports:
-            - 80:9080
-            - 9443:9443
+  db:
+    image: mysql:latest
+    container_name: tpack-mysql
+    ports:
+      - 3306:3306
+    volumes:
+      - database:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=tpack
+      - MYSQL_DATABASE=tpack
+      - MYSQL_USER=tpack
+      - MYSQL_PASSWORD=tpack
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    container_name: tpack-phpmyadmin
+    environment:
+      - PMA_ARBITRARY=1
+    links:
+      - "db"
+    ports:
+      - 8080:80
+    volumes:
+      - /sessions
+  app:
+    #build: .
+    image: rodrigoprestesmachado/tpack
+    container_name: tpack-service
+    depends_on:
+      - db
+      - phpmyadmin
+    command:
+      [
+        "./wait-for-it.sh",
+        "db:3306",
+        "--",
+        "liberty/bin/server",
+        "run",
+        "defaultServer",
+      ]
+    ports:
+      - 80:9080
+      - 9443:9443
