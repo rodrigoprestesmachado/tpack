@@ -1,4 +1,4 @@
-INSERT INTO `SESSION` (`ID`,`TITLE`) VALUES (1,'Práticas pedagógicas antes, durante e pós pandemia');
+INSERT INTO `SESSION` (`ID`,`TITLE`) VALUES (1,'Práticas pedagógicas digitais no contexto de pandemia');
 INSERT INTO `SESSION` (`ID`,`TITLE`) VALUES (2,'Caracterização das atividades');
 INSERT INTO `SESSION` (`ID`,`TITLE`) VALUES (3,'Conhecimento pedagógico');
 INSERT INTO `SESSION` (`ID`,`TITLE`) VALUES (4,'Conhecimento de conteúdo');
@@ -11,7 +11,7 @@ INSERT INTO `SESSION` (`ID`,`TITLE`) VALUES (10,'Uso de Tecnologia Digital de In
 INSERT INTO `SESSION` (`ID`,`TITLE`) VALUES (11,'Caracterização do respondente');
 INSERT INTO `SESSION` (`ID`,`TITLE`) VALUES (12,'Encerramento');
 
-INSERT INTO `QUESTION` (`ID`,`NOTE`,`TEXT`,`TYPE`,`SESSION_ID`) VALUES (1,NULL,'Esta pesquisa aborda as práticas pedagógicas e os impactos causados pela pandemia. Ao responder essa pesquisa, você contribui com a identificação \r\nde práticas utilizadas neste período e impacto que estas sofreram, identificando o surgimento de novas abordagens \r\ne adaptação de outras consolidadas entre professores e estudantes.\r\n</br></br>\r\nO tempo de preenchimento é de aproximadamente 8 minutos. Os seus dados de identificação não serão coletados e suas \r\nrespostas serão confidenciais, permanecerão em sigilo de pesquisa e não serão divulgadas individualmente.</br></br>\r\nO IFRS e seus pesquisadores agradecem sua contribuição. A coleta de dados foi distribuída entre professores por meio \r\nde mídias sociais. Ampliando o retrato das alterações das práticas pedagógicas e seus impactos.</br></br>\r\nSua opinião irá contribuir com a identificação de práticas pedagógicas pós-pandemia. Ao final da pesquisa, se tiver \r\ninteresse em receber o relatório do estudo sem custo, deixe seu e-mail.\r\nO termo de consentimento livre e esclarecido se encontra disponível \r\n<a href=\"https://drive.google.com/file/d/1gENXo26_iqWtOCE3c7b-vvJ8zY0Q6A3c/view?usp=sharing\">aqui</a>, ao clicar em \r\nprosseguir você aceita os termos de coleta dessa pesquisa.\r\n</br></br>\r\nAgradecemos sua contribuição!',7,1);
+INSERT INTO `QUESTION` (`ID`,`NOTE`,`TEXT`,`TYPE`,`SESSION_ID`) VALUES (1,NULL,'Esta pesquisa aborda as práticas pedagógicas e os impactos causados pela pandemia. Ao responder essa pesquisa, você contribui com a identificação de práticas utilizadas neste período e impacto que estas sofreram, identificando o surgimento de novas abordagens e adaptação de outras consolidadas entre professores e estudantes. <br/><br/>\r\nO tempo de preenchimento é de aproximadamente <b>8 minutos</b>. Os seus dados de identificação não serão coletados e suas respostas serão confidenciais, permanecerão em sigilo de pesquisa e não serão divulgadas individualmente. <br/><br/>\r\nO termo de consentimento livre e esclarecido se encontra disponível <a href=\"https://drive.google.com/file/d/1gENXo26_iqWtOCE3c7b-vvJ8zY0Q6A3c/view?usp=sharing\" target="_blank">aqui</a>, ao clicar em prosseguir você aceita os termos de coleta dessa pesquisa.<br/><br/>\r\nO IFRS e seus pesquisadores agradecem a sua contribuição!',7,1);
 INSERT INTO `QUESTION` (`ID`,`NOTE`,`TEXT`,`TYPE`,`SESSION_ID`) VALUES (2,'<span class="font-weight-bold">Nota:</span> você pode marcar mais de uma alternativa','Qual o âmbito da instituição de ensino que você leciona?',2,2);
 INSERT INTO `QUESTION` (`ID`,`NOTE`,`TEXT`,`TYPE`,`SESSION_ID`) VALUES (3,'<span class="font-weight-bold">Nota:</span> você pode marcar mais de uma alternativa','Qual o nível de ensino que você atua? ',2,2);
 INSERT INTO `QUESTION` (`ID`,`NOTE`,`TEXT`,`TYPE`,`SESSION_ID`) VALUES (4,NULL,'Sobre a sua formação, selecione todas as concluídas:',2,2);
@@ -72,7 +72,7 @@ INSERT INTO `CHOICE` (`ID`,`TEXT`,`QUESTION_ID`) VALUES (14,'Técnico',4);
 INSERT INTO `CHOICE` (`ID`,`TEXT`,`QUESTION_ID`) VALUES (15,'Tecnólogo',4);
 INSERT INTO `CHOICE` (`ID`,`TEXT`,`QUESTION_ID`) VALUES (16,'Bacharel',4);
 INSERT INTO `CHOICE` (`ID`,`TEXT`,`QUESTION_ID`) VALUES (17,'Licenciatura',4);
-INSERT INTO `CHOICE` (`ID`,`TEXT`,`QUESTION_ID`) VALUES (18,'Mestre',3);
+INSERT INTO `CHOICE` (`ID`,`TEXT`,`QUESTION_ID`) VALUES (18,'Mestre',4);
 INSERT INTO `CHOICE` (`ID`,`TEXT`,`QUESTION_ID`) VALUES (19,'Doutor',4);
 INSERT INTO `CHOICE` (`ID`,`TEXT`,`QUESTION_ID`) VALUES (20,'Pós-doutor ',4);
 INSERT INTO `CHOICE` (`ID`,`TEXT`,`QUESTION_ID`) VALUES (21,'Ciências agrárias',6);

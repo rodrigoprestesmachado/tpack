@@ -1,7 +1,14 @@
 <template>
   <v-app id="inspire">
     <v-app-bar app color="#009688" dark>
-      <v-toolbar-title>tpack</v-toolbar-title>
+      <v-row>
+        <v-btn icon small link="true" href="/tpack">
+          <v-icon large color="white darken-2">
+            mdi-home
+          </v-icon>
+        </v-btn>
+        <v-toolbar-title class="ml-2">tpack</v-toolbar-title>
+      </v-row>
     </v-app-bar>
     <v-main>
       <session />
@@ -18,9 +25,7 @@ import { Component, Vue } from "vue-property-decorator";
 import session from "@/components/Session.vue";
 
 @Component({
-  components: {
-    session
-  }
+  components: { session }
 })
 export default class Instrument extends Vue {}
 </script>

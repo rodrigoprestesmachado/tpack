@@ -6,9 +6,18 @@ Vue.use(VueRouter);
 
 const routes: Array<RouteConfig> = [
   {
+    component: Instrument,
     path: "/",
     name: "Instrument",
-    component: Instrument
+    meta: {
+      title: 'Tpack',
+      metaTags: [
+        {
+          name: 'description',
+          content: 'Tpack xs application'
+        }
+      ]
+    }
   }
 ];
 

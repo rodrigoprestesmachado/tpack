@@ -1,227 +1,281 @@
 <template>
-  <v-container>
-    <!--
-      load feedback
-    -->
-    <v-row justify="center">
-      <v-progress-circular
-        indeterminate
-        color="primary"
-        v-if="loaded === false && errorMessage === ''"
-      ></v-progress-circular>
-    </v-row>
+  <v-container fluid>
+    <v-row no-gutters align="start" justify="center">
+      <v-col lg="4">
+        <!-- load feedback -->
+        <v-progress-circular
+          indeterminate
+          justify="center"
+          color="primary"
+          v-if="loaded === false && errorMessage === ''"
+        ></v-progress-circular>
 
-    <!-- error Message -->
-    <v-row align="center" justify="center">
-      <template>{{errorMessage}}</template>
-    </v-row>
+        <!-- error Message -->
+        <div align="center" justify="center">{{ errorMessage }}</div>
 
-    <!-- save message -->
-    <template v-if="token != null && loaded === true">
-      <v-row
-        align="center"
-        justify="center"
-        class="ma-5 indigo--text text-h5"
-      >Obrigado por ter respondido essa pesquisa</v-row>
-    </template>
-
-    <!-- main container -->
-    <template v-if="loaded == true ">
-      <v-row align="center" justify="center">
-        <div class="headline">{{ sessions[current].title }}</div>
-      </v-row>
-      <v-container v-for="question of sessions[current].questions" :key="question.id">
-        <v-row class="mb-1 pa-0" align="center" justify="center">
-          <v-col class="text-justify">
-            <span v-html="question.text"></span>
-          </v-col>
-        </v-row>
-        <v-row class="ml-10 body-2" align="center" justify="center">
-          <v-col class="text-justify">
-            <span v-html="question.note"></span>
-          </v-col>
-        </v-row>
-
-        <!-- Scale queston  -->
-        <template v-if="question.type == 'SCALE'">
-          <v-row class="mx-1">
-            <v-slider
-              v-model="answer[question.id]"
-              thumb-label="always"
-              thumb-size="30"
-              :step="0.1"
-              :max="5"
-              :min="1"
-              aria-label="classifique"
-            />
-          </v-row>
+        <!-- save message -->
+        <template v-if="token != null && loaded === true">
+          <div
+            align="center"
+            justify="center"
+            class="ma-5 indigo--text text-h5"
+          >
+            Obrigado por ter respondido essa pesquisa
+          </div>
         </template>
 
-        <!-- Age question -->
-        <template v-if="question.type == 'AGE'">
-          <v-row align="center" justify="center">
-            <v-alert type="error" :value="validation[question.id]" dense outlined>Informe sua idade</v-alert>
-          </v-row>
-          <v-row>
-            <v-select v-model="answer[question.id]" :items="ages" dense outlined class="ml-8 mr-8"></v-select>
-          </v-row>
-        </template>
+        <!-- main container -->
+        <template v-if="loaded == true">
+          <div class="headline" align="center" justify="center">
+            {{ sessions[current].title }}
+          </div>
 
-        <!-- Multiple choice question -->
-        <template v-if="question.type == 'MULTIPLE'">
-          <v-row align="center" justify="center">
-            <v-alert
-              type="error"
-              dense
-              outlined
-              :value="validation[question.id]"
-            >Escolha pelo menos uma das opções abaixo</v-alert>
-          </v-row>
-          <v-row class="mt-1">
-            <v-col v-for="choice of question.choices" :key="choice.id">
-              <v-checkbox
+          <v-container
+            v-for="question of sessions[current].questions"
+            :key="question.id"
+          >
+            <!-- Label queston  -->
+            <template v-if="question.type == 'LABEL'">
+              <div v-html="question.text" align="start" justify="center"></div>
+            </template>
+
+            <!-- Scale queston  -->
+            <template v-if="question.type == 'SCALE'">
+              <div v-html="question.text"></div>
+              <div class="subtitle-2 mx-4" v-html="question.note"></div>
+              <v-slider
                 v-model="answer[question.id]"
-                :value="choice.id"
-                :label="choice.text"
-                multiple
+                thumb-label="always"
+                thumb-size="30"
+                :step="0.1"
+                :max="5"
+                :min="1"
+                aria-label="classifique"
+                class="mt-10 mb-10 mx-3"
                 dense
-              ></v-checkbox>
+                :tick-labels="ticks"
+              />
+            </template>
+
+            <!-- Age question -->
+            <template v-if="question.type == 'AGE'">
+              <v-card elevation="2" class="mb-8">
+                <v-card-title class="body-1 text--primary">
+                  <div v-html="question.text"></div>
+                  <div class="subtitle-2 mx-4" v-html="question.note"></div>
+                </v-card-title>
+                <v-card-actions>
+                  <v-col>
+                    <v-alert
+                      type="error"
+                      :value="validation[question.id]"
+                      dense
+                      outlined
+                      >Informe sua idade</v-alert
+                    >
+                    <v-select
+                      v-model="answer[question.id]"
+                      :items="ages"
+                      dense
+                      outlined
+                      class="ml-8 mr-8"
+                    ></v-select>
+                  </v-col>
+                </v-card-actions>
+              </v-card>
+            </template>
+
+            <!-- Multiple choice question -->
+            <template v-if="question.type == 'MULTIPLE'">
+              <v-card elevation="2" class="mb-8">
+                <v-card-title class="subtitle-1 text--primary">
+                  <div v-html="question.text"></div>
+                  <div class="subtitle-2 mx-4" v-html="question.note"></div>
+                </v-card-title>
+                <v-card-actions>
+                  <v-col>
+                    <v-alert
+                      type="error"
+                      dense
+                      outlined
+                      :value="validation[question.id]"
+                      >Escolha pelo menos uma das opções abaixo</v-alert
+                    >
+                    <template v-for="choice of question.choices">
+                      <v-checkbox
+                        v-model="answer[question.id]"
+                        :value="choice.id"
+                        :label="choice.text"
+                        multiple
+                        dense
+                        :key="choice.id"
+                        class="ma-0"
+                      ></v-checkbox>
+                    </template>
+                  </v-col>
+                </v-card-actions>
+              </v-card>
+            </template>
+
+            <!-- Unique choice question -->
+            <template v-if="question.type == 'UNIQUE'">
+              <v-card elevation="2" class="mb-8">
+                <v-card-title class="body-1 text--primary">
+                  <div v-html="question.text"></div>
+                  <div class="subtitle-2 mx-4" v-html="question.note"></div>
+                </v-card-title>
+                <v-card-actions>
+                  <v-col>
+                    <v-alert
+                      type="error"
+                      dense
+                      outlined
+                      :value="validation[question.id]"
+                      >Escolha uma das opções abaixo</v-alert
+                    >
+                    <v-radio-group v-model="answer[question.id]" dense column>
+                      <template v-for="choice of question.choices">
+                        <v-radio
+                          :value="choice.id"
+                          :label="choice.text"
+                          :key="choice.id"
+                        ></v-radio>
+                      </template>
+                    </v-radio-group>
+                  </v-col>
+                </v-card-actions>
+              </v-card>
+            </template>
+
+            <!-- Year question -->
+            <template v-if="question.type == 'YEAR'">
+              <v-card elevation="2" class="mb-8">
+                <v-card-title class="body-1 text--primary">
+                  <div v-html="question.text"></div>
+                  <div class="subtitle-2 mx-4" v-html="question.note"></div>
+                </v-card-title>
+                <v-card-actions>
+                  <v-col>
+                    <v-alert
+                      type="error"
+                      :value="validation[question.id]"
+                      dense
+                      outlined
+                      >Informe um ano</v-alert
+                    >
+                    <v-select
+                      v-model="answer[question.id]"
+                      :items="years"
+                      dense
+                      outlined
+                      class="ml-8 mr-8"
+                    ></v-select>
+                  </v-col>
+                </v-card-actions>
+              </v-card>
+            </template>
+
+            <!-- Region question-->
+            <template v-if="question.type == 'REGION'">
+              <v-card elevation="2" class="mb-8">
+                <v-card-title class="body-1 text--primary">
+                  <div v-html="question.text"></div>
+                  <div class="subtitle-2 mx-4" v-html="question.note"></div>
+                </v-card-title>
+                <v-card-actions>
+                  <v-col>
+                    <v-alert
+                      type="error"
+                      :value="validation[question.id]"
+                      dense
+                      outlined
+                      >Escolha seu estado e cidade</v-alert
+                    >
+                    <v-select
+                      v-model="state"
+                      :items="states"
+                      item-text="nome"
+                      item-value="sigla"
+                      label="Estado"
+                      dense
+                      outlined
+                      class="ml-8 mr-8"
+                      @change="getCities()"
+                    ></v-select>
+                    <v-select
+                      v-if="state != null && loadCities == true"
+                      v-model="answer[question.id]"
+                      :items="cities"
+                      item-text="nome"
+                      item-value="nome"
+                      dense
+                      outlined
+                      label="Município"
+                      class="ml-8 mr-8"
+                    ></v-select>
+                  </v-col>
+                </v-card-actions>
+              </v-card>
+            </template>
+
+            <!-- Save button -->
+            <template v-if="question.type === 'SAVE' && token === null">
+              <v-btn
+                align="center"
+                justify="center"
+                small
+                color="teal lighten-2"
+                class="ma-10"
+                v-on:click.native="save()"
+                >Enviar suas respostas</v-btn
+              >
+            </template>
+          </v-container>
+
+          <!-- Next and previus buttons -->
+          <v-row no-gutters class="mb-10">
+            <v-col>
+              <v-btn
+                v-if="previousButton"
+                small
+                fab
+                :color="navigationColor"
+                v-on:click="nextSession(-1)"
+                aria-label="voltar para as questões anteriores"
+              >
+                <v-icon dark>mdi-arrow-left</v-icon>
+              </v-btn>
+            </v-col>
+            <v-col>
+              <v-progress-linear :value="progress"></v-progress-linear>
+            </v-col>
+            <v-col>
+              <v-btn
+                v-if="nextButton"
+                small
+                fab
+                :color="navigationColor"
+                v-on:click="nextSession(1)"
+                aria-label="próximas questões"
+              >
+                <v-icon dark>mdi-arrow-right</v-icon>
+              </v-btn>
             </v-col>
           </v-row>
-        </template>
 
-        <!-- Unique choice question -->
-        <template v-if="question.type == 'UNIQUE'">
-          <v-row align="center" justify="center">
-            <v-alert
-              type="error"
-              dense
-              outlined
-              :value="validation[question.id]"
-            >Escolha uma das opções abaixo</v-alert>
-          </v-row>
-          <v-row class="ma-5 pa-0">
-            <v-radio-group
-              v-model="answer[question.id]"
-              v-for="choice of question.choices"
-              :key="choice.id"
-              dense
-            >
-              <v-col>
-                <v-radio :value="choice.id" :label="choice.text"></v-radio>
-              </v-col>
-            </v-radio-group>
-          </v-row>
-        </template>
-
-        <!-- Year question -->
-        <template v-if="question.type == 'YEAR'">
-          <v-row align="center" justify="center">
-            <v-alert type="error" :value="validation[question.id]" dense outlined>Informe uma data</v-alert>
-          </v-row>
-          <v-row align="center" justify="center">
-            <v-date-picker
-              v-model="answer[question.id]"
-              type="month"
-              show-current="2010-01"
-              landscape
-              no-title
-              class="ml-8"
-            ></v-date-picker>
-          </v-row>
-        </template>
-
-        <!-- Region question-->
-        <template v-if="question.type == 'REGION'">
-          <v-row align="center" justify="center">
-            <v-alert
-              type="error"
-              :value="validation[question.id]"
-              dense
-              outlined
-            >Escolha seu estado e cidade</v-alert>
-          </v-row>
+          <!-- Alert snack bar -->
           <v-row>
-            <v-select
-              v-model="state"
-              :items="states"
-              item-text="nome"
-              item-value="sigla"
-              label="Estado"
-              dense
-              outlined
-              class="ml-8 mr-8"
-              @change="getCities()"
-            ></v-select>
-          </v-row>
-          <v-row>
-            <v-select
-              v-if="state != null && loadCities == true"
-              v-model="answer[question.id]"
-              :items="cities"
-              item-text="nome"
-              item-value="nome"
-              dense
-              outlined
-              label="Município"
-              class="ml-8 mr-8"
-            ></v-select>
+            <v-snackbar v-model="openSnackbar">
+              Necessitamos que você responda todas as questões para que possamos
+              completar essa pesquisa
+              <v-btn color="indigo" text @click="openSnackbar = false"
+                >Fechar</v-btn
+              >
+            </v-snackbar>
           </v-row>
         </template>
-
-        <!-- Save button -->
-        <template v-if="question.type === 'SAVE' && token === null">
-          <v-row align="center" justify="center">
-            <v-btn
-              small
-              color="teal lighten-2"
-              class="ma-10"
-              v-on:click.native="save()"
-            >Enviar suas respostas</v-btn>
-          </v-row>
-        </template>
-      </v-container>
-
-      <!-- Next and previus buttons -->
-      <v-row no-gutters class="mu-16">
-        <v-col>
-          <v-btn
-            v-if="previousButton"
-            small
-            fab
-            :color="navigationColor"
-            v-on:click="nextSession(-1)"
-            aria-label="voltar para as questões anteriores"
-          >
-            <v-icon dark>mdi-arrow-left</v-icon>
-          </v-btn>
-        </v-col>
-        <v-col>
-          <v-progress-linear :value="progress"></v-progress-linear>
-        </v-col>
-        <v-col>
-          <v-btn
-            v-if="nextButton"
-            small
-            fab
-            :color="navigationColor"
-            v-on:click="nextSession(1)"
-            aria-label="próximas questões"
-          >
-            <v-icon dark>mdi-arrow-right</v-icon>
-          </v-btn>
-        </v-col>
-      </v-row>
-
-      <!-- Alert snack bar -->
-      <v-row>
-        <v-snackbar v-model="openSnackbar">
-          Necessitamos que você responda todas as questões
-          Para que possamos completar a pesquisa, .
-          <v-btn color="indigo" text @click="openSnackbar = false">Fechar</v-btn>
-        </v-snackbar>
-      </v-row>
-    </template>
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 
@@ -246,7 +300,7 @@ import Vuetify from "vuetify/lib";
 })
 export default class Session extends Vue {
   /** sets base URL */
-  private readonly BASE = "http://REPLACE-HOST/REPLACE-API";
+  private readonly BASE = "http://REPLACE-HOST:REPLACE-PORT/REPLACE-API";
   /** ttores the answer of the users to only sync with the interface */
   private answer: any = [];
   /** the session with the questions */
@@ -281,13 +335,43 @@ export default class Session extends Vue {
   private openSnackbar = false;
   /** sores the token/id of a user */
   private token: any = null;
-
+  /** stores the array of years  */
+  private years: Array<string> = [];
+  /** the labels of the sliders   */
+  private ticks: Array<string> = [];
   /**
    * When the component is created (Vue created) then init
    */
   created() {
+    this.initLabels();
+    this.initYears();
     this.initAges();
     this.initApplication();
+  }
+
+  initLabels() {
+    for (let index = 1; index <= 41; index++) {
+      switch (index) {
+        case 1:
+          this.ticks.push("1");
+          break;
+        case 41:
+          this.ticks.push("5");
+          break;
+        default:
+          this.ticks.push("");
+          break;
+      }
+    }
+  }
+
+  /** initalize the years array  */
+  initYears() {
+    const current = new Date();
+    const strYear = "";
+    for (let index = 0; index < 61; index++) {
+      this.years.push(String(current.getFullYear() - index));
+    }
   }
 
   /** initalize the ages array  */

@@ -173,6 +173,10 @@
                   <value>${replace.host}</value>
                 </replacement>
                 <replacement>
+                  <token>REPLACE-PORT</token>
+                  <value>${replace.port}</value>
+                </replacement>
+                <replacement>
                   <token>REPLACE-API</token>
                   <value>${replace.api}</value>
                 </replacement>
