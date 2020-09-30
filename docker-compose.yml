@@ -27,7 +27,7 @@ services:
       - /sessions
   app:
     #build: .
-    image: rodrigoprestesmachado/tpack
+    image: rodrigoprestesmachado/tpack_app:latest
     container_name: tpack-service
     depends_on:
       - db

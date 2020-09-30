@@ -5,7 +5,7 @@
             <id>production</id>
             <properties>
                 <replace.host>code.inf.poa.ifrs.edu.br</replace.host>
-                <replace.port>9080</replace.port>
+                <replace.port>80</replace.port>
                 <replace.api>tpack/service/api/</replace.api>
                 <replace.db>db</replace.db>
             </properties>
