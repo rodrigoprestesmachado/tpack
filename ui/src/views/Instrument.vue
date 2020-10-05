@@ -2,7 +2,7 @@
   <v-app id="inspire">
     <v-app-bar app color="#009688" dark>
       <v-row>
-        <v-btn icon small link="true" href="/tpack">
+        <v-btn icon small :link="true" href="/tpack">
           <v-icon large color="white darken-2">
             mdi-home
           </v-icon>

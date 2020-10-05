@@ -1,7 +1,7 @@
 <template>
   <v-container fluid>
     <v-row no-gutters align="start" justify="center">
-      <v-col lg="4">
+      <v-col lg="5">
         <!-- load feedback -->
         <v-progress-circular
           indeterminate
@@ -39,10 +39,29 @@
               <div v-html="question.text" align="start" justify="center"></div>
             </template>
 
+            <!-- Text area field question   -->
+            <template v-if="question.type == 'TEXTAREA'">
+              <v-card elevation="2" class="mb-8">
+                <v-card-title class="body-1 text--primary">
+                  <div v-html="question.id - 1 + ') ' + question.text"></div>
+                  <div class="body-2 mx-4 mt-4" v-html="question.note"></div>
+                </v-card-title>
+                <v-card-actions>
+                  <v-col>
+                    <v-textarea
+                      v-model="answer[question.id]"
+                      clearable
+                      name="input-7-4"
+                    ></v-textarea>
+                  </v-col>
+                </v-card-actions>
+              </v-card>
+            </template>
+
             <!-- Scale queston  -->
             <template v-if="question.type == 'SCALE'">
-              <div v-html="question.text"></div>
-              <div class="subtitle-2 mx-4" v-html="question.note"></div>
+              <div v-html="question.id - 1 + ') ' + question.text"></div>
+              <div class="body-2 mx-4 mt-6" v-html="question.note"></div>
               <v-slider
                 v-model="answer[question.id]"
                 thumb-label="always"
@@ -61,14 +80,14 @@
             <template v-if="question.type == 'AGE'">
               <v-card elevation="2" class="mb-8">
                 <v-card-title class="body-1 text--primary">
-                  <div v-html="question.text"></div>
-                  <div class="subtitle-2 mx-4" v-html="question.note"></div>
+                  <div v-html="question.id - 1 + ') ' + question.text"></div>
+                  <div class="body-2 mx-4 mt-4" v-html="question.note"></div>
                 </v-card-title>
                 <v-card-actions>
                   <v-col>
                     <v-alert
                       type="error"
-                      :value="validation[question.id]"
+                      :value="validation[question.id].alert"
                       dense
                       outlined
                       >Informe sua idade</v-alert
@@ -89,8 +108,8 @@
             <template v-if="question.type == 'MULTIPLE'">
               <v-card elevation="2" class="mb-8">
                 <v-card-title class="subtitle-1 text--primary">
-                  <div v-html="question.text"></div>
-                  <div class="subtitle-2 mx-4" v-html="question.note"></div>
+                  <div v-html="question.id - 1 + ') ' + question.text"></div>
+                  <div class="body-2 mx-4 mt-4" v-html="question.note"></div>
                 </v-card-title>
                 <v-card-actions>
                   <v-col>
@@ -98,7 +117,7 @@
                       type="error"
                       dense
                       outlined
-                      :value="validation[question.id]"
+                      :value="validation[question.id].alert"
                       >Escolha pelo menos uma das opções abaixo</v-alert
                     >
                     <template v-for="choice of question.choices">
@@ -117,12 +136,12 @@
               </v-card>
             </template>
 
-            <!-- Unique choice question -->
-            <template v-if="question.type == 'UNIQUE'">
+            <!-- Multilevel choice question -->
+            <template v-if="question.type == 'MULTILEVEL'">
               <v-card elevation="2" class="mb-8">
-                <v-card-title class="body-1 text--primary">
-                  <div v-html="question.text"></div>
-                  <div class="subtitle-2 mx-4" v-html="question.note"></div>
+                <v-card-title class="subtitle-1 text--primary">
+                  <div v-html="question.id - 1 + ') ' + question.text"></div>
+                  <div class="body-2 mx-4 mt-4" v-html="question.note"></div>
                 </v-card-title>
                 <v-card-actions>
                   <v-col>
@@ -130,7 +149,50 @@
                       type="error"
                       dense
                       outlined
-                      :value="validation[question.id]"
+                      :value="validation[question.id].alert"
+                      >Escolha pelo menos uma das opções abaixo</v-alert
+                    >
+                    <template v-for="index in question.levels">
+                      <v-select
+                        v-model="answer[question.id]"
+                        :items="
+                          question.choices.filter(choice => {
+                            if (choice.level === index) return choice;
+                          })
+                        "
+                        item-text="text"
+                        item-value="id"
+                        multiple
+                        dense
+                        outlined
+                        class="ml-8 mr-8"
+                        :key="index"
+                        :placeholder="
+                          'grupo: ' + index + ' de ' + question.levels
+                        "
+                        :ref="'multilevel' + index"
+                        @change="handleLevel"
+                      ></v-select>
+                    </template>
+                  </v-col>
+                </v-card-actions>
+              </v-card>
+            </template>
+
+            <!-- Unique choice question -->
+            <template v-if="question.type == 'UNIQUE'">
+              <v-card elevation="2" class="mb-8">
+                <v-card-title class="body-1 text--primary">
+                  <div v-html="question.id - 1 + ') ' + question.text"></div>
+                  <div class="body-2 mx-4 mt-4" v-html="question.note"></div>
+                </v-card-title>
+                <v-card-actions>
+                  <v-col>
+                    <v-alert
+                      type="error"
+                      dense
+                      outlined
+                      :value="validation[question.id].alert"
                       >Escolha uma das opções abaixo</v-alert
                     >
                     <v-radio-group v-model="answer[question.id]" dense column>
@@ -139,6 +201,7 @@
                           :value="choice.id"
                           :label="choice.text"
                           :key="choice.id"
+                          :disabled="isQuestionDisable(question.id)"
                         ></v-radio>
                       </template>
                     </v-radio-group>
@@ -151,14 +214,14 @@
             <template v-if="question.type == 'YEAR'">
               <v-card elevation="2" class="mb-8">
                 <v-card-title class="body-1 text--primary">
-                  <div v-html="question.text"></div>
-                  <div class="subtitle-2 mx-4" v-html="question.note"></div>
+                  <div v-html="question.id - 1 + ') ' + question.text"></div>
+                  <div class="body-2 mx-4 mt-4" v-html="question.note"></div>
                 </v-card-title>
                 <v-card-actions>
                   <v-col>
                     <v-alert
                       type="error"
-                      :value="validation[question.id]"
+                      :value="validation[question.id].alert"
                       dense
                       outlined
                       >Informe um ano</v-alert
@@ -179,14 +242,14 @@
             <template v-if="question.type == 'REGION'">
               <v-card elevation="2" class="mb-8">
                 <v-card-title class="body-1 text--primary">
-                  <div v-html="question.text"></div>
-                  <div class="subtitle-2 mx-4" v-html="question.note"></div>
+                  <div v-html="question.id - 1 + ') ' + question.text"></div>
+                  <div class="body-2 mx-4 mt-4" v-html="question.note"></div>
                 </v-card-title>
                 <v-card-actions>
                   <v-col>
                     <v-alert
                       type="error"
-                      :value="validation[question.id]"
+                      :value="validation[question.id].alert"
                       dense
                       outlined
                       >Escolha seu estado e cidade</v-alert
@@ -218,7 +281,7 @@
               </v-card>
             </template>
 
-            <!-- Save button -->
+            <!-- Button -->
             <template v-if="question.type === 'SAVE' && token === null">
               <v-btn
                 align="center"
@@ -266,8 +329,8 @@
           <!-- Alert snack bar -->
           <v-row>
             <v-snackbar v-model="openSnackbar">
-              Necessitamos que você responda todas as questões para que possamos
-              completar essa pesquisa
+              Necessitamos que você responda todas as questões obrigatórias para
+              que possamos completar essa pesquisa
               <v-btn color="indigo" text @click="openSnackbar = false"
                 >Fechar</v-btn
               >
@@ -326,7 +389,7 @@ export default class Session extends Vue {
   /** indicates when the cities is loaded  */
   private loadCities = false;
   /** stores if a user answered a question or not */
-  private validation: Array<boolean> = [];
+  private validation: Array<any> = [];
   /** stores the array of ages */
   private ages: Array<string> = [];
   /** the default color of navigation buttons */
@@ -339,6 +402,13 @@ export default class Session extends Vue {
   private years: Array<string> = [];
   /** the labels of the sliders   */
   private ticks: Array<string> = [];
+
+  /**
+   * Tpack spefic rule
+   * This property is because 5 is related with question 4
+   */
+  private disableQuestion5 = true;
+
   /**
    * When the component is created (Vue created) then init
    */
@@ -349,6 +419,9 @@ export default class Session extends Vue {
     this.initApplication();
   }
 
+  /**
+   * Initi the labels of the sliders
+   */
   initLabels() {
     for (let index = 1; index <= 41; index++) {
       switch (index) {
@@ -368,7 +441,6 @@ export default class Session extends Vue {
   /** initalize the years array  */
   initYears() {
     const current = new Date();
-    const strYear = "";
     for (let index = 0; index < 61; index++) {
       this.years.push(String(current.getFullYear() - index));
     }
@@ -387,9 +459,6 @@ export default class Session extends Vue {
    * @param base The URL base of the service
    */
   async initApplication() {
-    //TODO It is a way to pass the first "question"
-    this.answer[1] = 1;
-
     const url = this.BASE + "getSessions";
     try {
       const resp = await axios.get(url);
@@ -453,19 +522,6 @@ export default class Session extends Vue {
   }
 
   /**
-   * Verifies if a question was answered, if not sets to the state to false
-   */
-  initNotNullValidation() {
-    const currentQuestions = this.sessions[this.current].questions;
-    for (const index in currentQuestions) {
-      const question = currentQuestions[index];
-      this.validation[question.id] === undefined
-        ? (this.validation[question.id] = false)
-        : "";
-    }
-  }
-
-  /**
    * Controls the changes of the sessions
    *
    * @param next the number used to move to the next session. For example,
@@ -518,23 +574,63 @@ export default class Session extends Vue {
       for (const x in questions) {
         const idQuestion = questions[x].id;
 
-        // checks if the user answered the question
-        if (
-          localStorage.getItem(idQuestion) == null ||
-          this.answer[idQuestion].length === 0
-        ) {
-          // do not allow to change the session
-          go = false;
-          this.validation[idQuestion] = true;
+        // checks if the question needs to be validated
+        if (this.validation[idQuestion].required) {
+          // checks if the user answered the question
+          if (
+            localStorage.getItem(idQuestion) == null ||
+            this.answer[idQuestion].length === 0
+          ) {
+            // do not allow to change the session (next session)
+            go = false;
+            this.validation[idQuestion].alert = true;
+          } else {
+            this.validation[idQuestion].alert = false;
+          }
         } else {
-          this.validation[idQuestion] = false;
+          console.log("DO NOT validade: " + idQuestion);
         }
       }
-      // force the update to show the erros to the users
-      this.$forceUpdate();
+      // TODO: remove in the future - force the update to show the erros to the users
+      //this.$forceUpdate();
     }
-
     return go;
+  }
+
+  /**
+   * Verifies if a question was answered, if not, sets to the state to true
+   */
+  initNotNullValidation() {
+    const currentQuestions = this.sessions[this.current].questions;
+    for (const index in currentQuestions) {
+      const question = currentQuestions[index];
+      // true means the question needs to be validated
+      if (this.validation[question.id] === undefined) {
+        this.validation[question.id] = { required: true, alert: false };
+      }
+    }
+    this.scapeValidationList();
+  }
+
+  /**
+   * // TODO this information should be in the data base in the next version.
+   * it is necessary a refactor of the validation and answer systens
+   *
+   * Indicate questions to scapes of not null validation
+   * false means: scape validation
+   */
+  scapeValidationList() {
+    this.validation[1] = { required: false, alert: false };
+    this.validation[43] = { required: false, alert: false };
+    this.validation[44] = { required: false, alert: false };
+    this.validation[45] = { required: false, alert: false };
+
+    if (localStorage.getItem("5") == null) {
+      this.validation[5] = { required: false, alert: false };
+    } else {
+      this.disableQuestion5 = false;
+      this.validation[5] = { required: true, alert: false };
+    }
   }
 
   /***
@@ -543,14 +639,17 @@ export default class Session extends Vue {
   saveInLocalStorage() {
     for (const key in this.answer) {
       const value = this.answer[key];
-      localStorage.setItem(key, value);
+      // avoid to store null values in localStorage
+      if (value != null) {
+        localStorage.setItem(key, value);
+      }
     }
-    // save the selected state for region component
+    // TODO save the selected state for region component
     localStorage.setItem("state", this.state);
   }
 
   /**
-   * Loads the previus data from local storage
+   * Loads the previous data from local storage
    */
   loadFromLocalStorage() {
     if (localStorage.length !== 0) {
@@ -562,8 +661,8 @@ export default class Session extends Vue {
         const value = localStorage.getItem(keys[k]);
         // gets the type of question
         const questionType = this.checkQuestionType(keys[k]);
-        if (questionType === "MULTIPLE") {
-          // When the answer is multiple we need to create a array of numbers
+        if (questionType === "MULTIPLE" || questionType === "MULTILEVEL") {
+          // When the answer is multiple or multilevel we need to create a array of numbers
           // from local storage to Vuetify render the interface
           const strArray = value!.split(",");
           const numberArray = [];
@@ -610,6 +709,9 @@ export default class Session extends Vue {
    * Saves the answers in the service
    */
   async save() {
+    // save the data of the latest session
+    this.saveInLocalStorage();
+
     interface DataMap {
       [key: string]: any;
     }
@@ -644,6 +746,37 @@ export default class Session extends Vue {
       }
     } else {
       console.log("data already saved");
+    }
+  }
+
+  /**
+   * Tpack spefic rule:
+   * Answers if some question need to be disable
+   */
+  isQuestionDisable(idQuestion) {
+    if (idQuestion == 5) {
+      return this.disableQuestion5;
+    }
+  }
+
+  /**
+   * Tpack spefic rule:
+   * Handles the levels of multilevel question about formation.
+   */
+  handleLevel(arraySelected) {
+    if (arraySelected.find(e => e > 12)) {
+      // enable question 5
+      this.disableQuestion5 = false;
+      this.validation[5].required = true;
+    } else {
+      // disable question 5
+      this.disableQuestion5 = true;
+      this.validation[5].required = false;
+
+      // clear localstorage
+      localStorage.removeItem("5");
+
+      this.answer[5] = null;
     }
   }
 

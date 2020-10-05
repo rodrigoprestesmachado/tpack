@@ -75,7 +75,8 @@ public class Controller extends BaseController {
                 try {
                     final Question question = this.daoQuestion.find(Long.parseLong(entry.getKey()));
                     // handles multiple choices questions
-                    if (question.getType() == QuestionType.MULTIPLE) {
+                    if (question.getType() == QuestionType.MULTIPLE || question.getType() == QuestionType.MULTILEVEL
+                            || question.getType() == QuestionType.UNIQUE) {
                         String[] strAnswer = entry.getValue().split(",");
                         for (String id : strAnswer) {
                             Choice choice = this.daoChoice.find(Long.parseLong(id));

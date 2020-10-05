@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package edu.ifrs.tpack;
+package edu.ifrs.tpack.containers;
 
 import java.time.Duration;
 
@@ -31,7 +31,7 @@ import org.testcontainers.junit.jupiter.Container;
  * This class creates the containers to run integration tests for TPACK XS
  * Application
  */
-public class DockerCompose implements BeforeAllCallback, AfterAllCallback {
+public class TpackCompose implements BeforeAllCallback, AfterAllCallback {
 
     // Configure the a tpack application container from project Dockerfile
     @Container

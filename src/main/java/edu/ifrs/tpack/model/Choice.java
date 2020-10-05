@@ -43,6 +43,12 @@ public class Choice {
     @JsonbTransient
     private List<Answer> answers;
 
+    /* used just for multilevel questions */
+    private byte level;
+
+    /* jumps for this level when user choose this choice */
+    private byte nextLevel;
+
     public long getId() {
         return id;
     }
@@ -75,4 +81,21 @@ public class Choice {
     public void setAnswers(List<Answer> answers) {
         this.answers = answers;
     }
+
+    public byte getLevel() {
+        return level;
+    }
+
+    public void setLevel(byte level) {
+        this.level = level;
+    }
+
+    public byte getNextLevel() {
+        return nextLevel;
+    }
+
+    public void setNextLevel(byte nextLevel) {
+        this.nextLevel = nextLevel;
+    }
+
 }

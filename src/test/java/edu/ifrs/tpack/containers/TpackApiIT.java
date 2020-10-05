@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package edu.ifrs.tpack;
+package edu.ifrs.tpack.containers;
 
 import static org.junit.Assert.assertEquals;
 
@@ -30,20 +30,20 @@ import org.junit.jupiter.api.extension.ExtendWith;
 /**
  * Integration test of TPACK XS Application
  */
-@ExtendWith({ DockerCompose.class })
-public class TpackAppIT {
+@ExtendWith({ TpackCompose.class })
+public class TpackApiIT {
 
-    private static String API = "/tpack-app/service/api/";
+    private static String API = "/tpack/service/api/";
 
     private String host;
     private Integer port;
 
     private CloseableHttpClient client;
 
-    public TpackAppIT() {
+    public TpackApiIT() {
         this.client = HttpClients.createDefault();
-        host = DockerCompose.tpack.getContainerIpAddress();
-        port = DockerCompose.tpack.getFirstMappedPort();
+        host = TpackCompose.tpack.getContainerIpAddress();
+        port = TpackCompose.tpack.getFirstMappedPort();
     }
 
     @Test
