@@ -23,7 +23,10 @@ import javax.persistence.criteria.Root;
 
 import edu.ifrs.tpack.model.Session;
 
-/* Classe que herda as operações CRUD implementadas pela classe Repository para aplicá-las sobre objetos da classe Session */
+/* 
+ * Classe que herda as operações CRUD implementadas pela classe Repository 
+ * para aplicá-las sobre objetos da classe Session. 
+ */
 public class DAOSession extends Repository<Session> {
 
     /**
