@@ -18,6 +18,7 @@ package edu.ifrs.tpack.data;
 
 import edu.ifrs.tpack.model.Choice;
 
+/* Classe que herda as operações CRUD implementadas pela classe Repository para aplicá-las sobre objetos da classe Choice */
 public class DAOChoice extends Repository<Choice> {
 
 }

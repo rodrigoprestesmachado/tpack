@@ -18,6 +18,7 @@ package edu.ifrs.tpack.data;
 
 import edu.ifrs.tpack.model.Answer;
 
+/* Classe que herda as operações CRUD implementadas pela classe Repository para aplicá-las sobre objetos da classe Answer */
 public class DAOAnswer extends Repository<Answer> {
 
 }

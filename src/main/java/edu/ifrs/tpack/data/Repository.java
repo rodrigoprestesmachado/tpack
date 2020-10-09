@@ -25,7 +25,15 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
-public abstract class Repository<T> {
+/** 
+Corrigido: AbstractClassWithoutAbstractMethod
+
+@see: pmd.github.io/latest/pmd_rules_java_bestpractices.html#abstractclasswithoutabstractmethod
+
+Classe que implementa um repositório capaz de realizar operações CRUD com diversos tipos de dados. No projeto, evita repetição de código entre as classes DAO.
+
+**/
+public class Repository<T> {
 
     @PersistenceContext(name = "TpackDS")
     protected EntityManager em;
