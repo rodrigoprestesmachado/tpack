@@ -26,7 +26,7 @@ import javax.ws.rs.core.Application;
 import edu.ifrs.tpack.service.Controller;
 
 @ApplicationPath("/service")
-/*
+/**
 * Teste com inserção de comentário
 */
 public class TpackApplication extends Application {
