@@ -1,13 +1,10 @@
-/**
+/*
  * @License
  * Copyright 2020 TPACK XS Application
- *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
  * http://www.apache.org/licenses/LICENSE-2.0
- *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -32,41 +29,44 @@ import javax.persistence.PostLoad;
 import javax.persistence.Transient;
 
 @Entity
+/*
+*
+*/
 public class Question {
 
     @Id
     @GeneratedValue
-    private long id;
+    private long id;//comment
 
     @Column(name = "TEXT", length = 1500)
-    private String text;
+    private String text;//comment
 
     /* one explanation about the question */
-    private String note;
+    private String note;//comment
 
     /* identify the type of the question */
-    private QuestionType type;
+    private QuestionType type;//comment
 
     /* indicates the number os levels in multilevel questions */
     @Transient
-    private byte levels;
+    private byte levels;//comment
 
     @ManyToOne
     @JoinColumn(name = "SESSION_ID", nullable = false)
-    private Session session;
+    private Session session;//comment
 
     @OneToMany(mappedBy = "question", cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
-    private List<Choice> choices;
+    private List<Choice> choices;//comment
 
     @OneToMany(mappedBy = "question", cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     @JsonbTransient
-    private List<Answer> answers;
+    private List<Answer> answers;//comment
 
     /**
      * Calculates the levels for multilevel questions
      */
     @PostLoad
-    private void calculateLevels() {
+    private void calculateLevels() {//unused
         if (this.type == QuestionType.MULTILEVEL) {
             for (Choice choice : choices) {
                 this.levels = choice.getLevel() > this.levels ? choice.getLevel() : this.levels;
