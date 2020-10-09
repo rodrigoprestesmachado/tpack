@@ -64,7 +64,7 @@ public class Controller extends BaseController {
 
         // converts the json to a map
         final Jsonb jsonb = JsonbBuilder.create();
-        Map<String, String> map = jsonb.fromJson(jsonString, HashMap.class);
+        Map<String, String> map = jsonb.fromJson(jsonString, Map.class);
 
         Subject subject = new Subject();
         try {
