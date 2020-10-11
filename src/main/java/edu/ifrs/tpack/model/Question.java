@@ -30,26 +30,50 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity
+/**
+ * Class Question
+ */
 public class Question {
 
     @Id
     @GeneratedValue
+    /**
+     * id
+     */
     private long id;
 
+    /**
+     * column text
+     */
     @Column(name = "TEXT", length = 1500)
     private String text;
 
+    /**
+     * note
+     */
     private String note;
 
+    /**
+     * type
+     */
     private QuestionType type;
 
+    /**
+     * Many to One
+     */
     @ManyToOne
     @JoinColumn(name = "SESSION_ID", nullable = false)
     private Session session;
 
+    /**
+     * One to Many
+     */
     @OneToMany(mappedBy = "question", cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     private List<Choice> choices;
 
+    /**
+     * One to Many
+     */
     @OneToMany(mappedBy = "question", cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     @JsonbTransient
     private List<Answer> answers;

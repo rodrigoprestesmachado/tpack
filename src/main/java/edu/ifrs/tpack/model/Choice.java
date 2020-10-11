@@ -28,17 +28,32 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity
+/**
+ * Class Choice
+ */
 public class Choice {
 
     @Id
+    /**
+     * Generated Value
+     */
     @GeneratedValue
     private long id;
 
+    /**
+     * text
+     */
     private String text;
 
+    /**
+     * many to one
+     */
     @ManyToOne
     private Question question;
 
+    /**
+     * one to many
+     */
     @OneToMany(mappedBy = "choice", cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     @JsonbTransient
     private List<Answer> answers;

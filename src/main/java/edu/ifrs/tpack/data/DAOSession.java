@@ -23,6 +23,9 @@ import javax.persistence.criteria.Root;
 
 import edu.ifrs.tpack.model.Session;
 
+/**
+ * Class DAOSession
+ */
 public class DAOSession extends Repository<Session> {
 
     /**

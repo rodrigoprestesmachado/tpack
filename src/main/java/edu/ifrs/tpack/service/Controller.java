@@ -16,7 +16,6 @@
  */
 package edu.ifrs.tpack.service;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -64,7 +63,7 @@ public class Controller extends BaseController {
 
         // converts the json to a map
         final Jsonb jsonb = JsonbBuilder.create();
-        Map<String, String> map = jsonb.fromJson(jsonString, HashMap.class);
+        Map<String, String> map = jsonb.fromJson(jsonString, Map.class);
 
         Subject subject = new Subject();
         try {
@@ -136,6 +135,10 @@ public class Controller extends BaseController {
     @Path("/getFirstSession")
     @Produces(MediaType.APPLICATION_JSON)
     @Transactional
+
+    /**
+     * getFirstSession
+     */
     public Session getFirstSession() {
         return daoSession.getFirstSession();
     }
@@ -144,6 +147,10 @@ public class Controller extends BaseController {
     @Path("/getSession/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     @Transactional
+
+    /**
+     * Session
+     */
     public Session getSession(@PathParam("id") final long id) {
         return daoSession.find(id);
     }

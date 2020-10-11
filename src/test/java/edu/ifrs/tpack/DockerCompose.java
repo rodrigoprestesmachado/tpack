@@ -34,10 +34,17 @@ import org.testcontainers.junit.jupiter.Container;
 public class DockerCompose implements BeforeAllCallback, AfterAllCallback {
 
     // Configure the a tpack application container from project Dockerfile
+
+    /**
+     * Container tpack
+     */
     @Container
     public static ApplicationContainer tpack = new ApplicationContainer().withAppContextRoot("/tpack-app")
             .waitingFor(Wait.forHttp("/")).withNetworkAliases("tpack").withExposedPorts(9080);
 
+    /**
+     * mysql
+     */
     public static MySQLContainer<?> mysql;
 
     @Override

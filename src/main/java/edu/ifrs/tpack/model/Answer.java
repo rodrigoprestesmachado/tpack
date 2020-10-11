@@ -23,22 +23,41 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+/**
+ *  Class Answer
+ */
 @Entity
 public class Answer {
 
     @Id
     @GeneratedValue
+    /**
+     * id
+     */
     private long id;
 
     @ManyToOne(cascade = CascadeType.PERSIST)
+    /**
+     * subject
+     */
     private Subject subject;
 
     @ManyToOne(cascade = CascadeType.PERSIST)
+    /**
+     * question
+     */
     private Question question;
 
     @ManyToOne(cascade = CascadeType.PERSIST)
+
+    /**
+     * choice
+     */
     private Choice choice;
 
+    /**
+     * answer
+     */
     private String answer;
 
     public long getId() {

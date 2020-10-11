@@ -33,19 +33,42 @@ import org.junit.jupiter.api.extension.ExtendWith;
 @ExtendWith({ DockerCompose.class })
 public class TpackAppIT {
 
+    /**
+     * API
+     */
     private static String API = "/tpack-app/service/api/";
 
+    /**
+     * host
+     */
     private String host;
+
+    /**
+     * port
+     */
     private Integer port;
 
+    /**
+    * client
+    */
     private CloseableHttpClient client;
 
+    /**
+     * TpackAppIT
+     */
     public TpackAppIT() {
+
+    /**
+     * HttpClients
+     */
         this.client = HttpClients.createDefault();
         host = DockerCompose.tpack.getContainerIpAddress();
         port = DockerCompose.tpack.getFirstMappedPort();
     }
 
+    /**
+     * subjectTest
+     */
     @Test
     public void subjectTest() {
         try {

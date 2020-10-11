@@ -28,14 +28,33 @@ import edu.ifrs.tpack.data.DAOSubject;
  * Base to build controllers
  */
 public class BaseController {
+    /**
+     * 
+     */
     @Inject
     protected DAOSession daoSession;
+
+    /**
+     * 
+     */
     @Inject
     protected DAOSubject daoSubject;
+
+    /**
+     * 
+     */
     @Inject
     protected DAOQuestion daoQuestion;
+
+    /**
+     * 
+     */
     @Inject
     protected DAOAnswer daoAnswer;
+
+    /**
+     * 
+     */
     @Inject
     protected DAOChoice daoChoice;
 }

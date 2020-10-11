@@ -33,17 +33,36 @@ import lombok.Data;
 
 @Data
 @Entity
+/**
+ * Class Subject
+ */
 public class Subject {
 
+    /**
+     * id
+     */
     @Id
+
+    /**
+     * Generated Value
+     */
     @GeneratedValue
     @JsonbTransient
     private long id;
 
+    /**
+     * 
+     */
     private String token;
 
+    /**
+     * 
+     */
     private Timestamp moment;
 
+    /**
+     * 
+     */
     @OneToMany(mappedBy = "subject", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     private List<Answer> answers;
 

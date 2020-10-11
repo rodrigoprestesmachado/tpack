@@ -29,14 +29,26 @@ import lombok.Data;
 
 @Data
 @Entity
+/**
+ * Class Session
+ */
 public class Session {
 
     @Id
+    /**
+     * Generated Value
+     */
     @GeneratedValue
     private long id;
 
+    /**
+     * title
+     */
     private String title;
 
+    /**
+     * one to many
+     */
     @OneToMany(mappedBy = "session", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     private List<Question> questions;
 
