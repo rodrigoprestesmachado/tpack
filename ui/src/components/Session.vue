@@ -1,7 +1,7 @@
 <template>
   <v-container fluid>
     <v-row no-gutters align="start" justify="center">
-      <v-col lg="5">
+      <v-col lg="4" md="5">
         <!-- load feedback -->
         <v-progress-circular
           indeterminate
@@ -36,14 +36,19 @@
           >
             <!-- Label queston  -->
             <template v-if="question.type == 'LABEL'">
-              <div v-html="question.text" align="start" justify="center"></div>
+              <div
+                class="text-justify"
+                v-html="question.text"
+                align="start"
+                justify="center"
+              ></div>
             </template>
 
             <!-- Text area field question   -->
             <template v-if="question.type == 'TEXTAREA'">
               <v-card elevation="2" class="mb-8">
-                <v-card-title class="body-1 text--primary">
-                  <div v-html="question.id - 1 + ') ' + question.text"></div>
+                <v-card-title class="text-subtitle-1 text-justify">
+                  <div v-html="question.text"></div>
                   <div class="body-2 mx-4 mt-4" v-html="question.note"></div>
                 </v-card-title>
                 <v-card-actions>
@@ -60,8 +65,14 @@
 
             <!-- Scale queston  -->
             <template v-if="question.type == 'SCALE'">
-              <div v-html="question.id - 1 + ') ' + question.text"></div>
-              <div class="body-2 mx-4 mt-6" v-html="question.note"></div>
+              <div
+                class="text-body-2 text-justify-center mb-6"
+                v-html="question.note"
+              ></div>
+              <div
+                v-html="question.id - 1 + ') ' + question.text"
+                class="text-justify"
+              ></div>
               <v-slider
                 v-model="answer[question.id]"
                 thumb-label="always"
@@ -70,7 +81,7 @@
                 :max="5"
                 :min="1"
                 aria-label="classifique"
-                class="mt-10 mb-10 mx-3"
+                class="mt-10 mb-5 mx-3"
                 dense
                 :tick-labels="ticks"
               />
@@ -79,7 +90,7 @@
             <!-- Age question -->
             <template v-if="question.type == 'AGE'">
               <v-card elevation="2" class="mb-8">
-                <v-card-title class="body-1 text--primary">
+                <v-card-title class="text-subtitle-1 text-justify">
                   <div v-html="question.id - 1 + ') ' + question.text"></div>
                   <div class="body-2 mx-4 mt-4" v-html="question.note"></div>
                 </v-card-title>
@@ -107,9 +118,12 @@
             <!-- Multiple choice question -->
             <template v-if="question.type == 'MULTIPLE'">
               <v-card elevation="2" class="mb-8">
-                <v-card-title class="subtitle-1 text--primary">
+                <v-card-title class="text-subtitle-1 text-justify">
                   <div v-html="question.id - 1 + ') ' + question.text"></div>
-                  <div class="body-2 mx-4 mt-4" v-html="question.note"></div>
+                  <div
+                    class="body-2 mx-4 mt-4 text-justify"
+                    v-html="question.note"
+                  ></div>
                 </v-card-title>
                 <v-card-actions>
                   <v-col>
@@ -139,7 +153,7 @@
             <!-- Multilevel choice question -->
             <template v-if="question.type == 'MULTILEVEL'">
               <v-card elevation="2" class="mb-8">
-                <v-card-title class="subtitle-1 text--primary">
+                <v-card-title class="text-subtitle-1 text-justify">
                   <div v-html="question.id - 1 + ') ' + question.text"></div>
                   <div class="body-2 mx-4 mt-4" v-html="question.note"></div>
                 </v-card-title>
@@ -167,9 +181,7 @@
                         outlined
                         class="ml-8 mr-8"
                         :key="index"
-                        :placeholder="
-                          'grupo: ' + index + ' de ' + question.levels
-                        "
+                        :placeholder="getLabelLevels(index)"
                         :ref="'multilevel' + index"
                         @change="handleLevel"
                       ></v-select>
@@ -182,7 +194,7 @@
             <!-- Unique choice question -->
             <template v-if="question.type == 'UNIQUE'">
               <v-card elevation="2" class="mb-8">
-                <v-card-title class="body-1 text--primary">
+                <v-card-title class="text-subtitle-1 text-justify">
                   <div v-html="question.id - 1 + ') ' + question.text"></div>
                   <div class="body-2 mx-4 mt-4" v-html="question.note"></div>
                 </v-card-title>
@@ -213,7 +225,7 @@
             <!-- Year question -->
             <template v-if="question.type == 'YEAR'">
               <v-card elevation="2" class="mb-8">
-                <v-card-title class="body-1 text--primary">
+                <v-card-title class="text-subtitle-1 text-justify">
                   <div v-html="question.id - 1 + ') ' + question.text"></div>
                   <div class="body-2 mx-4 mt-4" v-html="question.note"></div>
                 </v-card-title>
@@ -241,7 +253,7 @@
             <!-- Region question-->
             <template v-if="question.type == 'REGION'">
               <v-card elevation="2" class="mb-8">
-                <v-card-title class="body-1 text--primary">
+                <v-card-title class="text-subtitle-1 text-justify">
                   <div v-html="question.id - 1 + ') ' + question.text"></div>
                   <div class="body-2 mx-4 mt-4" v-html="question.note"></div>
                 </v-card-title>
@@ -459,6 +471,9 @@ export default class Session extends Vue {
    * @param base The URL base of the service
    */
   async initApplication() {
+    // TODO (use router) The title of session component
+    document.title = "tpack";
+
     const url = this.BASE + "getSessions";
     try {
       const resp = await axios.get(url);
@@ -778,6 +793,18 @@ export default class Session extends Vue {
 
       this.answer[5] = null;
     }
+  }
+
+  getLabelLevels(index) {
+    let label;
+    if (index - 1 == 0) {
+      label = "Fundamental e médio";
+    } else if (index - 1 == 1) {
+      label = "Superior";
+    } else {
+      label = "Pós-graduação";
+    }
+    return label;
   }
 
   /**

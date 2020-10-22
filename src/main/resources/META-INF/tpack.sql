@@ -53,8 +53,8 @@ INSERT INTO `QUESTION` (`ID`,`NOTE`,`TEXT`,`TYPE`,`SESSION_ID`) VALUES (39,'<spa
 INSERT INTO `QUESTION` (`ID`,`NOTE`,`TEXT`,`TYPE`,`SESSION_ID`) VALUES (40,NULL,'Gênero',2,11);
 INSERT INTO `QUESTION` (`ID`,`NOTE`,`TEXT`,`TYPE`,`SESSION_ID`) VALUES (41,NULL,'Idade (em anos)',5,11);
 INSERT INTO `QUESTION` (`ID`,`NOTE`,`TEXT`,`TYPE`,`SESSION_ID`) VALUES (42,NULL,'Região: estado e município',6,11);
-INSERT INTO `QUESTION` (`ID`,`NOTE`,`TEXT`,`TYPE`,`SESSION_ID`) VALUES (43,NULL,'Escreva seus comentários ',10,12);
-INSERT INTO `QUESTION` (`ID`,`NOTE`,`TEXT`,`TYPE`,`SESSION_ID`) VALUES (44,NULL,'TEXTO FINAL',7,12);
+INSERT INTO `QUESTION` (`ID`,`NOTE`,`TEXT`,`TYPE`,`SESSION_ID`) VALUES (43,NULL,'Se desejar fazer algum comentário sobre a pesquisa ou fornecer alguma informação que julgar pertinente, utilize esse espaço. Certamente será de grande relevância para a nossa pesquisa.',7,12);
+INSERT INTO `QUESTION` (`ID`,`NOTE`,`TEXT`,`TYPE`,`SESSION_ID`) VALUES (44,NULL,'Comentários ',10,12);
 INSERT INTO `QUESTION` (`ID`,`NOTE`,`TEXT`,`TYPE`,`SESSION_ID`) VALUES (45,NULL,'',8,12);
 
 INSERT INTO `CHOICE` (`ID`,`LEVEL`,`NEXTLEVEL`,`TEXT`,`QUESTION_ID`) VALUES (1,NULL,0,'Municipal',2);

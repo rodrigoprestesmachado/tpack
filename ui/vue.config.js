@@ -1,4 +1,9 @@
 module.exports = {
   transpileDependencies: ["vuetify"],
-  publicPath: '/tpack/'
+  publicPath: '/tpack/',
+  pages: {
+    index: {
+      title: 'Tpack',
+    }
+  }
 };
