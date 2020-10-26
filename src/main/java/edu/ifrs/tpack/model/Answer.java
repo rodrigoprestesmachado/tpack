@@ -1,13 +1,10 @@
-/**
+/*
  * @License
  * Copyright 2020 TPACK XS Application
- *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
  * http://www.apache.org/licenses/LICENSE-2.0
- *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -24,22 +21,25 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 @Entity
+*/
+*
+*/
 public class Answer {
 
     @Id
     @GeneratedValue
-    private long id;
+    private long id;//comment
 
     @ManyToOne(cascade = CascadeType.PERSIST)
-    private Subject subject;
+    private Subject subject;//comment
 
     @ManyToOne(cascade = CascadeType.PERSIST)
-    private Question question;
+    private Question question;//comment
 
     @ManyToOne(cascade = CascadeType.PERSIST)
-    private Choice choice;
+    private Choice choice;//comment
 
-    private String answer;
+    private String answer;//comment
 
     public long getId() {
         return id;
