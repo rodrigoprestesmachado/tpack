@@ -355,18 +355,16 @@
 </template>
 
 <script lang="ts">
+import axios from "axios";
+import { Component, Vue } from "vue-property-decorator";
 // TODO remove the comments
 // To use with Electron
 // https://medium.com/@bromix/electron-application-with-vue-js-and-vuetify-f2a1f9c749b8
-import axios from "axios";
-import { Component, Vue } from "vue-property-decorator";
 import installExtension from "electron-devtools-installer";
-import Axios from "axios";
 import { createProtocol } from "vue-cli-plugin-electron-builder/lib";
 
 //Components
 import multiple from "./Multiple.vue";
-import Vuetify from "vuetify/lib";
 
 @Component({
   components: {
@@ -733,7 +731,7 @@ export default class Session extends Vue {
     const data: DataMap = {};
     // Creates a JS object from local storage
     const keys = Object.keys(localStorage);
-    const result = keys.forEach(function(element, index, keys) {
+    keys.forEach(function(element) {
       data[element] = localStorage.getItem(element);
     });
     // verifies if the user already send an answer
@@ -768,7 +766,7 @@ export default class Session extends Vue {
    * Tpack spefic rule:
    * Answers if some question need to be disable
    */
-  isQuestionDisable(idQuestion) {
+  isQuestionDisable(idQuestion: number) {
     if (idQuestion == 5) {
       return this.disableQuestion5;
     }
@@ -778,7 +776,7 @@ export default class Session extends Vue {
    * Tpack spefic rule:
    * Handles the levels of multilevel question about formation.
    */
-  handleLevel(arraySelected) {
+  handleLevel(arraySelected: Array<number>) {
     if (arraySelected.find(e => e > 12)) {
       // enable question 5
       this.disableQuestion5 = false;
@@ -795,7 +793,7 @@ export default class Session extends Vue {
     }
   }
 
-  getLabelLevels(index) {
+  getLabelLevels(index: number) {
     let label;
     if (index - 1 == 0) {
       label = "Fundamental e médio";
@@ -816,3 +814,15 @@ export default class Session extends Vue {
   }
 }
 </script>
+
+<style scoped>
+/*
+there is a open bug in vuetify about v-card word break
+https://github.com/vuetifyjs/vuetify/issues/9130
+thus, this is a work around
+*/
+.v-card__text,
+.v-card__title {
+  word-break: normal; /* maybe !important  */
+}
+</style>
