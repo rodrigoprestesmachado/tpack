@@ -18,9 +18,9 @@
           <div
             align="center"
             justify="center"
-            class="ma-5 indigo--text text-h5"
+            class="ma-5 orange--text text-h5"
           >
-            Obrigado por ter respondido essa pesquisa
+            Obrigado por você ter respondido essa pesquisa
           </div>
         </template>
 
@@ -734,6 +734,10 @@ export default class Session extends Vue {
     keys.forEach(function(element) {
       data[element] = localStorage.getItem(element);
     });
+
+    // Add the state in the question about the city
+    data["42"] = data["42"] + ", " + this.state;
+
     // verifies if the user already send an answer
     if (!localStorage.getItem("token")) {
       // converts from JS object fo string

@@ -50,7 +50,7 @@ INSERT INTO `QUESTION` (`ID`,`NOTE`,`TEXT`,`TYPE`,`SESSION_ID`) VALUES (36,NULL,
 INSERT INTO `QUESTION` (`ID`,`NOTE`,`TEXT`,`TYPE`,`SESSION_ID`) VALUES (37,NULL,'As Tecnologias Digitais de Informação e Comunicação utilizadas na prática docente, proporcionaram maior engajamento dos estudantes',1,10);
 INSERT INTO `QUESTION` (`ID`,`NOTE`,`TEXT`,`TYPE`,`SESSION_ID`) VALUES (38,NULL,'Você acredita que alguma de suas práticas pedagógicas no pós-pandemia permanecerão com as alterações tecnológicas realizadas durante o período de pandemia?',3,10);
 INSERT INTO `QUESTION` (`ID`,`NOTE`,`TEXT`,`TYPE`,`SESSION_ID`) VALUES (39,'<span class="font-weight-bold">Nota:</span> você pode marcar mais de uma alternativa','Assinale as opções de ferramentas on-line utilizadas nas práticas pedagógicas durante a pandemia que você pretende continuar aplicando no pós-pandemia',2,10);
-INSERT INTO `QUESTION` (`ID`,`NOTE`,`TEXT`,`TYPE`,`SESSION_ID`) VALUES (40,NULL,'Gênero',2,11);
+INSERT INTO `QUESTION` (`ID`,`NOTE`,`TEXT`,`TYPE`,`SESSION_ID`) VALUES (40,NULL,'Gênero',3,11);
 INSERT INTO `QUESTION` (`ID`,`NOTE`,`TEXT`,`TYPE`,`SESSION_ID`) VALUES (41,NULL,'Idade (em anos)',5,11);
 INSERT INTO `QUESTION` (`ID`,`NOTE`,`TEXT`,`TYPE`,`SESSION_ID`) VALUES (42,NULL,'Região: estado e município',6,11);
 INSERT INTO `QUESTION` (`ID`,`NOTE`,`TEXT`,`TYPE`,`SESSION_ID`) VALUES (43,NULL,'Se desejar fazer algum comentário sobre a pesquisa ou fornecer alguma informação que julgar pertinente, utilize esse espaço. Certamente será de grande relevância para a nossa pesquisa.',7,12);

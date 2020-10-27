@@ -116,7 +116,7 @@ public class Controller extends BaseController {
 
     /**
      * Returns the sessions and related questions
-     * 
+     *
      * @return A list of sessions with related questions
      */
     @GET
