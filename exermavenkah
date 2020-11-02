@@ -1,1 +1,105 @@
 
+package junit;
+
+/**
+ * Calculator.
+ */
+public class Calculator {
+
+    /** add. **/
+    public int add(int a, int b) {
+        return a + b;
+    }
+
+    /** remove. **/
+    public int remove(int a, int b) {
+        return a - b;
+    }
+}
+
+
+
+
+package junit;
+
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+/**
+ * CalculatorTest.
+ */
+class CalculatorTest {
+
+    /** constructor. **/
+    private Calculator calculator = new Calculator();
+
+    @Test
+    @Tag("VVS")
+    public void add() {
+        assertEquals(2, calculator.add(1, 1));
+    }
+}
+
+
+
+
+package junit;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Order;
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+/**
+ * AnnotationsTest.
+ */
+public class AnnotationsTest {
+
+    /** Logger. **/
+    private static Logger logger = Logger.getLogger("AnnotationsTest");
+
+    private static List<String> cars;
+
+    @BeforeAll
+    public static void init() {
+        logger.info("init");
+        cars = new ArrayList<String>();
+        cars.add("Volvo");
+    }
+
+    @BeforeEach
+    public void add() {
+        logger.info("add");
+        cars.add("Bmw");
+    }
+
+    @Test
+    @Order(1)
+    @Tag("VVS")
+    @DisplayName("Length test")
+    public void length() {
+        logger.info("length");
+        assertEquals(2, cars.size());
+    }
+
+    @Test
+    @Order(2)
+    @Tag("VVS")
+    @DisplayName("Remove car test")
+    public void remove() {
+        logger.log(Level.INFO, "remove");
+        cars.remove(0);
+        assertEquals(2, cars.size());
+    }
+}
+
