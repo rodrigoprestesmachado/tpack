@@ -22,7 +22,7 @@ INSERT INTO `QUESTION` (`ID`,`NOTE`,`TEXT`,`TYPE`,`SESSION_ID`) VALUES (8,NULL,'
 INSERT INTO `QUESTION` (`ID`,`NOTE`,`TEXT`,`TYPE`,`SESSION_ID`) VALUES (9,NULL,'Posso usar uma ampla variedade de abordagens de ensino em sala de aula',1,3);
 INSERT INTO `QUESTION` (`ID`,`NOTE`,`TEXT`,`TYPE`,`SESSION_ID`) VALUES (10,NULL,'Posso avaliar a aprendizagem dos estudantes de várias maneiras',1,3);
 INSERT INTO `QUESTION` (`ID`,`NOTE`,`TEXT`,`TYPE`,`SESSION_ID`) VALUES (11,'1 para discordo totalmente e 5 para concordo totalmente','Tenho conhecimento suficiente sobre o meu conteúdo de ensino',1,4);
-INSERT INTO `QUESTION` (`ID`,`NOTE`,`TEXT`,`TYPE`,`SESSION_ID`) VALUES (12,NULL,'Posso usar uma maneira específica de pensar no meu conteúdo de ensino',1,4);
+INSERT INTO `QUESTION` (`ID`,`NOTE`,`TEXT`,`TYPE`,`SESSION_ID`) VALUES (12,NULL,'Posso empregar uma maneira específica de pensar no meu conteúdo de ensino',1,4);
 INSERT INTO `QUESTION` (`ID`,`NOTE`,`TEXT`,`TYPE`,`SESSION_ID`) VALUES (13,NULL,'Conheço as teorias e conceitos básicos do meu conteúdo de ensino',1,4);
 INSERT INTO `QUESTION` (`ID`,`NOTE`,`TEXT`,`TYPE`,`SESSION_ID`) VALUES (14,NULL,'Conheço a história e o desenvolvimento de teorias importantes do meu conteúdo de ensino',1,4);
 INSERT INTO `QUESTION` (`ID`,`NOTE`,`TEXT`,`TYPE`,`SESSION_ID`) VALUES (15,'1 para discordo totalmente e 5 para concordo totalmente','Acompanho novas tecnologias importantes',1,5);
