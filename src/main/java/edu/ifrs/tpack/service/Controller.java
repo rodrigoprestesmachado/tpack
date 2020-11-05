@@ -50,7 +50,7 @@ public class Controller extends BaseController {
 
     /**
      * Stores all answers in the data base
-     * 
+     *
      * @param jsonString The answers in json
      * @return A Subject object
      */
@@ -148,4 +148,13 @@ public class Controller extends BaseController {
     public Session getSession(@PathParam("id") final long id) {
         return daoSession.find(id);
     }
+
+    @GET
+    @Path("/test")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Transactional
+    public String test() {
+        return "";
+    }
+
 }

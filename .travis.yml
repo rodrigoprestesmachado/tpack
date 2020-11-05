@@ -3,7 +3,9 @@ services:
     - docker
 jdk:
     - oraclejdk11
-script: mvn verify
+before_install:
+    - cp scripts/settings.xml $HOME/.m2/settings.xml
+script: mvn replacer:replace verify
 after_success:
     - wget https://raw.githubusercontent.com/DiscordHooks/travis-ci-discord-webhook/master/send.sh
     - chmod +x send.sh

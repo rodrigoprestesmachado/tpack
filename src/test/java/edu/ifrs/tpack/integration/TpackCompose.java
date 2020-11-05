@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package edu.ifrs.tpack.containers;
+package edu.ifrs.tpack.integration;
 
 import java.time.Duration;
 
@@ -33,10 +33,10 @@ import org.testcontainers.junit.jupiter.Container;
  */
 public class TpackCompose implements BeforeAllCallback, AfterAllCallback {
 
-    // Configure the a tpack application container from project Dockerfile
+    // Configure the a tpack application container from Dockerfile
     @Container
-    public static ApplicationContainer tpack = new ApplicationContainer().withAppContextRoot("/tpack-app")
-            .waitingFor(Wait.forHttp("/")).withNetworkAliases("tpack").withExposedPorts(9080);
+    public static ApplicationContainer tpack = new ApplicationContainer().withAppContextRoot("/tpack")
+            .waitingFor(Wait.forHttp("/tpack"));
 
     public static MySQLContainer<?> mysql;
 
@@ -46,9 +46,6 @@ public class TpackCompose implements BeforeAllCallback, AfterAllCallback {
         // Create a private network for the containers
         Network network = Network.newNetwork();
 
-        // Set network for tpack service
-        tpack.withNetwork(network);
-
         // Create a MySQL container to work with tpack service
         mysql = new MySQLContainer<>("mysql:latest");
         mysql.withDatabaseName("tpack");
@@ -56,17 +53,22 @@ public class TpackCompose implements BeforeAllCallback, AfterAllCallback {
         mysql.withPassword("tpack");
         mysql.withNetworkAliases("db");
         mysql.withExposedPorts(3306);
-        mysql.waitingFor(Wait.forListeningPort().withStartupTimeout(Duration.ofSeconds(30)));
+        mysql.waitingFor(Wait.forListeningPort().withStartupTimeout(Duration.ofSeconds(60)));
         mysql.withNetwork(network);
 
+        // Set network for tpack service
+        tpack.withExposedPorts(9080);
+        tpack.withNetworkAliases("tpack");
+        tpack.withNetwork(network);
+
         // Start the containers
-        tpack.start();
         mysql.start();
+        tpack.start();
     }
 
     @Override
     public void afterAll(ExtensionContext context) throws Exception {
-        tpack.stop();
         mysql.stop();
+        tpack.stop();
     }
 }
