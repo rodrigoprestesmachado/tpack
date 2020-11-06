@@ -98,7 +98,7 @@ public class Controller extends BaseController {
 
     /**
      * Creates and stores an answer object
-     * 
+     *
      * @param subject  The subject
      * @param question The question object
      * @param choice   Choice object for multiple selection question
@@ -147,14 +147,6 @@ public class Controller extends BaseController {
     @Transactional
     public Session getSession(@PathParam("id") final long id) {
         return daoSession.find(id);
-    }
-
-    @GET
-    @Path("/test")
-    @Produces(MediaType.APPLICATION_JSON)
-    @Transactional
-    public String test() {
-        return "";
     }
 
 }

@@ -36,7 +36,7 @@ public class TpackCompose implements BeforeAllCallback, AfterAllCallback {
     // Configure the a tpack application container from Dockerfile
     @Container
     public static ApplicationContainer tpack = new ApplicationContainer().withAppContextRoot("/tpack")
-            .waitingFor(Wait.forHttp("/tpack"));
+            .waitingFor(Wait.forHttp("/"));
 
     public static MySQLContainer<?> mysql;
 
