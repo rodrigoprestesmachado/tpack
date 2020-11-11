@@ -50,7 +50,7 @@ public class Controller extends BaseController {
 
     /**
      * Stores all answers in the data base
-     * 
+     *
      * @param jsonString The answers in json
      * @return A Subject object
      */
@@ -98,7 +98,7 @@ public class Controller extends BaseController {
 
     /**
      * Creates and stores an answer object
-     * 
+     *
      * @param subject  The subject
      * @param question The question object
      * @param choice   Choice object for multiple selection question
@@ -116,7 +116,7 @@ public class Controller extends BaseController {
 
     /**
      * Returns the sessions and related questions
-     * 
+     *
      * @return A list of sessions with related questions
      */
     @GET
@@ -148,4 +148,5 @@ public class Controller extends BaseController {
     public Session getSession(@PathParam("id") final long id) {
         return daoSession.find(id);
     }
+
 }

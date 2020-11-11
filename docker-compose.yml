@@ -26,8 +26,8 @@ services:
     volumes:
       - /sessions
   app:
-    #build: .
-    image: rodrigoprestesmachado/tpack_app:latest
+    build: .
+    #image: rodrigoprestesmachado/tpack_app:latest
     container_name: tpack-service
     depends_on:
       - db
