@@ -22,8 +22,8 @@ services:
     links:
       - "db"
     ports:
-      #- 8080:80
-      - 8080:8080
+      - 8080:80
+      # - 8080:8080
     volumes:
       - /sessions
   app:
@@ -43,6 +43,6 @@ services:
         "defaultServer",
       ]
     ports:
-      #- 80:9080
-      - 8080:9080      
+      - 80:9080
+      # - 8080:9080      
       - 9443:9443
