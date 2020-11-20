@@ -19,9 +19,9 @@
   </dependencyManagement>
 
   <properties>
-    <openliberty.maven.version>3.1</openliberty.maven.version>
-    <maven.compiler.target>1.8</maven.compiler.target>
-    <maven.compiler.source>1.8</maven.compiler.source>
+    <openliberty.maven.version>3.2</openliberty.maven.version>
+    <maven.compiler.target>11</maven.compiler.target>
+    <maven.compiler.source>11</maven.compiler.source>
     <failOnMissingWebXml>false</failOnMissingWebXml>
     <openliberty.version>[19.0.0.9,)</openliberty.version>
     <final.name>tpack</final.name>
@@ -31,7 +31,7 @@
     <dependency>
       <groupId>org.eclipse.microprofile</groupId>
       <artifactId>microprofile</artifactId>
-      <version>3.2</version>
+      <version>3.3</version>
       <type>pom</type>
       <scope>provided</scope>
     </dependency>
