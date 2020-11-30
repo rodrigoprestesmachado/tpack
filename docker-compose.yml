@@ -28,7 +28,9 @@ services:
   app:
     build: .
     #image: rodrigoprestesmachado/tpack_app:latest
-    container_name: tpack-service
+    container_name: tpack-app
+    links:
+      - "db"
     depends_on:
       - db
       - phpmyadmin
