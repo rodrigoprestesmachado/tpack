@@ -20,6 +20,8 @@ import static org.junit.Assert.assertEquals;
 
 import java.io.IOException;
 
+import com.github.dockerjava.zerodep.shaded.org.apache.hc.core5.http.io.entity.EntityUtils;
+
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -50,13 +52,16 @@ public class TpackApiIT {
     public void getSessions() {
         try {
             // mounts the URL
+            // String url = "http://" + host + API + "getSessions";
             String url = "http://" + host + ":" + port + API + "getSessions";
+            // String url = "http://localhost/tpack/service/api/getSessions";
             // creates a http get
             HttpGet get = new HttpGet(url);
             // executes and getting the response
             HttpResponse response = this.client.execute(get);
-
-            assertEquals(response.getStatusLine().getStatusCode(), 200);
+            //assertEquals(response.getStatusLine().getStatusCode(), 200);
+            //assertEquals(200, 300);
+            assertEquals(200, response.getStatusLine().getStatusCode());
         } catch (IOException e) {
             e.printStackTrace();
         }
