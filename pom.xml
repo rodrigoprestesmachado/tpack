@@ -24,6 +24,7 @@
     <maven.compiler.source>1.8</maven.compiler.source>
     <failOnMissingWebXml>false</failOnMissingWebXml>
     <openliberty.version>[19.0.0.9,)</openliberty.version>
+    <maven-surefire-plugin.version>3.0.0-M4</maven-surefire-plugin.version>
     <final.name>tpack</final.name>
   </properties>
 
@@ -109,6 +110,11 @@
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-simple</artifactId>
       <version>2.0.0-alpha1</version>
+    </dependency>
+    <dependency>
+      <groupId>org.seleniumhq.selenium</groupId>
+      <artifactId>selenium-java</artifactId>
+      <version>4.0.0-alpha-7</version>
     </dependency>
   </dependencies>
   <build>
@@ -214,6 +220,12 @@
                 <ruleset>pmd.xml</ruleset>
               </rulesets>
             </configuration>
+          </plugin>
+
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+             <artifactId>maven-surefire-plugin</artifactId>
+            <version>${maven-surefire-plugin.version}</version>
           </plugin>
 
         </plugins>
