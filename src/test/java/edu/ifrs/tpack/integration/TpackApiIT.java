@@ -54,13 +54,10 @@ public class TpackApiIT {
             // mounts the URL
             // String url = "http://" + host + API + "getSessions";
             String url = "http://" + host + ":" + port + API + "getSessions";
-            // String url = "http://localhost/tpack/service/api/getSessions";
             // creates a http get
             HttpGet get = new HttpGet(url);
             // executes and getting the response
             HttpResponse response = this.client.execute(get);
-            //assertEquals(response.getStatusLine().getStatusCode(), 200);
-            //assertEquals(200, 300);
             assertEquals(200, response.getStatusLine().getStatusCode());
         } catch (IOException e) {
             e.printStackTrace();
