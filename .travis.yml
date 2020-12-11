@@ -13,10 +13,10 @@ jdk:
   - openjdk11
 
 script: 
-  - mvn pmd:pmd
-  - mvn test
   - mvn clean package
   - docker-compose up -d
+  - mvn pmd:pmd
+  - mvn test
 
 after_script:
 notifications:
