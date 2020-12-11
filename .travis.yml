@@ -1,16 +1,23 @@
 language: java
+
+install:
+  - git clone --depth=50 --branch=master https://github.com/cleberramiresmachado/tpack.git cleberramiresmachado/tpack
+  - cd cleberramiresmachado/tpack
+  - git checkout -qf $TRAVIS_COMMIT
+  - cp scripts/settings.xml $HOME/.m2/settings.xml
+
 services:
     - docker
+
 jdk:
-    - oraclejdk11
-install:
-    - cp scripts/settings.xml $HOME/.m2/settings.xml
-script: mvn verify
-after_success:
-    - wget https://raw.githubusercontent.com/DiscordHooks/travis-ci-discord-webhook/master/send.sh
-    - chmod +x send.sh
-    - ./send.sh success $WEBHOOK_URL
-after_failure:
-    - wget https://raw.githubusercontent.com/DiscordHooks/travis-ci-discord-webhook/master/send.sh
-    - chmod +x send.sh
-    - ./send.sh failure $WEBHOOK_URL
+  - openjdk11
+
+script: 
+  - mvn clean package
+  - mvn pmd:pmd
+  - mvn test
+
+after_script:
+notifications:
+  recipients:
+    - cleber.ramires.machado@gmail.com
