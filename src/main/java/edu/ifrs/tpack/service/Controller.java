@@ -1,22 +1,8 @@
 /**
- * @License
- * Copyright 2020 TPACK XS Application
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * Comentário com menos linhas
  */
 package edu.ifrs.tpack.service;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -30,9 +16,7 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
 
 import edu.ifrs.tpack.model.Answer;
 import edu.ifrs.tpack.model.Choice;
@@ -60,11 +44,9 @@ public class Controller extends BaseController {
     @Produces(MediaType.APPLICATION_JSON)
     @Transactional
     public Subject save(final String jsonString) {
-        String errorMessage = null;
-
         // converts the json to a map
         final Jsonb jsonb = JsonbBuilder.create();
-        Map<String, String> map = jsonb.fromJson(jsonString, HashMap.class);
+        Map<String, String> map = jsonb.fromJson(jsonString, Map.class);
 
         Subject subject = new Subject();
         try {
@@ -90,8 +72,7 @@ public class Controller extends BaseController {
                 }
             }
         } catch (final Exception e) {
-            errorMessage = "The database is out of service ";
-            throw new WebApplicationException(errorMessage, Response.Status.INTERNAL_SERVER_ERROR);
+            throw new Exception().initCause(e);
         }
         return subject;
     }
@@ -124,15 +105,17 @@ public class Controller extends BaseController {
     @Produces(MediaType.APPLICATION_JSON)
     @Transactional
     public List<Session> getSessions() {
-        String errorMessage = null;
         try {
             return daoSession.read();
         } catch (final Exception e) {
-            errorMessage = "The database is out of service ";
-            throw new WebApplicationException(errorMessage, Response.Status.INTERNAL_SERVER_ERROR);
+            throw new Exception().initCause(e);
         }
     }
 
+    /**
+     * Comentário de método público
+     * @return
+     */
     @GET
     @Path("/getFirstSession")
     @Produces(MediaType.APPLICATION_JSON)
@@ -141,6 +124,11 @@ public class Controller extends BaseController {
         return daoSession.getFirstSession();
     }
 
+    /**
+     * Comentário de método público
+     * @param id
+     * @return
+     */
     @GET
     @Path("/getSession/{id}")
     @Produces(MediaType.APPLICATION_JSON)
