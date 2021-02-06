@@ -10,10 +10,16 @@ public enum QuestionType {
 
     private int value;
 
+    /*
+        Comentário sobre o método
+    */
     QuestionType(int value) {
         this.value = value;
     }
 
+    /*
+        Comentário sobre o método
+    */
     public int getValue() {
         return value;
     }

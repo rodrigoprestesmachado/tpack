@@ -8,8 +8,14 @@ import javax.ws.rs.container.ContainerResponseFilter;
 import javax.ws.rs.ext.Provider;
 
 @Provider
+/*
+    Comentário sobre a classe
+*/
 public class CORSFilter implements ContainerResponseFilter {
     @Override
+    /*
+        Comentário sobre o método
+    */
     public void filter(ContainerRequestContext requestContext, ContainerResponseContext responseContext)
             throws IOException {
         responseContext.getHeaders().add("Access-Control-Allow-Origin", "*");

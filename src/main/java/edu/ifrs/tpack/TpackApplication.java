@@ -9,9 +9,15 @@ import javax.ws.rs.core.Application;
 import edu.ifrs.tpack.service.Controller;
 
 @ApplicationPath("/service")
+/*
+    Comentário sobre a classe
+*/
 public class TpackApplication extends Application {
 
     @Override
+    /*
+        Comentário sobre o método
+    */
     public Set<Class<?>> getClasses() {
         final Set<Class<?>> resources = new HashSet<Class<?>>();
         resources.add(Controller.class);

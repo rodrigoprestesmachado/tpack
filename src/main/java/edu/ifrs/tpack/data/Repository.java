@@ -9,6 +9,9 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
+/*
+    Comentário sobre a classe
+*/
 public abstract class Repository<T> {
 
     @PersistenceContext(name = "TpackDS")
@@ -75,6 +78,9 @@ public abstract class Repository<T> {
         return em.createQuery(criteria).getSingleResult();
     }
 
+    /*
+        Comentário sobre o método
+    */
     @SuppressWarnings("unchecked")
     private Class<T> genericClass() {
         return (Class<T>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];

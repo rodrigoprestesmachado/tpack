@@ -13,13 +13,28 @@ import edu.ifrs.tpack.data.DAOSubject;
  */
 public class BaseController {
     @Inject
+    /*
+        Comentário sobre o atributo
+    */
     protected DAOSession daoSession;
     @Inject
+    /*
+        Comentário sobre o atributo
+    */
     protected DAOSubject daoSubject;
     @Inject
+    /*
+        Comentário sobre o atributo
+    */
     protected DAOQuestion daoQuestion;
     @Inject
+    /*
+        Comentário sobre o atributo
+    */
     protected DAOAnswer daoAnswer;
     @Inject
+    /*
+        Comentário sobre o atributo
+    */
     protected DAOChoice daoChoice;
 }
