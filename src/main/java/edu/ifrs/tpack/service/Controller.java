@@ -75,7 +75,7 @@ public class Controller extends BaseController {
                 }
             }
         } catch (final Exception e) {
-            throw new WebApplicationException(e.getMessage(), Response.Status.INTERNAL_SERVER_ERROR);
+            throw e;
         }
         return subject;
     }
@@ -111,7 +111,7 @@ public class Controller extends BaseController {
         try {
             return daoSession.read();
         } catch (final Exception e) {
-            throw new WebApplicationException(e.getMessage(), Response.Status.INTERNAL_SERVER_ERROR);
+            throw e;
         }
     }
 
