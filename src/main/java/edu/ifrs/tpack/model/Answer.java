@@ -11,8 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 @Entity
-/*
-    Comentário sobre a classe
+/**
+* Comentário sobre a classe
 */
 public class Answer {
 

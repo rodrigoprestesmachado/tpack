@@ -19,8 +19,8 @@ import javax.persistence.PostLoad;
 import javax.persistence.Transient;
 
 @Entity
-/*
-    Comentário sobre a classe
+/**
+* Comentário sobre a classe
 */
 public class Question {
 
@@ -75,18 +75,6 @@ public class Question {
      * Comentário sobre o atributo
      */
     private List<Answer> answers;
-
-    /**
-     * Calculates the levels for multilevel questions
-     */
-    @PostLoad
-    private void calculateLevels() {
-        if (this.type == QuestionType.MULTILEVEL) {
-            for (Choice choice : choices) {
-                this.levels = choice.getLevel() > this.levels ? choice.getLevel() : this.levels;
-            }
-        }
-    }
 
     /**
      * Comentário sobre o método

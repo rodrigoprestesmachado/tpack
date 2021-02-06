@@ -15,8 +15,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity
-/*
-    Comentário sobre a classe
+/**
+* Comentário sobre a classe
 */
 public class Choice {
 
