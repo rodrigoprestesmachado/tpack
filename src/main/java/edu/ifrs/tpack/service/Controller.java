@@ -119,7 +119,7 @@ public class Controller extends BaseController {
     @Path("/getFirstSession")
     @Produces(MediaType.APPLICATION_JSON)
     @Transactional
-/**
+    /**
      * Comentário sobre o método
      */
     public Session getFirstSession() {
