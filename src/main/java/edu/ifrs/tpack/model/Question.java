@@ -1,3 +1,6 @@
+/**
+* @author rodrigo
+*/
 package edu.ifrs.tpack.model;
 
 import java.util.List;

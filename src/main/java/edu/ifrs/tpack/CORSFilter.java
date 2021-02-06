@@ -1,6 +1,4 @@
 /**
-*
-*
 * @author rodrigo
 */
 
@@ -14,6 +12,9 @@ import javax.ws.rs.container.ContainerResponseFilter;
 import javax.ws.rs.ext.Provider;
 
 @Provider
+/**
+* Comentário sobre a classe
+*/
 public class CORSFilter implements ContainerResponseFilter {
     @Override
     /*

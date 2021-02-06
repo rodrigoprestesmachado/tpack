@@ -1,6 +1,4 @@
 /**
-*
-*
 * @author rodrigo
 */
 
@@ -15,6 +13,9 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
+/**
+* Comentário sobre a classe
+*/
 public abstract class Repository<T> {
 
     @PersistenceContext(name = "TpackDS")

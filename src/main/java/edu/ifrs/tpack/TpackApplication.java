@@ -14,7 +14,7 @@ import edu.ifrs.tpack.service.Controller;
 
 @ApplicationPath("/service")
 /**
-* Comentário de classe
+* Comentário sobre a classe
 */
 public class TpackApplication extends Application {
 
