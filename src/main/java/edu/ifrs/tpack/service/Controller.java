@@ -46,7 +46,6 @@ public class Controller extends BaseController {
     @Produces(MediaType.APPLICATION_JSON)
     @Transactional
     public Subject save(final String jsonString) {
-        String errorMessage = null;
 
         // converts the json to a map
         final Jsonb jsonb = JsonbBuilder.create();
@@ -76,8 +75,7 @@ public class Controller extends BaseController {
                 }
             }
         } catch (final Exception e) {
-            errorMessage = "The database is out of service ";
-            throw new WebApplicationException(errorMessage, Response.Status.INTERNAL_SERVER_ERROR);
+            throw new WebApplicationException(e.getMessage(), Response.Status.INTERNAL_SERVER_ERROR);
         }
         return subject;
     }
@@ -110,7 +108,6 @@ public class Controller extends BaseController {
     @Produces(MediaType.APPLICATION_JSON)
     @Transactional
     public List<Session> getSessions() {
-        String errorMessage = null;
         try {
             return daoSession.read();
         } catch (final Exception e) {
