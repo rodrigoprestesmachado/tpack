@@ -46,9 +46,15 @@ public class Choice {
     private List<Answer> answers;
 
     /* used just for multilevel questions */
+    /**
+     * Comentário sobre o atributo
+     */
     private byte level;
 
     /* jumps for this level when user choose this choice */
+    /**
+     * Comentário sobre o atributo
+     */
     private byte nextLevel;
 
     /**

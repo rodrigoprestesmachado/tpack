@@ -38,13 +38,22 @@ public class Question {
     private String text;
 
     /* one explanation about the question */
+    /**
+     * Comentário sobre o atributo
+     */
     private String note;
 
     /* identify the type of the question */
+    /**
+     * Comentário sobre o atributo
+     */
     private QuestionType type;
 
     @Transient
     /* indicates the number os levels in multilevel questions */
+    /**
+     * Comentário sobre o atributo
+     */
     private byte levels;
 
     @ManyToOne
