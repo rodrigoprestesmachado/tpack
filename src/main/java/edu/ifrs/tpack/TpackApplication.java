@@ -1,6 +1,4 @@
 /**
-*
-*
 * @author rodrigo
 */
 
@@ -15,6 +13,9 @@ import javax.ws.rs.core.Application;
 import edu.ifrs.tpack.service.Controller;
 
 @ApplicationPath("/service")
+/**
+* Comentário de classe
+*/
 public class TpackApplication extends Application {
 
     @Override
