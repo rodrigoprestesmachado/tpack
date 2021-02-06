@@ -16,11 +16,17 @@ import javax.persistence.criteria.Root;
 /**
 * Comentário sobre a classe
 */
-public abstract class Repository<T> {
+public class Repository<T> {
 
     @PersistenceContext(name = "TpackDS")
+    /**
+     * Comentário sobre o atributo
+     */
     protected EntityManager em;
 
+    /**
+     * Comentário sobre o método
+     */
     public T create(final T obj) {
         this.em.persist(obj);
         return obj;
@@ -82,9 +88,9 @@ public abstract class Repository<T> {
         return em.createQuery(criteria).getSingleResult();
     }
 
-    /*
-        Comentário sobre o método
-    */
+    /**
+     * Comentário sobre o método
+     */
     @SuppressWarnings("unchecked")
     private Class<T> genericClass() {
         return (Class<T>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];

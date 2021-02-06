@@ -19,9 +19,9 @@ import edu.ifrs.tpack.service.Controller;
 public class TpackApplication extends Application {
 
     @Override
-    /*
-        Comentário sobre o método
-    */
+    /**
+     * Comentário sobre o método
+     */
     public Set<Class<?>> getClasses() {
         final Set<Class<?>> resources = new HashSet<Class<?>>();
         resources.add(Controller.class);

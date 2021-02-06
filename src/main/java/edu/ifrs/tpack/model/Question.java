@@ -26,15 +26,15 @@ public class Question {
 
     @Id
     @GeneratedValue
-    /*
-        Comentário sobre o atributo
-    */
+    /**
+     * Comentário sobre o atributo
+     */
     private long id;
 
     @Column(name = "TEXT", length = 1500)
-    /*
-        Comentário sobre o atributo
-    */
+    /**
+     * Comentário sobre o atributo
+     */
     private String text;
 
     /* one explanation about the question */
@@ -49,22 +49,22 @@ public class Question {
 
     @ManyToOne
     @JoinColumn(name = "SESSION_ID", nullable = false)
-    /*
-        Comentário sobre o atributo
-    */
+    /**
+     * Comentário sobre o atributo
+     */
     private Session session;
 
     @OneToMany(mappedBy = "question", cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
-    /*
-        Comentário sobre o atributo
-    */
+    /**
+     * Comentário sobre o atributo
+     */
     private List<Choice> choices;
 
     @OneToMany(mappedBy = "question", cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     @JsonbTransient
-    /*
-        Comentário sobre o atributo
-    */
+    /**
+     * Comentário sobre o atributo
+     */
     private List<Answer> answers;
 
     /**
@@ -79,115 +79,115 @@ public class Question {
         }
     }
 
-    /*
-        Comentário sobre o método
-    */
+    /**
+     * Comentário sobre o método
+     */
     public long getId() {
         return id;
     }
 
-    /*
-        Comentário sobre o método
-    */
+    /**
+     * Comentário sobre o método
+     */
     public void setId(long id) {
         this.id = id;
     }
 
-    /*
-        Comentário sobre o método
-    */
+    /**
+     * Comentário sobre o método
+     */
     public String getText() {
         return text;
     }
 
-    /*
-        Comentário sobre o método
-    */
+    /**
+     * Comentário sobre o método
+     */
     public void setText(String text) {
         this.text = text;
     }
 
-    /*
-        Comentário sobre o método
-    */
+    /**
+     * Comentário sobre o método
+     */
     public String getNote() {
         return note;
     }
 
-    /*
-        Comentário sobre o método
-    */
+    /**
+     * Comentário sobre o método
+     */
     public void setNote(String note) {
         this.note = note;
     }
 
-    /*
-        Comentário sobre o método
-    */
+    /**
+     * Comentário sobre o método
+     */
     public QuestionType getType() {
         return type;
     }
 
-    /*
-        Comentário sobre o método
-    */
+    /**
+     * Comentário sobre o método
+     */
     public void setType(QuestionType type) {
         this.type = type;
     }
 
-    /*
-        Comentário sobre o método
-    */
+    /**
+     * Comentário sobre o método
+     */
     public byte getLevels() {
         return levels;
     }
 
-    /*
-        Comentário sobre o método
-    */
+    /**
+     * Comentário sobre o método
+     */
     public void setLevels(byte levels) {
         this.levels = levels;
     }
 
     @JsonbTransient
-    /*
-        Comentário sobre o método
-    */
+    /**
+     * Comentário sobre o método
+     */
     public Session getSession() {
         return session;
     }
 
-    /*
-        Comentário sobre o método
-    */
+    /**
+     * Comentário sobre o método
+     */
     public void setSession(Session session) {
         this.session = session;
     }
 
-    /*
-        Comentário sobre o método
-    */
+    /**
+     * Comentário sobre o método
+     */
     public List<Answer> getAnswers() {
         return answers;
     }
 
-    /*
-        Comentário sobre o método
-    */
+    /**
+     * Comentário sobre o método
+     */
     public void setAnswers(List<Answer> answers) {
         this.answers = answers;
     }
 
-    /*
-        Comentário sobre o método
-    */
+    /**
+     * Comentário sobre o método
+     */
     public List<Choice> getChoices() {
         return choices;
     }
 
-    /*
-        Comentário sobre o método
-    */
+    /**
+     * Comentário sobre o método
+     */
     public void setChoices(List<Choice> choices) {
         this.choices = choices;
     }

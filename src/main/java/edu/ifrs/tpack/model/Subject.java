@@ -28,25 +28,25 @@ public class Subject {
     @Id
     @GeneratedValue
     @JsonbTransient
-    /*
-        Comentário sobre o atributo
-    */
+    /**
+     * Comentário sobre o atributo
+     */
     private long id;
 
-    /*
-        Comentário sobre o atributo
-    */
+    /**
+     * Comentário sobre o atributo
+     */
     private String token;
 
-    /*
-        Comentário sobre o atributo
-    */
+    /**
+     * Comentário sobre o atributo
+     */
     private Timestamp moment;
 
     @OneToMany(mappedBy = "subject", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
-    /*
-        Comentário sobre o atributo
-    */
+    /**
+     * Comentário sobre o atributo
+     */
     private List<Answer> answers;
 
     /**

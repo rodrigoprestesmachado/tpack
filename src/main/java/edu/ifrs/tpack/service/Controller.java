@@ -135,9 +135,9 @@ public class Controller extends BaseController {
     @Path("/getSession/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     @Transactional
-    /*
-        Comentário sobre o método
-    */
+    /**
+     * Comentário sobre o método
+     */
     public Session getSession(@PathParam("id") final long id) {
         return daoSession.find(id);
     }
