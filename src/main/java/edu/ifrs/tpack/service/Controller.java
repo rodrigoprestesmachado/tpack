@@ -1,3 +1,8 @@
+/**
+*
+*
+* @author rodrigo
+*/
 package edu.ifrs.tpack.service;
 
 import java.util.HashMap;
@@ -30,9 +35,6 @@ import edu.ifrs.tpack.model.Subject;
  */
 @Path("/api")
 @RequestScoped
-/*
-    Comentário sobre a classe
-*/
 public class Controller extends BaseController {
 
     /**

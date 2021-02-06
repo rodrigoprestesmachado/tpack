@@ -1,3 +1,9 @@
+/**
+*
+*
+* @author rodrigo
+*/
+
 package edu.ifrs.tpack;
 
 import java.io.IOException;
@@ -8,9 +14,6 @@ import javax.ws.rs.container.ContainerResponseFilter;
 import javax.ws.rs.ext.Provider;
 
 @Provider
-/*
-    Comentário sobre a classe
-*/
 public class CORSFilter implements ContainerResponseFilter {
     @Override
     /*
