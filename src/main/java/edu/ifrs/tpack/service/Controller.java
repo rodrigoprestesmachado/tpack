@@ -68,13 +68,10 @@ public class Controller extends BaseController {
 
         Subject subject = new Subject();
         try {
-            // stores the subject
             daoSubject.create(subject);
-            // stores all answers
             for (final Map.Entry<String, String> entry : map.entrySet()) {
                 try {
                     final Question question = this.daoQuestion.find(Long.parseLong(entry.getKey()));
-                    // handles multiple choices questions
                     if (question.getType() == QuestionType.MULTIPLE || question.getType() == QuestionType.MULTILEVEL
                             || question.getType() == QuestionType.UNIQUE) {
                         String[] strAnswer = entry.getValue().split(",");
