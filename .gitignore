@@ -5,3 +5,4 @@ target/
 .github
 .DS_Store
 .factorypath
+.history
