@@ -25,7 +25,7 @@
         </template>
 
         <!-- main container -->
-        <template v-if="loaded == true">
+        <template v-if="loaded === true">
           <div class="headline" align="center" justify="center">
             {{ sessions[current].title }}
           </div>
@@ -35,7 +35,7 @@
             :key="question.id"
           >
             <!-- Label queston  -->
-            <template v-if="question.type == 'LABEL'">
+            <template v-if="question.type === 'LABEL'">
               <div
                 class="text-justify"
                 v-html="question.text"
@@ -45,7 +45,7 @@
             </template>
 
             <!-- Text area field question   -->
-            <template v-if="question.type == 'TEXTAREA'">
+            <template v-if="question.type === 'TEXTAREA'">
               <v-card elevation="2" class="mb-8">
                 <v-card-title class="text-subtitle-1 text-justify">
                   <div v-html="question.text"></div>
@@ -64,7 +64,7 @@
             </template>
 
             <!-- Scale queston  -->
-            <template v-if="question.type == 'SCALE'">
+            <template v-if="question.type === 'SCALE'">
               <div
                 class="text-body-2 text-justify-center mb-6"
                 v-html="question.note"
@@ -88,7 +88,7 @@
             </template>
 
             <!-- Age question -->
-            <template v-if="question.type == 'AGE'">
+            <template v-if="question.type === 'AGE'">
               <v-card elevation="2" class="mb-8">
                 <v-card-title class="text-subtitle-1 text-justify">
                   <div v-html="question.id - 1 + ') ' + question.text"></div>
@@ -116,7 +116,7 @@
             </template>
 
             <!-- Multiple choice question -->
-            <template v-if="question.type == 'MULTIPLE'">
+            <template v-if="question.type === 'MULTIPLE'">
               <v-card elevation="2" class="mb-8">
                 <v-card-title class="text-subtitle-1 text-justify">
                   <div v-html="question.id - 1 + ') ' + question.text"></div>
@@ -151,7 +151,7 @@
             </template>
 
             <!-- Multilevel choice question -->
-            <template v-if="question.type == 'MULTILEVEL'">
+            <template v-if="question.type === 'MULTILEVEL'">
               <v-card elevation="2" class="mb-8">
                 <v-card-title class="text-subtitle-1 text-justify">
                   <div v-html="question.id - 1 + ') ' + question.text"></div>
@@ -192,7 +192,7 @@
             </template>
 
             <!-- Unique choice question -->
-            <template v-if="question.type == 'UNIQUE'">
+            <template v-if="question.type === 'UNIQUE'">
               <v-card elevation="2" class="mb-8">
                 <v-card-title class="text-subtitle-1 text-justify">
                   <div v-html="question.id - 1 + ') ' + question.text"></div>
@@ -223,7 +223,7 @@
             </template>
 
             <!-- Year question -->
-            <template v-if="question.type == 'YEAR'">
+            <template v-if="question.type === 'YEAR'">
               <v-card elevation="2" class="mb-8">
                 <v-card-title class="text-subtitle-1 text-justify">
                   <div v-html="question.id - 1 + ') ' + question.text"></div>
@@ -251,7 +251,7 @@
             </template>
 
             <!-- Region question-->
-            <template v-if="question.type == 'REGION'">
+            <template v-if="question.type === 'REGION'">
               <v-card elevation="2" class="mb-8">
                 <v-card-title class="text-subtitle-1 text-justify">
                   <div v-html="question.id - 1 + ') ' + question.text"></div>
@@ -278,7 +278,7 @@
                       @change="getCities()"
                     ></v-select>
                     <v-select
-                      v-if="state != null && loadCities == true"
+                      v-if="state != null && loadCities === true"
                       v-model="answer[question.id]"
                       :items="cities"
                       item-text="nome"
@@ -478,8 +478,8 @@ export default class Session extends Vue {
       this.sessions = resp.data;
       this.loadFromLocalStorage();
       this.initNotNullValidation();
-      this.getStates();
-      this.getCities();
+      await this.getStates();
+      await this.getCities();
       this.loaded = true;
     } catch (error) {
       this.loaded = false;
