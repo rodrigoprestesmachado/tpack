@@ -47,20 +47,20 @@ public class Subject {
     @OneToMany(mappedBy = "subject", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     private List<Answer> answers;
 
-    /**
-     * Construtor
-     */
+    // 
+    // Construtor
+    // 
     public Subject() {
         Calendar calendar = Calendar.getInstance();
         this.moment = new Timestamp(calendar.getTimeInMillis());
         this.token = UUID.randomUUID().toString();
     }
 
-    /**
-     * Adds a answer to a subject
-     * 
-     * @param answer Answer object
-     */
+    // 
+    // Adds a answer to a subject
+    // 
+    // @param answer Answer object
+    // 
     public void addAnswer(Answer answer) {
         this.answers.add(answer);
     }

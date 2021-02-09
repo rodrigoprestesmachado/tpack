@@ -25,11 +25,11 @@ import edu.ifrs.tpack.model.Session;
 
 public class DAOSession extends Repository<Session> {
 
-    /**
-     * Returns the first session object/register
-     * 
-     * @return A Session object
-     */
+    // 
+    // Returns the first session object/register
+    // 
+    // @return A Session object
+    // 
     public Session getFirstSession() {
 
         final CriteriaBuilder builder = em.getCriteriaBuilder();

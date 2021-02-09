@@ -35,11 +35,11 @@ public abstract class Repository<T> {
         return obj;
     }
 
-    /**
-     * Returns all objetcs/registers from the base
-     * 
-     * @return A List of T objects
-     */
+    // 
+    // Returns all objetcs/registers from the base
+    // 
+    // @return A List of T objects
+    // 
     public List<T> read() {
         final CriteriaBuilder builder = em.getCriteriaBuilder();
         final CriteriaQuery<T> criteria = builder.createQuery(this.genericClass());
@@ -48,41 +48,41 @@ public abstract class Repository<T> {
         return em.createQuery(criteria).getResultList();
     }
 
-    /**
-     * Updates the T object
-     * 
-     * @param The T object
-     */
+    // 
+    // Updates the T object
+    // 
+    // @param The T object
+    // 
     public void update(T obj) {
         this.em.merge(obj);
     }
 
-    /**
-     *  Deletes the object in the data base
-     * 
-     * @param The id of the object
-     */
+    // 
+    //  Deletes the object in the data base
+    // 
+    // @param The id of the object
+    // 
     public void delete(Long id) {
         T obj = em.find(this.genericClass(), id);
         this.em.remove(obj);
     }
 
-    /**
-     * Finds a specific object by id
-     * 
-     * @param The id of teh object
-     * @return The T object
-     */
+    
+    // Finds a specific object by id
+    
+    // @param The id of the object
+    // @return The T object
+    
     public T find(Long id) {
         return em.find(this.genericClass(), id);
     }
 
-    /**
-     * Finds the value by colum 
-     * @param column
-     * @param value
-     * @return
-     */
+    // 
+    // Finds the value by colum 
+    // @param column
+    // @param value
+    // @return
+    // 
     public T find(String column, String value) {
         final CriteriaBuilder builder = em.getCriteriaBuilder();
         final CriteriaQuery<T> criteria = builder.createQuery(this.genericClass());
