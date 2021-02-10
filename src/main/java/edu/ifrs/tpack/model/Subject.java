@@ -40,9 +40,11 @@ public class Subject {
     @JsonbTransient
     private long id;
 
-    private String token;
+    //Com private Mostra esta mensagem de erro 'The value of the field Subject.moment is not usedJava(570425421)'
+    protected String token;
 
-    private Timestamp moment;
+    //Com private Mostra esta mensagem de erro 'The value of the field Subject.moment is not usedJava(570425421)'
+    protected Timestamp moment;
 
     @OneToMany(mappedBy = "subject", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     private List<Answer> answers;
