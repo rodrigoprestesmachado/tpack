@@ -21,6 +21,6 @@
         </profile>
     </profiles>
     <activeProfiles>
-        <activeProfile>production</activeProfile>
+        <activeProfile>development</activeProfile>
     </activeProfiles>
 </settings>
