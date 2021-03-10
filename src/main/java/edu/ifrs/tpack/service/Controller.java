@@ -1,19 +1,3 @@
-/**
- * @License
- * Copyright 2020 TPACK XS Application
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package edu.ifrs.tpack.service;
 
 import java.util.HashMap;
@@ -64,14 +48,14 @@ public class Controller extends BaseController {
 
         // converts the json to a map
         final Jsonb jsonb = JsonbBuilder.create();
-        Map<String, String> map = jsonb.fromJson(jsonString, HashMap.class);
+        Map<String, String> map = jsonb.fromJson(jsonString, Map.class);
 
         Subject subject = new Subject();
         try {
             // stores the subject
             daoSubject.create(subject);
             // stores all answers
-            for (final Map.Entry<String, String> entry : map.entrySet()) {
+            for (final HashMap.Entry<String, String> entry : map.entrySet()) {
                 try {
                     final Question question = this.daoQuestion.find(Long.parseLong(entry.getKey()));
                     // handles multiple choices questions
