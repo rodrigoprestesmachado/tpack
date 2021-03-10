@@ -49,51 +49,92 @@ public class Choice {
     /* jumps for this level when user choose this choice */
     private byte nextLevel;
 
+    /**
+     * 
+     * @return
+     */
     public long getId() {
         return id;
     }
 
+    /**
+     * 
+     * @param id
+     */
     public void setId(long id) {
         this.id = id;
     }
 
+    /**
+     * 
+     * @return
+     */
     public String getText() {
         return text;
     }
 
+    /**
+     * 
+     * @param text
+     */
     public void setText(String text) {
         this.text = text;
     }
 
+    /**
+     * 
+     * @return
+     */
     @JsonbTransient
     public Question getQuestion() {
         return question;
     }
-
+    /**
+     * 
+     * @param question
+     */
     public void setQuestion(Question question) {
         this.question = question;
     }
-
+    /**
+     * 
+     * @return
+     */
     public List<Answer> getAnswers() {
         return answers;
     }
-
+    /**
+     * 
+     * @param answers
+     */
     public void setAnswers(List<Answer> answers) {
         this.answers = answers;
     }
-
+    /**
+     * 
+     * @return
+     */
     public byte getLevel() {
         return level;
     }
-
+    /**
+     * 
+     * @param level
+     */
     public void setLevel(byte level) {
         this.level = level;
     }
-
+    /**
+     * 
+     * @return
+     */
     public byte getNextLevel() {
         return nextLevel;
     }
-
+    /**
+     * 
+     * @param nextLevel
+     */
     public void setNextLevel(byte nextLevel) {
         this.nextLevel = nextLevel;
     }
