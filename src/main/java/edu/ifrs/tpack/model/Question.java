@@ -1,19 +1,3 @@
-/**
- * @License
- * Copyright 2020 TPACK XS Application
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package edu.ifrs.tpack.model;
 
 import java.util.List;
@@ -28,51 +12,65 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.PostLoad;
 import javax.persistence.Transient;
 
 @Entity
+/**
+ * Comentário da classe Question
+ */
 public class Question {
 
     @Id
     @GeneratedValue
+    /**
+     * Comentando atributo
+     */
     private long id;
 
     @Column(name = "TEXT", length = 1500)
+    /**
+     * Comentando atributo
+     */
     private String text;
 
     /* one explanation about the question */
+    /**
+     * Comentando atributo
+     */
     private String note;
 
     /* identify the type of the question */
+    /**
+     * Comentando atributo
+     */
     private QuestionType type;
 
     /* indicates the number os levels in multilevel questions */
+    /**
+     * Comentando atributo
+     */
     @Transient
     private byte levels;
 
     @ManyToOne
     @JoinColumn(name = "SESSION_ID", nullable = false)
+    /**
+     * Comentando atributo
+     */
     private Session session;
 
     @OneToMany(mappedBy = "question", cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+    /**
+     * Comentando atributo
+     */
     private List<Choice> choices;
 
     @OneToMany(mappedBy = "question", cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     @JsonbTransient
-    private List<Answer> answers;
-
     /**
-     * Calculates the levels for multilevel questions
+     * Comentando atributo
      */
-    @PostLoad
-    private void calculateLevels() {
-        if (this.type == QuestionType.MULTILEVEL) {
-            for (Choice choice : choices) {
-                this.levels = choice.getLevel() > this.levels ? choice.getLevel() : this.levels;
-            }
-        }
-    }
+    private List<Answer> answers;
 
     public long getId() {
         return id;
