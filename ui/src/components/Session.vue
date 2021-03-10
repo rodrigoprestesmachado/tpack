@@ -373,7 +373,7 @@ import multiple from "./Multiple.vue";
 })
 export default class Session extends Vue {
   /** sets base URL */
-  private readonly BASE = "http://REPLACE-HOST:REPLACE-PORT/REPLACE-API";
+  private readonly BASE = "http://:/";
   /** ttores the answer of the users to only sync with the interface */
   private answer: any = [];
   /** the session with the questions */
