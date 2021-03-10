@@ -64,7 +64,9 @@ public class Controller extends BaseController {
 
         // converts the json to a map
         final Jsonb jsonb = JsonbBuilder.create();
-        Map<String, String> map = jsonb.fromJson(jsonString, HashMap.class);
+        
+        //Mostra o seguinte erro "Type safety: The expression of type HashMap needs unchecked conversion to conform to Map<String,String>Java(16777748)"
+        Map<String, String> map = jsonb.fromJson(jsonString, HashMap.class); 
 
         Subject subject = new Subject();
         try {
