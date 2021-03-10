@@ -1,13 +1,12 @@
 /**
  * @License
  * Copyright 2020 TPACK XS Application
- *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
  * http://www.apache.org/licenses/LICENSE-2.0
- *
+ */
+/**
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -33,18 +32,33 @@ import lombok.Data;
 
 @Data
 @Entity
+/**
+ * Teste com comentário.
+ */
 public class Subject {
 
     @Id
     @GeneratedValue
     @JsonbTransient
+    /**
+     * Teste com comentário.
+     */
     private long id;
 
+    /**
+     * Teste com comentário.
+     */
     private String token;
 
+    /**
+     * Teste com comentário.
+     */
     private Timestamp moment;
 
     @OneToMany(mappedBy = "subject", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    /**
+     * Teste com comentário.
+     */
     private List<Answer> answers;
 
     /**
