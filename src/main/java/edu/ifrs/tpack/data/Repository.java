@@ -1,18 +1,5 @@
 /**
- * @License
- * Copyright 2020 TPACK XS Application
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * Comentário com menos linhas
  */
 package edu.ifrs.tpack.data;
 
@@ -25,11 +12,22 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
+/**
+ * Comentário da classe
+ */
 public abstract class Repository<T> {
 
+    /**
+     * Comentário de atributo
+     */
     @PersistenceContext(name = "TpackDS")
     protected EntityManager em;
 
+    /**
+     * Comentário do construtor
+     * @param obj
+     * @return
+     */
     public T create(final T obj) {
         this.em.persist(obj);
         return obj;
@@ -95,4 +93,6 @@ public abstract class Repository<T> {
     private Class<T> genericClass() {
         return (Class<T>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
     }
+
+    abstract void abstractMethod();
 }
