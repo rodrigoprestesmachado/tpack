@@ -16,7 +16,7 @@
                 <replace.host>localhost</replace.host>
                 <replace.port>9080</replace.port>
                 <replace.api>service/api/</replace.api>
-                <replace.db>localhost</replace.db>
+                <replace.db>db</replace.db>
             </properties>
         </profile>
     </profiles>
