@@ -1,6 +1,6 @@
 <template>
   <v-app id="inspire">
-    <v-app-bar app color="#009688" dark>
+    <v-app-bar app class="app-bar-div" dark>
       <v-row>
         <v-btn icon small :link="true" href="/tpack" class="ml-3">
           <v-icon large color="white darken-2">
@@ -13,7 +13,7 @@
     <v-main>
       <session />
     </v-main>
-    <v-footer color="#009688" app dark>
+    <v-footer class="app-bar-div" app dark>
       <span class="white--text">ifrs.edu.br</span>
     </v-footer>
   </v-app>

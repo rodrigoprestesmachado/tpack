@@ -48,12 +48,11 @@ import edu.ifrs.tpack.model.Subject;
 @RequestScoped
 public class Controller extends BaseController {
 
-    /**
-     * Stores all answers in the data base
-     *
-     * @param jsonString The answers in json
-     * @return A Subject object
-     */
+    // 
+    // Stores all answers in the data base
+        // // @param jsonString The answers in json
+    // @return A Subject object
+    // 
     @POST
     @Path("/save")
     @Consumes(MediaType.APPLICATION_JSON)
@@ -96,14 +95,13 @@ public class Controller extends BaseController {
         return subject;
     }
 
-    /**
-     * Creates and stores an answer object
-     *
-     * @param subject  The subject
-     * @param question The question object
-     * @param choice   Choice object for multiple selection question
-     * @param data     Represents the answer in string format
-     */
+    // 
+    // Creates and stores an answer object
+    // @param subject  The subject
+    // @param question The question object
+    // @param choice   Choice object for multiple selection question
+    // @param data     Represents the answer in string format
+    // 
     private void createAnswer(Subject subject, Question question, Choice choice, String data) {
         final Answer answer = new Answer();
         answer.setSubject(subject);
@@ -114,11 +112,8 @@ public class Controller extends BaseController {
         daoAnswer.create(answer);
     }
 
-    /**
-     * Returns the sessions and related questions
-     *
-     * @return A list of sessions with related questions
-     */
+    // Returns the sessions and related questions
+    // @return A list of sessions with related questions
     @GET
     @Path("/getSessions")
     @Produces(MediaType.APPLICATION_JSON)
