@@ -66,7 +66,7 @@ public class TpackApiIT {
             // System.out.println(bodyString); 
             // Separa a variável bodyString em elementos de um array
             String[] array_choices = bodyString.split("choices");
-            // Número de número de questões é igual ao número de elementos -1
+            // O número de questões é igual ao número de elementos -1
             int numeroQuestoes = (array_choices.length -1);
             // Imprime o número de questões
             // System.out.println(numeroQuestoes); 
