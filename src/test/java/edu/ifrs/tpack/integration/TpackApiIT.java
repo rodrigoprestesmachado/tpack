@@ -52,8 +52,8 @@ public class TpackApiIT {
     public void getSessions() {
         try {
             // mounts the URL
-            // String url = "http://" + host + API + "getSessions";
-            String url = "http://" + host + ":" + port + API + "getSessions";
+            String url = "http://" + host + API + "getSessions";
+            //String url = "http://" + host + ":" + port + API + "getSessions";
             // creates a http get
             HttpGet get = new HttpGet(url);
             // executes and getting the response
