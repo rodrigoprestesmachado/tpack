@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package edu.ifrs.tpack.containers;
+package edu.ifrs.tpack.integration;
 
 import static org.junit.Assert.assertEquals;
 
@@ -47,14 +47,13 @@ public class TpackApiIT {
     }
 
     @Test
-    public void subjectTest() {
+    public void getSessions() {
         try {
-            // Mounting URL
-            String url = "http://" + host + ":" + port + API + "createSubject";
-
-            // Creating a http get
+            // mounts the URL
+            String url = "http://" + host + ":" + port + API + "getSessions";
+            // creates a http get
             HttpGet get = new HttpGet(url);
-            // execute and getting the response
+            // executes and getting the response
             HttpResponse response = this.client.execute(get);
 
             assertEquals(response.getStatusLine().getStatusCode(), 200);

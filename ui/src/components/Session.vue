@@ -1,7 +1,7 @@
 <template>
   <v-container fluid>
     <v-row no-gutters align="start" justify="center">
-      <v-col lg="5">
+      <v-col lg="4" md="5">
         <!-- load feedback -->
         <v-progress-circular
           indeterminate
@@ -18,9 +18,9 @@
           <div
             align="center"
             justify="center"
-            class="ma-5 indigo--text text-h5"
+            class="ma-5 orange--text text-h5"
           >
-            Obrigado por ter respondido essa pesquisa
+            Obrigado por você ter respondido essa pesquisa
           </div>
         </template>
 
@@ -36,14 +36,19 @@
           >
             <!-- Label queston  -->
             <template v-if="question.type == 'LABEL'">
-              <div v-html="question.text" align="start" justify="center"></div>
+              <div
+                class="text-justify"
+                v-html="question.text"
+                align="start"
+                justify="center"
+              ></div>
             </template>
 
             <!-- Text area field question   -->
             <template v-if="question.type == 'TEXTAREA'">
               <v-card elevation="2" class="mb-8">
-                <v-card-title class="body-1 text--primary">
-                  <div v-html="question.id - 1 + ') ' + question.text"></div>
+                <v-card-title class="text-subtitle-1 text-justify">
+                  <div v-html="question.text"></div>
                   <div class="body-2 mx-4 mt-4" v-html="question.note"></div>
                 </v-card-title>
                 <v-card-actions>
@@ -60,8 +65,14 @@
 
             <!-- Scale queston  -->
             <template v-if="question.type == 'SCALE'">
-              <div v-html="question.id - 1 + ') ' + question.text"></div>
-              <div class="body-2 mx-4 mt-6" v-html="question.note"></div>
+              <div
+                class="text-body-2 text-justify-center mb-6"
+                v-html="question.note"
+              ></div>
+              <div
+                v-html="question.id - 1 + ') ' + question.text"
+                class="text-justify"
+              ></div>
               <v-slider
                 v-model="answer[question.id]"
                 thumb-label="always"
@@ -70,7 +81,7 @@
                 :max="5"
                 :min="1"
                 aria-label="classifique"
-                class="mt-10 mb-10 mx-3"
+                class="mt-10 mb-5 mx-3"
                 dense
                 :tick-labels="ticks"
               />
@@ -79,7 +90,7 @@
             <!-- Age question -->
             <template v-if="question.type == 'AGE'">
               <v-card elevation="2" class="mb-8">
-                <v-card-title class="body-1 text--primary">
+                <v-card-title class="text-subtitle-1 text-justify">
                   <div v-html="question.id - 1 + ') ' + question.text"></div>
                   <div class="body-2 mx-4 mt-4" v-html="question.note"></div>
                 </v-card-title>
@@ -107,9 +118,12 @@
             <!-- Multiple choice question -->
             <template v-if="question.type == 'MULTIPLE'">
               <v-card elevation="2" class="mb-8">
-                <v-card-title class="subtitle-1 text--primary">
+                <v-card-title class="text-subtitle-1 text-justify">
                   <div v-html="question.id - 1 + ') ' + question.text"></div>
-                  <div class="body-2 mx-4 mt-4" v-html="question.note"></div>
+                  <div
+                    class="body-2 mx-4 mt-4 text-justify"
+                    v-html="question.note"
+                  ></div>
                 </v-card-title>
                 <v-card-actions>
                   <v-col>
@@ -139,7 +153,7 @@
             <!-- Multilevel choice question -->
             <template v-if="question.type == 'MULTILEVEL'">
               <v-card elevation="2" class="mb-8">
-                <v-card-title class="subtitle-1 text--primary">
+                <v-card-title class="text-subtitle-1 text-justify">
                   <div v-html="question.id - 1 + ') ' + question.text"></div>
                   <div class="body-2 mx-4 mt-4" v-html="question.note"></div>
                 </v-card-title>
@@ -167,9 +181,7 @@
                         outlined
                         class="ml-8 mr-8"
                         :key="index"
-                        :placeholder="
-                          'grupo: ' + index + ' de ' + question.levels
-                        "
+                        :placeholder="getLabelLevels(index)"
                         :ref="'multilevel' + index"
                         @change="handleLevel"
                       ></v-select>
@@ -182,7 +194,7 @@
             <!-- Unique choice question -->
             <template v-if="question.type == 'UNIQUE'">
               <v-card elevation="2" class="mb-8">
-                <v-card-title class="body-1 text--primary">
+                <v-card-title class="text-subtitle-1 text-justify">
                   <div v-html="question.id - 1 + ') ' + question.text"></div>
                   <div class="body-2 mx-4 mt-4" v-html="question.note"></div>
                 </v-card-title>
@@ -213,7 +225,7 @@
             <!-- Year question -->
             <template v-if="question.type == 'YEAR'">
               <v-card elevation="2" class="mb-8">
-                <v-card-title class="body-1 text--primary">
+                <v-card-title class="text-subtitle-1 text-justify">
                   <div v-html="question.id - 1 + ') ' + question.text"></div>
                   <div class="body-2 mx-4 mt-4" v-html="question.note"></div>
                 </v-card-title>
@@ -241,7 +253,7 @@
             <!-- Region question-->
             <template v-if="question.type == 'REGION'">
               <v-card elevation="2" class="mb-8">
-                <v-card-title class="body-1 text--primary">
+                <v-card-title class="text-subtitle-1 text-justify">
                   <div v-html="question.id - 1 + ') ' + question.text"></div>
                   <div class="body-2 mx-4 mt-4" v-html="question.note"></div>
                 </v-card-title>
@@ -343,18 +355,16 @@
 </template>
 
 <script lang="ts">
+import axios from "axios";
+import { Component, Vue } from "vue-property-decorator";
 // TODO remove the comments
 // To use with Electron
 // https://medium.com/@bromix/electron-application-with-vue-js-and-vuetify-f2a1f9c749b8
-import axios from "axios";
-import { Component, Vue } from "vue-property-decorator";
 import installExtension from "electron-devtools-installer";
-import Axios from "axios";
 import { createProtocol } from "vue-cli-plugin-electron-builder/lib";
 
 //Components
 import multiple from "./Multiple.vue";
-import Vuetify from "vuetify/lib";
 
 @Component({
   components: {
@@ -459,6 +469,9 @@ export default class Session extends Vue {
    * @param base The URL base of the service
    */
   async initApplication() {
+    // TODO (use router) The title of session component
+    document.title = "tpack";
+
     const url = this.BASE + "getSessions";
     try {
       const resp = await axios.get(url);
@@ -718,9 +731,13 @@ export default class Session extends Vue {
     const data: DataMap = {};
     // Creates a JS object from local storage
     const keys = Object.keys(localStorage);
-    const result = keys.forEach(function(element, index, keys) {
+    keys.forEach(function(element) {
       data[element] = localStorage.getItem(element);
     });
+
+    // Add the state in the question about the city
+    data["42"] = data["42"] + ", " + this.state;
+
     // verifies if the user already send an answer
     if (!localStorage.getItem("token")) {
       // converts from JS object fo string
@@ -753,7 +770,7 @@ export default class Session extends Vue {
    * Tpack spefic rule:
    * Answers if some question need to be disable
    */
-  isQuestionDisable(idQuestion) {
+  isQuestionDisable(idQuestion: number) {
     if (idQuestion == 5) {
       return this.disableQuestion5;
     }
@@ -763,7 +780,7 @@ export default class Session extends Vue {
    * Tpack spefic rule:
    * Handles the levels of multilevel question about formation.
    */
-  handleLevel(arraySelected) {
+  handleLevel(arraySelected: Array<number>) {
     if (arraySelected.find(e => e > 12)) {
       // enable question 5
       this.disableQuestion5 = false;
@@ -780,6 +797,18 @@ export default class Session extends Vue {
     }
   }
 
+  getLabelLevels(index: number) {
+    let label;
+    if (index - 1 == 0) {
+      label = "Fundamental e médio";
+    } else if (index - 1 == 1) {
+      label = "Superior";
+    } else {
+      label = "Pós-graduação";
+    }
+    return label;
+  }
+
   /**
    * Puts the scroll to the top
    */
@@ -789,3 +818,15 @@ export default class Session extends Vue {
   }
 }
 </script>
+
+<style scoped>
+/*
+there is a open bug in vuetify about v-card word break
+https://github.com/vuetifyjs/vuetify/issues/9130
+thus, this is a work around
+*/
+.v-card__text,
+.v-card__title {
+  word-break: normal; /* maybe !important  */
+}
+</style>

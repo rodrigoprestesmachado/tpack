@@ -4,7 +4,7 @@
         <profile>
             <id>production</id>
             <properties>
-                <replace.host>code.inf.poa.ifrs.edu.br</replace.host>
+                <replace.host>35.199.66.38</replace.host>
                 <replace.port>80</replace.port>
                 <replace.api>tpack/service/api/</replace.api>
                 <replace.db>db</replace.db>
@@ -16,11 +16,11 @@
                 <replace.host>localhost</replace.host>
                 <replace.port>9080</replace.port>
                 <replace.api>service/api/</replace.api>
-                <replace.db>localhost</replace.db>
+                <replace.db>db</replace.db>
             </properties>
         </profile>
     </profiles>
     <activeProfiles>
-        <activeProfile>production</activeProfile>
+        <activeProfile>development</activeProfile>
     </activeProfiles>
 </settings>

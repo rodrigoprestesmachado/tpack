@@ -26,9 +26,11 @@ services:
     volumes:
       - /sessions
   app:
-    #build: .
-    image: rodrigoprestesmachado/tpack_app:latest
-    container_name: tpack-service
+    build: .
+    #image: rodrigoprestesmachado/tpack_app:latest
+    container_name: tpack-app
+    links:
+      - "db"
     depends_on:
       - db
       - phpmyadmin

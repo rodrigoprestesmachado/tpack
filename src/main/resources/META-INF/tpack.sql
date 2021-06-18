@@ -22,7 +22,7 @@ INSERT INTO `QUESTION` (`ID`,`NOTE`,`TEXT`,`TYPE`,`SESSION_ID`) VALUES (8,NULL,'
 INSERT INTO `QUESTION` (`ID`,`NOTE`,`TEXT`,`TYPE`,`SESSION_ID`) VALUES (9,NULL,'Posso usar uma ampla variedade de abordagens de ensino em sala de aula',1,3);
 INSERT INTO `QUESTION` (`ID`,`NOTE`,`TEXT`,`TYPE`,`SESSION_ID`) VALUES (10,NULL,'Posso avaliar a aprendizagem dos estudantes de várias maneiras',1,3);
 INSERT INTO `QUESTION` (`ID`,`NOTE`,`TEXT`,`TYPE`,`SESSION_ID`) VALUES (11,'1 para discordo totalmente e 5 para concordo totalmente','Tenho conhecimento suficiente sobre o meu conteúdo de ensino',1,4);
-INSERT INTO `QUESTION` (`ID`,`NOTE`,`TEXT`,`TYPE`,`SESSION_ID`) VALUES (12,NULL,'Posso usar uma maneira específica de pensar no meu conteúdo de ensino',1,4);
+INSERT INTO `QUESTION` (`ID`,`NOTE`,`TEXT`,`TYPE`,`SESSION_ID`) VALUES (12,NULL,'Posso empregar uma maneira específica de pensar no meu conteúdo de ensino',1,4);
 INSERT INTO `QUESTION` (`ID`,`NOTE`,`TEXT`,`TYPE`,`SESSION_ID`) VALUES (13,NULL,'Conheço as teorias e conceitos básicos do meu conteúdo de ensino',1,4);
 INSERT INTO `QUESTION` (`ID`,`NOTE`,`TEXT`,`TYPE`,`SESSION_ID`) VALUES (14,NULL,'Conheço a história e o desenvolvimento de teorias importantes do meu conteúdo de ensino',1,4);
 INSERT INTO `QUESTION` (`ID`,`NOTE`,`TEXT`,`TYPE`,`SESSION_ID`) VALUES (15,'1 para discordo totalmente e 5 para concordo totalmente','Acompanho novas tecnologias importantes',1,5);
@@ -50,11 +50,11 @@ INSERT INTO `QUESTION` (`ID`,`NOTE`,`TEXT`,`TYPE`,`SESSION_ID`) VALUES (36,NULL,
 INSERT INTO `QUESTION` (`ID`,`NOTE`,`TEXT`,`TYPE`,`SESSION_ID`) VALUES (37,NULL,'As Tecnologias Digitais de Informação e Comunicação utilizadas na prática docente, proporcionaram maior engajamento dos estudantes',1,10);
 INSERT INTO `QUESTION` (`ID`,`NOTE`,`TEXT`,`TYPE`,`SESSION_ID`) VALUES (38,NULL,'Você acredita que alguma de suas práticas pedagógicas no pós-pandemia permanecerão com as alterações tecnológicas realizadas durante o período de pandemia?',3,10);
 INSERT INTO `QUESTION` (`ID`,`NOTE`,`TEXT`,`TYPE`,`SESSION_ID`) VALUES (39,'<span class="font-weight-bold">Nota:</span> você pode marcar mais de uma alternativa','Assinale as opções de ferramentas on-line utilizadas nas práticas pedagógicas durante a pandemia que você pretende continuar aplicando no pós-pandemia',2,10);
-INSERT INTO `QUESTION` (`ID`,`NOTE`,`TEXT`,`TYPE`,`SESSION_ID`) VALUES (40,NULL,'Gênero',2,11);
+INSERT INTO `QUESTION` (`ID`,`NOTE`,`TEXT`,`TYPE`,`SESSION_ID`) VALUES (40,NULL,'Gênero',3,11);
 INSERT INTO `QUESTION` (`ID`,`NOTE`,`TEXT`,`TYPE`,`SESSION_ID`) VALUES (41,NULL,'Idade (em anos)',5,11);
 INSERT INTO `QUESTION` (`ID`,`NOTE`,`TEXT`,`TYPE`,`SESSION_ID`) VALUES (42,NULL,'Região: estado e município',6,11);
-INSERT INTO `QUESTION` (`ID`,`NOTE`,`TEXT`,`TYPE`,`SESSION_ID`) VALUES (43,NULL,'Escreva seus comentários ',10,12);
-INSERT INTO `QUESTION` (`ID`,`NOTE`,`TEXT`,`TYPE`,`SESSION_ID`) VALUES (44,NULL,'TEXTO FINAL',7,12);
+INSERT INTO `QUESTION` (`ID`,`NOTE`,`TEXT`,`TYPE`,`SESSION_ID`) VALUES (43,NULL,'Se desejar fazer algum comentário sobre a pesquisa ou fornecer alguma informação que julgar pertinente, utilize esse espaço. Certamente será de grande relevância para a nossa pesquisa.',7,12);
+INSERT INTO `QUESTION` (`ID`,`NOTE`,`TEXT`,`TYPE`,`SESSION_ID`) VALUES (44,NULL,'Comentários ',10,12);
 INSERT INTO `QUESTION` (`ID`,`NOTE`,`TEXT`,`TYPE`,`SESSION_ID`) VALUES (45,NULL,'',8,12);
 
 INSERT INTO `CHOICE` (`ID`,`LEVEL`,`NEXTLEVEL`,`TEXT`,`QUESTION_ID`) VALUES (1,NULL,0,'Municipal',2);

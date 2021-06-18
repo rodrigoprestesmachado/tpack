@@ -1,4 +1,4 @@
-FROM open-liberty:20.0.0.9-full-java8-openj9
+FROM open-liberty:20.0.0.11-full-java8-openj9
 
 # Sending wait-for-it.sh script
 COPY scripts/wait-for-it.sh /wait-for-it.sh
