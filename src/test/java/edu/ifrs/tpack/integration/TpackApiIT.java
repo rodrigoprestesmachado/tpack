@@ -56,7 +56,7 @@ public class TpackApiIT {
             // executes and getting the response
             HttpResponse response = this.client.execute(get);
 
-            assertEquals(response.getStatusLine().getStatusCode(), 200);
+            assertEquals(200, response.getStatusLine().getStatusCode());
         } catch (IOException e) {
             e.printStackTrace();
         }

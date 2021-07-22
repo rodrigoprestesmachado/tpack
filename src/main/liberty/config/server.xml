@@ -14,6 +14,11 @@
     <variable name="default.http.port" defaultValue="9080" />
     <variable name="default.https.port" defaultValue="9443" />
     <variable name="app.context.root" defaultValue="/" />
+    <variable name="app.dabase.serverName" defaultValue="db" />
+    <variable name="app.dabase.portNumber" defaultValue="3306" />
+    <variable name="app.dabase.user" defaultValue="tpack" />
+    <variable name="app.dabase.password" defaultValue="tpack" />
+    <variable name="app.dabase.databaseName" defaultValue="tpack" />
 
     <httpEndpoint host="*" httpPort="${default.http.port}" httpsPort="${default.https.port}" id="defaultHttpEndpoint" />
 
@@ -27,7 +32,7 @@
     <dataSource jndiName="jdbc/TpackDS">
         <jdbcDriver libraryRef="MySQLLib" />
         <!-- Dev mode use: serverName="localhost" -->
-        <properties serverName="REPLACE-DB" portNumber="3306" user="tpack" password="tpack" databaseName="tpack" />
+        <properties serverName="${app.dabase.serverName}" portNumber="${app.dabase.portNumber}" user="${app.dabase.user}" password="${app.dabase.password}" databaseName="${app.dabase.databaseName}" />
     </dataSource>
 
     <!-- Basic user register -->
