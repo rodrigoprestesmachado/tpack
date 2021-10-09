@@ -11,12 +11,21 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
+/**
+ * Mock test of TPACK XS Application
+ */
 @RunWith(MockitoJUnitRunner.class)
 public class MockTest {
 
+    /**
+     * the mocked hashmap
+     */
     @Mock
     HashMap<String, Integer> mockHashMap;
 
+    /**
+     * must test saving a pair of key values
+     */
     @Test
     public void saveTest() {
 
