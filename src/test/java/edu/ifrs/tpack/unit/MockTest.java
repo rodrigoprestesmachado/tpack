@@ -11,12 +11,21 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
+/**
+ * @author Rodrigo Machado
+ */
 @RunWith(MockitoJUnitRunner.class)
 public class MockTest {
 
+    /**
+     * hash map
+     */
     @Mock
     HashMap<String, Integer> mockHashMap;
 
+    /**
+     * method save test
+     */
     @Test
     public void saveTest() {
 
