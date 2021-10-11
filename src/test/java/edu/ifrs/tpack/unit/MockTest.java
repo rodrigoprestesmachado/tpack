@@ -12,12 +12,24 @@ import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
 @RunWith(MockitoJUnitRunner.class)
+/**
+ * @description da classe aqui
+ */
+
 public class MockTest {
 
     @Mock
+    /**
+     * valor p HashMap
+     */
     HashMap<String, Integer> mockHashMap;
 
     @Test
+    /**
+     * comentario sobre o uso desta classe
+     */
+
+
     public void saveTest() {
 
         mockHashMap.put("A", 1);
