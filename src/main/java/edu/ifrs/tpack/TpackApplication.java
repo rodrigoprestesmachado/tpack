@@ -26,6 +26,10 @@ import edu.ifrs.tpack.service.Controller;
 
 @ApplicationPath("/service")
 public class TpackApplication extends Application {
+    /**
+     * 
+     * @return
+     */
 
     @Override
     public Set<Class<?>> getClasses() {
