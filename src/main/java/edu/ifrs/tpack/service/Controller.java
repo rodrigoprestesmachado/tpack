@@ -19,6 +19,7 @@ package edu.ifrs.tpack.service;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.enterprise.context.RequestScoped;
 import javax.json.bind.Jsonb;
@@ -60,58 +61,22 @@ public class Controller extends BaseController {
     @Produces(MediaType.APPLICATION_JSON)
     @Transactional
     public Subject save(final String jsonString) {
-        String errorMessage = null;
-
-        // converts the json to a map
-        final Jsonb jsonb = JsonbBuilder.create();
-        Map<String, String> map = jsonb.fromJson(jsonString, HashMap.class);
-
         Subject subject = new Subject();
-        try {
+
+        try(final Jsonb jsonb = JsonbBuilder.create();) {
+            Map<String, String> map = jsonb.fromJson(jsonString, HashMap.class.getClass().getGenericSuperclass());
+
             // stores the subject
             daoSubject.create(subject);
             // stores all answers
             for (final Map.Entry<String, String> entry : map.entrySet()) {
-                try {
-                    final Question question = this.daoQuestion.find(Long.parseLong(entry.getKey()));
-                    // handles multiple choices questions
-                    if (question.getType() == QuestionType.MULTIPLE || question.getType() == QuestionType.MULTILEVEL
-                            || question.getType() == QuestionType.UNIQUE) {
-                        String[] strAnswer = entry.getValue().split(",");
-                        for (String id : strAnswer) {
-                            Choice choice = this.daoChoice.find(Long.parseLong(id));
-                            this.createAnswer(subject, question, choice, entry.getValue());
-                        }
-                    } else {
-                        this.createAnswer(subject, question, null, entry.getValue());
-                    }
-                } catch (NumberFormatException e) {
-                    continue;
-                }
+                tryExample(entry, subject);
             }
         } catch (final Exception e) {
-            errorMessage = "The database is out of service ";
+            String errorMessage = "The database is out of service ";
             throw new WebApplicationException(errorMessage, Response.Status.INTERNAL_SERVER_ERROR);
-        }
+        }        
         return subject;
-    }
-
-    /**
-     * Creates and stores an answer object
-     *
-     * @param subject  The subject
-     * @param question The question object
-     * @param choice   Choice object for multiple selection question
-     * @param data     Represents the answer in string format
-     */
-    private void createAnswer(Subject subject, Question question, Choice choice, String data) {
-        final Answer answer = new Answer();
-        answer.setSubject(subject);
-        answer.setQuestion(question);
-        answer.setAnswer(data);
-        if (choice != null)
-            answer.setChoice(choice);
-        daoAnswer.create(answer);
     }
 
     /**
@@ -149,4 +114,51 @@ public class Controller extends BaseController {
         return daoSession.find(id);
     }
 
+    /**
+     * Creates and stores an answer object
+     *
+     * @param entry The entry object
+     * @param subject  The subject
+     */
+    private void tryExample(Entry<String, String> entry, Subject subject) {
+
+        try {
+            final Question question = this.daoQuestion.find(Long.parseLong(entry.getKey()));
+            // handles multiple choices questions
+            if (
+                   question.getType() == QuestionType.MULTIPLE
+                || question.getType() == QuestionType.MULTILEVEL
+                || question.getType() == QuestionType.UNIQUE
+            ) {
+                String[] strAnswer = entry.getValue().split(",");
+                for (String id : strAnswer) {
+                    Choice choice = this.daoChoice.find(Long.parseLong(id));
+                    this.createAnswer(subject, question, choice, entry.getValue());
+                }
+            } else {
+                this.createAnswer(subject, question, null, entry.getValue());
+            }
+        } catch (NumberFormatException e) {
+            String errorMessage = "Occured an error when analising the questions.";
+            throw new WebApplicationException(errorMessage, Response.Status.INTERNAL_SERVER_ERROR);                    
+        }
+    }
+    
+    /**
+     * Creates and stores an answer object
+     *
+     * @param subject  The subject
+     * @param question The question object
+     * @param choice   Choice object for multiple selection question
+     * @param data     Represents the answer in string format
+     */
+    private void createAnswer(Subject subject, Question question, Choice choice, String data) {
+        final Answer answer = new Answer();
+        answer.setSubject(subject);
+        answer.setQuestion(question);
+        answer.setAnswer(data);
+        if (choice != null)
+            answer.setChoice(choice);
+        daoAnswer.create(answer);
+    }
 }

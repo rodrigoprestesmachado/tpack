@@ -35,9 +35,6 @@ public class Session {
     @GeneratedValue
     private long id;
 
-    private String title;
-
     @OneToMany(mappedBy = "session", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     private List<Question> questions;
-
 }

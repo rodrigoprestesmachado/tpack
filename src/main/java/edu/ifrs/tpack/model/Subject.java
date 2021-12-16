@@ -40,9 +40,8 @@ public class Subject {
     @JsonbTransient
     private long id;
 
-    private String token;
-
-    private Timestamp moment;
+    String token;
+    Timestamp moment;
 
     @OneToMany(mappedBy = "subject", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     private List<Answer> answers;
@@ -52,8 +51,8 @@ public class Subject {
      */
     public Subject() {
         Calendar calendar = Calendar.getInstance();
-        this.moment = new Timestamp(calendar.getTimeInMillis());
-        this.token = UUID.randomUUID().toString();
+        moment = new Timestamp(calendar.getTimeInMillis());
+        token = UUID.randomUUID().toString();
     }
 
     /**
@@ -64,5 +63,4 @@ public class Subject {
     public void addAnswer(Answer answer) {
         this.answers.add(answer);
     }
-
 }
