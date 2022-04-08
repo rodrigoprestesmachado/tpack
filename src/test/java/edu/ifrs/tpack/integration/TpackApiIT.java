@@ -46,11 +46,9 @@ public class TpackApiIT {
         host = TpackCompose.tpack.getContainerIpAddress();
         port = TpackCompose.tpack.getFirstMappedPort();
     }
+   */
 
-    */
-
-    /** 
-
+   /**
     @Test
     public void getSessions() {
         try {
@@ -66,7 +64,7 @@ public class TpackApiIT {
             e.printStackTrace();
         }
     }
-
     */
+    
 
 }
