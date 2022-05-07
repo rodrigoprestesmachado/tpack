@@ -1,6 +1,6 @@
 <template>
   <v-app id="inspire">
-    <v-app-bar app color="#009688" dark>
+    <v-app-bar app color="#2D3245 " dark>
       <v-row>
         <v-btn icon small :link="true" href="/tpack" class="ml-3">
           <v-icon large color="white darken-2">
@@ -8,13 +8,13 @@
           </v-icon>
         </v-btn>
       </v-row>
-      <v-img src="../assets/ifrs.png" max-width="190"></v-img>
+      <v-img src="../assets/orion.png" max-width="40"></v-img>
     </v-app-bar>
     <v-main>
       <session />
     </v-main>
-    <v-footer color="#009688" app dark>
-      <span class="white--text">ifrs.edu.br</span>
+    <v-footer color="#2D3245" app dark>
+      <span class="white--text">orion-services.dev</span>
     </v-footer>
   </v-app>
 </template>

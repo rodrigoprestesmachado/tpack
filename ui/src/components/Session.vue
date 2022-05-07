@@ -373,51 +373,51 @@ import multiple from "./Multiple.vue";
 })
 export default class Session extends Vue {
   /** sets base URL */
-  private readonly BASE = "http://REPLACE-HOST:REPLACE-PORT/REPLACE-API";
+  readonly BASE = "http://localhost:8080/tpack/";
   /** ttores the answer of the users to only sync with the interface */
-  private answer: any = [];
+  answer: any = [];
   /** the session with the questions */
-  private sessions: any = [];
+  sessions: any = [];
   /** controls the button used to back the sessions */
-  private nextButton = true;
+  nextButton = true;
   /** controls the button used to back the sessions */
-  private previousButton = false;
+  previousButton = false;
   /** controls the current session */
-  private current = 0;
+  current = 0;
   /** controls if the data was loaded from server  */
-  private loaded = false;
+  loaded = false;
   /** indicates an app error */
-  private errorMessage = "";
+  errorMessage = "";
   /** indicates the progress */
-  private progress = 0;
+  progress = 0;
   /** stores the states of Brazil */
-  private states = [];
+  states = [];
   /** stores the selected state */
-  private state: any = null;
+  state: any = null;
   /** stores the selected cities */
-  private cities = [];
+  cities = [];
   /** indicates when the cities is loaded  */
-  private loadCities = false;
+  loadCities = false;
   /** stores if a user answered a question or not */
-  private validation: Array<any> = [];
+  validation: Array<any> = [];
   /** stores the array of ages */
-  private ages: Array<string> = [];
+  ages: Array<string> = [];
   /** the default color of navigation buttons */
-  private navigationColor = "#80CBC4";
+  navigationColor = "#838AA8";
   /** sets the snack bar to false (or closed) */
-  private openSnackbar = false;
+  openSnackbar = false;
   /** sores the token/id of a user */
-  private token: any = null;
+  token: any = null;
   /** stores the array of years  */
-  private years: Array<string> = [];
+  years: Array<string> = [];
   /** the labels of the sliders   */
-  private ticks: Array<string> = [];
+  ticks: Array<string> = [];
 
   /**
    * Tpack spefic rule
    * This property is because 5 is related with question 4
    */
-  private disableQuestion5 = true;
+  disableQuestion5 = true;
 
   /**
    * When the component is created (Vue created) then init
@@ -472,7 +472,7 @@ export default class Session extends Vue {
     // TODO (use router) The title of session component
     document.title = "tpack";
 
-    const url = this.BASE + "getSessions";
+    const url = this.BASE + "getPages";
     try {
       const resp = await axios.get(url);
       this.sessions = resp.data;
@@ -546,7 +546,7 @@ export default class Session extends Vue {
     // Cheks empty answer
     const go = await this.notNullValidation();
     if (go) {
-      this.navigationColor = "#80CBC4";
+      this.navigationColor = "#838AA8";
       if (this.current + next == this.sessions.length - 1) {
         this.nextButton = false;
         this.previousButton = true;
@@ -569,7 +569,7 @@ export default class Session extends Vue {
       // open the snack bar and change the color of the navigation
       //buttons
       this.openSnackbar = true;
-      this.navigationColor = "#FF8A65";
+      this.navigationColor = "#838AA8";
     }
   }
 

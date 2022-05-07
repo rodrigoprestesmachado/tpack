@@ -1,215 +1,149 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<?xml version="1.0"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>edu.ifrs.tpack</groupId>
+  <groupId>dev.rpmhub</groupId>
   <artifactId>tpack</artifactId>
-  <version>1.0</version>
-  <packaging>war</packaging>
-
+  <version>0.2.0</version>
+  <properties>
+    <compiler-plugin.version>3.8.1</compiler-plugin.version>
+    <failsafe.useModulePath>false</failsafe.useModulePath>
+    <maven.compiler.release>11</maven.compiler.release>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
+    <quarkus.platform.group-id>io.quarkus.platform</quarkus.platform.group-id>
+    <quarkus.platform.version>2.8.2.Final</quarkus.platform.version>
+    <surefire-plugin.version>3.0.0-M5</surefire-plugin.version>
+  </properties>
   <dependencyManagement>
     <dependencies>
       <dependency>
-        <groupId>io.openliberty.features</groupId>
-        <artifactId>features-bom</artifactId>
-        <version>20.0.0.3</version>
+        <groupId>${quarkus.platform.group-id}</groupId>
+        <artifactId>${quarkus.platform.artifact-id}</artifactId>
+        <version>${quarkus.platform.version}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
     </dependencies>
   </dependencyManagement>
-
-  <properties>
-    <sonar.organization>rodrigoprestesmachado</sonar.organization>
-    <sonar.host.url>https://sonarcloud.io</sonar.host.url>
-    <openliberty.maven.version>3.2</openliberty.maven.version>
-    <maven.compiler.target>1.8</maven.compiler.target>
-    <maven.compiler.source>1.8</maven.compiler.source>
-    <failOnMissingWebXml>false</failOnMissingWebXml>
-    <openliberty.version>[19.0.0.9,)</openliberty.version>
-    <final.name>tpack</final.name>
-  </properties>
-
   <dependencies>
     <dependency>
-      <groupId>org.eclipse.microprofile</groupId>
-      <artifactId>microprofile</artifactId>
-      <version>3.3</version>
-      <type>pom</type>
-      <scope>provided</scope>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-arc</artifactId>
     </dependency>
     <dependency>
-      <groupId>io.openliberty.features</groupId>
-      <artifactId>jpa-2.2</artifactId>
-      <type>esa</type>
-    </dependency>
-    <dependency>
-      <groupId>io.openliberty.features</groupId>
-      <artifactId>ejb-3.2</artifactId>
-      <type>esa</type>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-hibernate-orm</artifactId>
     </dependency>
     <dependency>
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
-      <version>1.18.12</version>
+      <version>1.18.24</version>
       <scope>provided</scope>
     </dependency>
-    <!-- Testing-->
     <dependency>
-      <groupId>org.junit.jupiter</groupId>
-      <artifactId>junit-jupiter</artifactId>
-      <version>5.6.0</version>
-      <scope>test</scope>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-jdbc-mysql</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.microshed</groupId>
-      <artifactId>microshed-testing-testcontainers</artifactId>
-      <version>0.9</version>
-      <scope>test</scope>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-hibernate-orm-panache</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.microshed</groupId>
-      <artifactId>microshed-testing-liberty</artifactId>
-      <version>0.9</version>
-      <scope>test</scope>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-resteasy</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.testcontainers</groupId>
-      <artifactId>testcontainers</artifactId>
-      <version>1.16.0</version>
-      <scope>test</scope>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-jsonb</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.testcontainers</groupId>
-      <artifactId>mysql</artifactId>
-      <version>1.16.0</version>
-      <scope>test</scope>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-resteasy-jackson</artifactId>
     </dependency>
     <dependency>
-      <groupId>mysql</groupId>
-      <artifactId>mysql-connector-java</artifactId>
-      <version>8.0.21</version>
-      <scope>test</scope>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-smallrye-openapi</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.apache.httpcomponents</groupId>
-      <artifactId>httpclient</artifactId>
-      <version>4.5.12</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.mockito</groupId>
-      <artifactId>mockito-core</artifactId>
-      <version>3.5.13</version>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-junit5</artifactId>
       <scope>test</scope>
     </dependency>
   </dependencies>
   <build>
-    <finalName>tpack</finalName>
+    <plugins>
+      <plugin>
+        <groupId>${quarkus.platform.group-id}</groupId>
+        <artifactId>quarkus-maven-plugin</artifactId>
+        <version>${quarkus.platform.version}</version>
+        <extensions>true</extensions>
+        <executions>
+          <execution>
+            <goals>
+              <goal>build</goal>
+              <goal>generate-code</goal>
+              <goal>generate-code-tests</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>${compiler-plugin.version}</version>
+        <configuration>
+          <compilerArgs>
+            <arg>-parameters</arg>
+          </compilerArgs>
+        </configuration>
+      </plugin>
+      <plugin>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>${surefire-plugin.version}</version>
+        <configuration>
+          <systemPropertyVariables>
+            <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
+            <maven.home>${maven.home}</maven.home>
+          </systemPropertyVariables>
+        </configuration>
+      </plugin>
+    </plugins>
   </build>
   <profiles>
     <profile>
-      <id>liberty</id>
+      <id>native</id>
       <activation>
-        <activeByDefault>true</activeByDefault>
+        <property>
+          <name>native</name>
+        </property>
       </activation>
       <build>
         <plugins>
-
           <plugin>
-            <groupId>io.openliberty.tools</groupId>
-            <artifactId>liberty-maven-plugin</artifactId>
-            <version>${openliberty.maven.version}</version>
-            <executions>
-              <execution>
-                <id>package-server</id>
-                <phase>package</phase>
-                <goals>
-                  <goal>create</goal>
-                  <goal>install-feature</goal>
-                  <goal>deploy</goal>
-                  <goal>package</goal>
-                </goals>
-                <configuration>
-                  <outputDirectory>target/wlp-package</outputDirectory>
-                </configuration>
-              </execution>
-            </executions>
-            <configuration>
-              <include>runnable</include>
-              <serverName>${final.name}</serverName>
-              <bootstrapProperties>
-                <project.name>${final.name}</project.name>
-                <jwt.issuer>https://server.example.com</jwt.issuer>
-              </bootstrapProperties>
-            </configuration>
-          </plugin>
-
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-failsafe-plugin</artifactId>
-            <version>3.0.0-M5</version>
+            <version>${surefire-plugin.version}</version>
             <executions>
               <execution>
                 <goals>
                   <goal>integration-test</goal>
                   <goal>verify</goal>
                 </goals>
+                <configuration>
+                  <systemPropertyVariables>
+                    <native.image.path>${project.build.directory}/${project.build.finalName}-runner</native.image.path>
+                    <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
+                    <maven.home>${maven.home}</maven.home>
+                  </systemPropertyVariables>
+                </configuration>
               </execution>
             </executions>
           </plugin>
-
-          <plugin>
-            <groupId>com.google.code.maven-replacer-plugin</groupId>
-            <artifactId>replacer</artifactId>
-            <version>1.5.3</version>
-            <executions>
-              <execution>
-                <phase>prepare-package</phase>
-                <goals>
-                  <goal>replace</goal>
-                </goals>
-              </execution>
-            </executions>
-            <configuration>
-              <includes>
-                <include>${basedir}/ui/src/components/Session.vue</include>
-                <include>${basedir}/src/main/liberty/config/server.xml</include>
-              </includes>
-              <replacements>
-                <replacement>
-                  <token>REPLACE-HOST</token>
-                  <value>${replace.host}</value>
-                </replacement>
-                <replacement>
-                  <token>REPLACE-PORT</token>
-                  <value>${replace.port}</value>
-                </replacement>
-                <replacement>
-                  <token>REPLACE-API</token>
-                  <value>${replace.api}</value>
-                </replacement>
-                <replacement>
-                  <token>REPLACE-DB</token>
-                  <value>${replace.db}</value>
-                </replacement>
-              </replacements>
-            </configuration>
-          </plugin>
-
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-pmd-plugin</artifactId>
-            <version>3.13.0</version>
-            <configuration>
-              <rulesets>
-                <ruleset>/category/java/bestpractices.xml</ruleset>
-                <ruleset>pmd.xml</ruleset>
-              </rulesets>
-            </configuration>
-          </plugin>
-
         </plugins>
       </build>
+      <properties>
+        <quarkus.package.type>native</quarkus.package.type>
+      </properties>
     </profile>
   </profiles>
 </project>

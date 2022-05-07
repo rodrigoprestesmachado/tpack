@@ -1,7 +1,7 @@
 #! /bin/bash
 clear
 echo "----------------------------------"
-echo "1 - Clean Docker" 
+echo "1 - Clean Docker"
 echo "----------------------------------"
 docker stop $(docker ps -a -q)
 docker rm $(docker ps -a -q)
