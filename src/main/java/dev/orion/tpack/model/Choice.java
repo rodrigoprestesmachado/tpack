@@ -14,32 +14,42 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package dev.rpmhub.tpack.model;
+package dev.orion.tpack.model;
 
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
 import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Getter
-@Setter
-@Table(name = "PAGE")
-public class Page extends PanacheEntity {
+@Getter @Setter
+@Table(name = "CHOICE")
+public class Choice extends PanacheEntity {
+    private String text;
 
-    private String title;
+    @ManyToOne
+    @JsonBackReference
+    private Question question;
 
-    @OneToMany(mappedBy = "page", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
-    @JsonManagedReference
-    private List<Question> questions;
+    @OneToMany(mappedBy = "choice", cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+    private List<Answer> answers;
+
+    /* used just for multilevel questions */
+    @Column(nullable = true)
+    private Byte level;
+
+    /* jumps for this level when user choose this choice */
+    private Byte nextLevel;
 
 }

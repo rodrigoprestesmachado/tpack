@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package dev.rpmhub.tpack.endpoints;
+package dev.orion.tpack.endpoints;
 
 import java.util.HashMap;
 import java.util.List;
@@ -33,12 +33,12 @@ import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import dev.rpmhub.tpack.model.Answer;
-import dev.rpmhub.tpack.model.Choice;
-import dev.rpmhub.tpack.model.Page;
-import dev.rpmhub.tpack.model.Question;
-import dev.rpmhub.tpack.model.QuestionType;
-import dev.rpmhub.tpack.model.Subject;
+import dev.orion.tpack.model.Answer;
+import dev.orion.tpack.model.Choice;
+import dev.orion.tpack.model.Page;
+import dev.orion.tpack.model.Question;
+import dev.orion.tpack.model.QuestionType;
+import dev.orion.tpack.model.Subject;
 
 /**
  * Implements the API of the Tpack XS App

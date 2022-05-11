@@ -14,23 +14,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package dev.rpmhub.tpack.model;
+package dev.orion.tpack;
 
-/**
- * Indicates the question type available
- */
-public enum QuestionType {
+import io.quarkus.test.junit.QuarkusTest;
+import org.junit.jupiter.api.Test;
 
-    BINARY(0), SCALE(1), MULTIPLE(2), UNIQUE(3), YEAR(4), AGE(5), REGION(6), LABEL(7), SAVE(8), MULTILEVEL(9),
-    TEXTAREA(10);
+import static io.restassured.RestAssured.given;
 
-    private int value;
+@QuarkusTest
+public class TpackServiceTest {
 
-    QuestionType(int value) {
-        this.value = value;
+    @Test
+    public void getPagesTest() {
+        given()
+            .when().get("/tpack/getPages")
+            .then()
+            .statusCode(200);
     }
 
-    public int getValue() {
-        return value;
-    }
 }

@@ -14,11 +14,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package dev.rpmhub.tpack.model;
+package dev.orion.tpack.model;
+
+import java.sql.Timestamp;
+import java.util.Calendar;
+import java.util.List;
+import java.util.UUID;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
+import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
@@ -27,18 +33,29 @@ import lombok.Setter;
 
 @Entity
 @Getter @Setter
-@Table(name = "ANSWER")
-public class Answer extends PanacheEntity {
+@Table(name = "SUBJECT")
+public class Subject extends PanacheEntity {
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
-    private Subject subject;
+    private String token;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
-    private Question question;
+    private Timestamp moment;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
-    private Choice choice;
+    @OneToMany(mappedBy = "subject", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    private List<Answer> answers;
 
-    private String answer;
+    public Subject() {
+        Calendar calendar = Calendar.getInstance();
+        this.moment = new Timestamp(calendar.getTimeInMillis());
+        this.token = UUID.randomUUID().toString();
+    }
+
+    /**
+     * Adds a answer to a subject
+     *
+     * @param answer Answer object
+     */
+    public void addAnswer(Answer answer) {
+        this.answers.add(answer);
+    }
 
 }
