@@ -124,7 +124,7 @@
         <configuration>
           <rulesets>
             <ruleset>pmd.xml</ruleset>
-            <ruleset>https://raw.githubusercontent.com/rodrigoprestesmachado/tpack/master/pmd.xml</ruleset>
+            <ruleset>https://raw.githubusercontent.com/rodrigoprestesmachado/tpack/tpack-quarkus/pmd.xml</ruleset>
           </rulesets>
         </configuration>
       </plugin>
