@@ -21,15 +21,69 @@ import org.junit.jupiter.api.Test;
 
 import static io.restassured.RestAssured.given;
 
+import javax.ws.rs.core.MediaType;
+
 @QuarkusTest
 public class TpackServiceTest {
 
     @Test
-    public void getPagesTest() {
+    void getPagesTest() {
         given()
             .when().get("/tpack/getPages")
             .then()
             .statusCode(200);
     }
+
+    @Test
+    void getPageOk() {
+        given()
+            .when().get("/tpack/getPage/6")
+            .then()
+            .statusCode(200)
+            .contentType(MediaType.APPLICATION_JSON);
+    }
+
+    @Test
+    void getPage1Ok() {
+        given()
+            .when().get("/tpack/getPage/1")
+            .then()
+            .statusCode(200)
+            .contentType(MediaType.APPLICATION_JSON);
+    }
+
+    @Test
+    void getPage12Ok() {
+        given()
+            .when().get("/tpack/getPage/12")
+            .then()
+            .statusCode(200)
+            .contentType(MediaType.APPLICATION_JSON);
+    }
+
+    @Test
+    void getPage0Invalid() {
+        given()
+            .when().get("/tpack/getPage/0")
+            .then()
+            .statusCode(204); // NO CONTENT
+    }
+
+    @Test
+    void getPage13Invalid() {
+        given()
+            .when().get("/tpack/getPage/13")
+            .then()
+            .statusCode(204); // NO CONTENT
+    }
+
+    @Test
+    void getPageValueInvalid() {
+        given()
+            .when().get("/tpack/getPage/invalid")
+            .then()
+            .statusCode(404); // NOT FOUND
+    }
+
 
 }
