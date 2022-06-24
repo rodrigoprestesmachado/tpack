@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - master
+      - tpack-quarkus
   pull_request:
     types: [opened, synchronize, reopened]
 jobs:
