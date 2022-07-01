@@ -1,0 +1,116 @@
+{
+  "id": "66e9b999-ee28-42bd-9299-7a65e8401c96",
+  "version": "2.0",
+  "name": "tpack",
+  "url": "http://localhost:8081/tpack/",
+  "tests": [{
+    "id": "6ceab882-2f91-40b7-90cd-dad96d815226",
+    "name": "tpack-test",
+    "commands": [{
+      "id": "6a762c8a-4001-426f-9a4e-e3029fb29340",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:8081/tpack/#/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "96d92a40-ad72-49cb-9289-04560154786f",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1381x816",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "ccfe5cb2-6595-4016-9e69-367c9aa5c7d5",
+      "comment": "",
+      "command": "mouseOver",
+      "target": "css=.mdi-arrow-right",
+      "targets": [
+        ["css=.mdi-arrow-right", "css:finder"],
+        ["xpath=//div[@id='inspire']/div/main/div/div/div/div/div[4]/div[3]/button/span/i", "xpath:idRelative"],
+        ["xpath=//button/span/i", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "b16e6771-e441-4abb-b224-6c20d6c5a79c",
+      "comment": "",
+      "command": "click",
+      "target": "css=.mdi-arrow-right",
+      "targets": [
+        ["css=.mdi-arrow-right", "css:finder"],
+        ["xpath=//div[@id='inspire']/div/main/div/div/div/div/div[4]/div[3]/button/span/i", "xpath:idRelative"],
+        ["xpath=//button/span/i", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "60bf1ea7-bb7e-4bd5-a1fc-26b71dd79e9b",
+      "comment": "",
+      "command": "mouseOut",
+      "target": "css=.mdi-arrow-right",
+      "targets": [
+        ["css=.mdi-arrow-right", "css:finder"],
+        ["xpath=//div[@id='inspire']/div/main/div/div/div/div/div[8]/div[3]/button/span/i", "xpath:idRelative"],
+        ["xpath=//div[3]/button/span/i", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "06192011-985e-4de9-849e-c2f0a580c793",
+      "comment": "",
+      "command": "click",
+      "target": "css=.container:nth-child(3) .v-input:nth-child(2) .v-label",
+      "targets": [
+        ["css=.container:nth-child(3) .v-input:nth-child(2) .v-label", "css:finder"],
+        ["xpath=//div[@id='inspire']/div/main/div/div/div/div/div[3]/div/div[2]/div/div[2]/div/div/label", "xpath:idRelative"],
+        ["xpath=//label", "xpath:position"],
+        ["xpath=//label[contains(.,'Municipal')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "18bc0e49-6988-4e2a-90aa-7347e5705184",
+      "comment": "",
+      "command": "click",
+      "target": "css=.container:nth-child(4) .v-input:nth-child(4) .v-label",
+      "targets": [
+        ["css=.container:nth-child(4) .v-input:nth-child(4) .v-label", "css:finder"],
+        ["xpath=//div[@id='inspire']/div/main/div/div/div/div/div[4]/div/div[2]/div/div[4]/div/div/label", "xpath:idRelative"],
+        ["xpath=//div[4]/div/div[2]/div/div[4]/div/div/label", "xpath:position"],
+        ["xpath=//label[contains(.,'Médio')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "8fe0407a-63d3-4dab-b53c-96449b0a8d1f",
+      "comment": "",
+      "command": "click",
+      "target": "css=.container:nth-child(4) .v-input:nth-child(5) .v-label",
+      "targets": [
+        ["css=.container:nth-child(4) .v-input:nth-child(5) .v-label", "css:finder"],
+        ["xpath=//div[@id='inspire']/div/main/div/div/div/div/div[4]/div/div[2]/div/div[5]/div/div/label", "xpath:idRelative"],
+        ["xpath=//div[4]/div/div[2]/div/div[5]/div/div/label", "xpath:position"],
+        ["xpath=//label[contains(.,'Técnico')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "8251ccef-fef8-4cf0-9e76-a549f8c19bcb",
+      "comment": "",
+      "command": "click",
+      "target": "css=.v-input:nth-child(6) .v-label",
+      "targets": [
+        ["css=.v-input:nth-child(6) .v-label", "css:finder"],
+        ["xpath=//div[@id='inspire']/div/main/div/div/div/div/div[4]/div/div[2]/div/div[6]/div/div/label", "xpath:idRelative"],
+        ["xpath=//div[6]/div/div/label", "xpath:position"],
+        ["xpath=//label[contains(.,'Superior ou Tecnológico')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }],
+  "suites": [{
+    "id": "77eddf4a-f732-48cd-8076-28aa1ba98fc1",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": []
+  }],
+  "urls": ["http://localhost:8081/", "http://localhost:8081/tpack/"],
+  "plugins": []
+}
