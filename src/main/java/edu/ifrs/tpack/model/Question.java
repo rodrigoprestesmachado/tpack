@@ -28,7 +28,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.PostLoad;
 import javax.persistence.Transient;
 
 @Entity
@@ -61,18 +60,6 @@ public class Question {
     @OneToMany(mappedBy = "question", cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     @JsonbTransient
     private List<Answer> answers;
-
-    /**
-     * Calculates the levels for multilevel questions
-     */
-    @PostLoad
-    private void calculateLevels() {
-        if (this.type == QuestionType.MULTILEVEL) {
-            for (Choice choice : choices) {
-                this.levels = choice.getLevel() > this.levels ? choice.getLevel() : this.levels;
-            }
-        }
-    }
 
     public long getId() {
         return id;
