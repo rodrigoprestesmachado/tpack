@@ -25,7 +25,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
-public abstract class Repository<T> {
+public class Repository<T> {
 
     @PersistenceContext(name = "TpackDS")
     protected EntityManager em;
@@ -58,7 +58,7 @@ public abstract class Repository<T> {
     }
 
     /**
-     *  Deletes the object in the data base
+     * Deletes the object in the data base
      * 
      * @param The id of the object
      */
@@ -78,7 +78,8 @@ public abstract class Repository<T> {
     }
 
     /**
-     * Finds the value by colum 
+     * Finds the value by colum
+     * 
      * @param column
      * @param value
      * @return
