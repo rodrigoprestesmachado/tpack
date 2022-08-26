@@ -65,14 +65,6 @@ public class Question {
     /**
      * Calculates the levels for multilevel questions
      */
-    @PostLoad
-    private void calculateLevels() {
-        if (this.type == QuestionType.MULTILEVEL) {
-            for (Choice choice : choices) {
-                this.levels = choice.getLevel() > this.levels ? choice.getLevel() : this.levels;
-            }
-        }
-    }
 
     public long getId() {
         return id;
