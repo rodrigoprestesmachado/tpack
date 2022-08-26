@@ -28,7 +28,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.PostLoad;
 import javax.persistence.Transient;
 
 @Entity
@@ -64,8 +63,8 @@ public class Question {
 
     /**
      * Calculates the levels for multilevel questions
-     */
-    @PostLoad
+     
+    //@PostLoad
     private void calculateLevels() {
         if (this.type == QuestionType.MULTILEVEL) {
             for (Choice choice : choices) {
@@ -73,7 +72,7 @@ public class Question {
             }
         }
     }
-
+    */
     public long getId() {
         return id;
     }

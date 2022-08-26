@@ -26,7 +26,7 @@ import edu.ifrs.tpack.service.Controller;
 
 @ApplicationPath("/service")
 public class TpackApplication extends Application {
-
+//Classe TpackApplication. Endpoint "/service" .
     @Override
     public Set<Class<?>> getClasses() {
         final Set<Class<?>> resources = new HashSet<Class<?>>();
