@@ -49,6 +49,8 @@ public class Choice {
     /* jumps for this level when user choose this choice */
     private byte nextLevel;
 
+    private String testepmd;
+
     public long getId() {
         return id;
     }
