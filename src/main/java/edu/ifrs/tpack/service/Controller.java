@@ -109,8 +109,8 @@ public class Controller extends BaseController {
         answer.setSubject(subject);
         answer.setQuestion(question);
         answer.setAnswer(data);
-        if (choice != null)
-            answer.setChoice(choice);
+        if (choice != null){
+            answer.setChoice(choice);}
         daoAnswer.create(answer);
     }
 
