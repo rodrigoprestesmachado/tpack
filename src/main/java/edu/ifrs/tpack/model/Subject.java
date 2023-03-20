@@ -51,7 +51,7 @@ public class Subject {
      * Construtor
      */
     public Subject() {
-        Calendar calendar = Calendar.getInstance();
+        final Calendar calendar = Calendar.getInstance();
         this.moment = new Timestamp(calendar.getTimeInMillis());
         this.token = UUID.randomUUID().toString();
     }
@@ -61,7 +61,7 @@ public class Subject {
      * 
      * @param answer Answer object
      */
-    public void addAnswer(Answer answer) {
+    public void addAnswer(final Answer answer) {
         this.answers.add(answer);
     }
 

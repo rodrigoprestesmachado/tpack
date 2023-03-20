@@ -53,7 +53,7 @@ public class Choice {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(final long id) {
         this.id = id;
     }
 
@@ -61,7 +61,7 @@ public class Choice {
         return text;
     }
 
-    public void setText(String text) {
+    public void setText(final String text) {
         this.text = text;
     }
 
@@ -70,7 +70,7 @@ public class Choice {
         return question;
     }
 
-    public void setQuestion(Question question) {
+    public void setQuestion(final Question question) {
         this.question = question;
     }
 
@@ -78,7 +78,7 @@ public class Choice {
         return answers;
     }
 
-    public void setAnswers(List<Answer> answers) {
+    public void setAnswers(final List<Answer> answers) {
         this.answers = answers;
     }
 
@@ -86,7 +86,7 @@ public class Choice {
         return level;
     }
 
-    public void setLevel(byte level) {
+    public void setLevel(final byte level) {
         this.level = level;
     }
 
@@ -94,7 +94,7 @@ public class Choice {
         return nextLevel;
     }
 
-    public void setNextLevel(byte nextLevel) {
+    public void setNextLevel(final byte nextLevel) {
         this.nextLevel = nextLevel;
     }
 

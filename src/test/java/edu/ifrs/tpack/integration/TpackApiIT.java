@@ -16,17 +16,6 @@
  */
 package edu.ifrs.tpack.integration;
 
-import static org.junit.Assert.assertEquals;
-
-import java.io.IOException;
-
-import org.apache.http.HttpResponse;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-
 /**
  * Integration test of TPACK XS Application
  */

@@ -64,9 +64,9 @@ public class Controller extends BaseController {
 
         // converts the json to a map
         final Jsonb jsonb = JsonbBuilder.create();
-        Map<String, String> map = jsonb.fromJson(jsonString, HashMap.class);
+        final Map<String, String> map = jsonb.fromJson(jsonString, HashMap.class);
 
-        Subject subject = new Subject();
+        final Subject subject = new Subject();
         try {
             // stores the subject
             daoSubject.create(subject);
@@ -77,9 +77,9 @@ public class Controller extends BaseController {
                     // handles multiple choices questions
                     if (question.getType() == QuestionType.MULTIPLE || question.getType() == QuestionType.MULTILEVEL
                             || question.getType() == QuestionType.UNIQUE) {
-                        String[] strAnswer = entry.getValue().split(",");
-                        for (String id : strAnswer) {
-                            Choice choice = this.daoChoice.find(Long.parseLong(id));
+                        final String[] strAnswer = entry.getValue().split(",");
+                        for (final String id : strAnswer) {
+                            final Choice choice = this.daoChoice.find(Long.parseLong(id));
                             this.createAnswer(subject, question, choice, entry.getValue());
                         }
                     } else {
@@ -104,13 +104,14 @@ public class Controller extends BaseController {
      * @param choice   Choice object for multiple selection question
      * @param data     Represents the answer in string format
      */
-    private void createAnswer(Subject subject, Question question, Choice choice, String data) {
+    private void createAnswer(final Subject subject, final Question question, final  Choice choice, final  String data) {
         final Answer answer = new Answer();
         answer.setSubject(subject);
         answer.setQuestion(question);
         answer.setAnswer(data);
-        if (choice != null)
+        if (choice != null) {
             answer.setChoice(choice);
+        }
         daoAnswer.create(answer);
     }
 

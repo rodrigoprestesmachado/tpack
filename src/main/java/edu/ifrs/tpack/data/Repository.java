@@ -28,10 +28,10 @@ import javax.persistence.criteria.Root;
 public abstract class Repository<T> {
 
     @PersistenceContext(name = "TpackDS")
-    protected EntityManager em;
+    protected EntityManager entityManager;
 
     public T create(final T obj) {
-        this.em.persist(obj);
+        this.entityManager.persist(obj);
         return obj;
     }
 
@@ -41,11 +41,11 @@ public abstract class Repository<T> {
      * @return A List of T objects
      */
     public List<T> read() {
-        final CriteriaBuilder builder = em.getCriteriaBuilder();
+        final CriteriaBuilder builder = entityManager.getCriteriaBuilder();
         final CriteriaQuery<T> criteria = builder.createQuery(this.genericClass());
         final Root<T> root = criteria.from(this.genericClass());
         criteria.select(root);
-        return em.createQuery(criteria).getResultList();
+        return entityManager.createQuery(criteria).getResultList();
     }
 
     /**
@@ -53,8 +53,8 @@ public abstract class Repository<T> {
      * 
      * @param The T object
      */
-    public void update(T obj) {
-        this.em.merge(obj);
+    public void update(final T obj) {
+        this.entityManager.merge(obj);
     }
 
     /**
@@ -62,9 +62,9 @@ public abstract class Repository<T> {
      * 
      * @param The id of the object
      */
-    public void delete(Long id) {
-        T obj = em.find(this.genericClass(), id);
-        this.em.remove(obj);
+    public void delete(final Long id) {
+        final T obj = entityManager.find(this.genericClass(), id);
+        this.entityManager.remove(obj);
     }
 
     /**
@@ -73,8 +73,8 @@ public abstract class Repository<T> {
      * @param The id of teh object
      * @return The T object
      */
-    public T find(Long id) {
-        return em.find(this.genericClass(), id);
+    public T find(final Long id) {
+        return entityManager.find(this.genericClass(), id);
     }
 
     /**
@@ -83,12 +83,12 @@ public abstract class Repository<T> {
      * @param value
      * @return
      */
-    public T find(String column, String value) {
-        final CriteriaBuilder builder = em.getCriteriaBuilder();
+    public T find(final String column, final String value) {
+        final CriteriaBuilder builder = entityManager.getCriteriaBuilder();
         final CriteriaQuery<T> criteria = builder.createQuery(this.genericClass());
-        Root<T> root = criteria.from(this.genericClass());
+        final Root<T> root = criteria.from(this.genericClass());
         criteria.select(root).where(builder.equal(root.get(column), value));
-        return em.createQuery(criteria).getSingleResult();
+        return entityManager.createQuery(criteria).getSingleResult();
     }
 
     @SuppressWarnings("unchecked")
