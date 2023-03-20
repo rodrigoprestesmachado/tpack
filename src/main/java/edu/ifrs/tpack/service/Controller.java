@@ -137,6 +137,10 @@ public class Controller extends BaseController {
     @Path("/getFirstSession")
     @Produces(MediaType.APPLICATION_JSON)
     @Transactional
+    /**
+     * 
+     * @return
+     */
     public Session getFirstSession() {
         return daoSession.getFirstSession();
     }
@@ -145,6 +149,12 @@ public class Controller extends BaseController {
     @Path("/getSession/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     @Transactional
+    
+    /**
+     * 
+     * @param id
+     * @return
+     */
     public Session getSession(@PathParam("id") final long id) {
         return daoSession.find(id);
     }
