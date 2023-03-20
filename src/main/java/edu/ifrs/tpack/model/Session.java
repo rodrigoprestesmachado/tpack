@@ -27,16 +27,28 @@ import javax.persistence.OneToMany;
 
 import lombok.Data;
 
+/**
+* @description Session
+*/
 @Data
 @Entity
 public class Session {
 
+    /**
+* @description id
+*/
     @Id
     @GeneratedValue
     private long id;
 
+/**
+* @description title
+*/
     private String title;
 
+    /**
+* @description questions
+*/
     @OneToMany(mappedBy = "session", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     private List<Question> questions;
 
