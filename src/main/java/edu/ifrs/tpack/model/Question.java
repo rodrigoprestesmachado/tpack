@@ -32,6 +32,9 @@ import javax.persistence.PostLoad;
 import javax.persistence.Transient;
 
 @Entity
+/**
+ * @description Implementando os relacionamentos da classe Question
+ */
 public class Question {
 
     @Id

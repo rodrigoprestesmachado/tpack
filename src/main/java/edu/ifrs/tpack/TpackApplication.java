@@ -25,6 +25,9 @@ import javax.ws.rs.core.Application;
 import edu.ifrs.tpack.service.Controller;
 
 @ApplicationPath("/service")
+/**
+ * @description Interface para os métodos a serem implementados no Application
+ */
 public class TpackApplication extends Application {
 
     @Override
