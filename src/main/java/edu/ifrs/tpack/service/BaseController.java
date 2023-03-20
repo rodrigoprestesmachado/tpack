@@ -29,13 +29,28 @@ import edu.ifrs.tpack.data.DAOSubject;
  */
 public class BaseController {
     @Inject
+    /**
+     * @Inject é usada para injetar a dependência do objeto DAOSubject no código
+     */
     protected DAOSession daoSession;
     @Inject
+    /**
+     * @Inject é usada para injetar a dependência do objeto DAOSubject no código
+     */
     protected DAOSubject daoSubject;
     @Inject
+    /**
+     * @Inject é usada para injetar a dependência do objeto DAOSubject no código
+     */
     protected DAOQuestion daoQuestion;
     @Inject
+    /**
+     * @Inject é usada para injetar a dependência do objeto DAOSubject no código
+     */
     protected DAOAnswer daoAnswer;
     @Inject
+    /**
+     * @Inject é usada para injetar a dependência do objeto DAOSubject no código
+     */
     protected DAOChoice daoChoice;
 }
