@@ -68,7 +68,7 @@ public class Question {
     @PostLoad
     private void calculateLevels() {
         if (this.type == QuestionType.MULTILEVEL) {
-            for (Choice choice : choices) {
+            for (final Choice choice : choices) {
                 this.levels = choice.getLevel() > this.levels ? choice.getLevel() : this.levels;
             }
         }
@@ -78,7 +78,7 @@ public class Question {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(final long id) {
         this.id = id;
     }
 
@@ -86,7 +86,7 @@ public class Question {
         return text;
     }
 
-    public void setText(String text) {
+    public void setText(final String text) {
         this.text = text;
     }
 
@@ -94,7 +94,7 @@ public class Question {
         return note;
     }
 
-    public void setNote(String note) {
+    public void setNote(final String note) {
         this.note = note;
     }
 
@@ -102,7 +102,7 @@ public class Question {
         return type;
     }
 
-    public void setType(QuestionType type) {
+    public void setType(final QuestionType type) {
         this.type = type;
     }
 
@@ -110,7 +110,7 @@ public class Question {
         return levels;
     }
 
-    public void setLevels(byte levels) {
+    public void setLevels(final byte levels) {
         this.levels = levels;
     }
 
@@ -119,7 +119,7 @@ public class Question {
         return session;
     }
 
-    public void setSession(Session session) {
+    public void setSession(final Session session) {
         this.session = session;
     }
 
@@ -127,7 +127,7 @@ public class Question {
         return answers;
     }
 
-    public void setAnswers(List<Answer> answers) {
+    public void setAnswers(final List<Answer> answers) {
         this.answers = answers;
     }
 
@@ -135,7 +135,7 @@ public class Question {
         return choices;
     }
 
-    public void setChoices(List<Choice> choices) {
+    public void setChoices(final List<Choice> choices) {
         this.choices = choices;
     }
 }

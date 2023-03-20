@@ -45,7 +45,7 @@ public class Answer {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(final long id) {
         this.id = id;
     }
 
@@ -53,7 +53,7 @@ public class Answer {
         return subject;
     }
 
-    public void setSubject(Subject subject) {
+    public void setSubject(final Subject subject) {
         this.subject = subject;
     }
 
@@ -61,7 +61,7 @@ public class Answer {
         return question;
     }
 
-    public void setQuestion(Question question) {
+    public void setQuestion(final Question question) {
         this.question = question;
     }
 
@@ -70,7 +70,7 @@ public class Answer {
         return answer;
     }
 
-    public void setAnswer(String answer) {
+    public void setAnswer(final String answer) {
         this.answer = answer;
     }
 
@@ -78,7 +78,7 @@ public class Answer {
         return choice;
     }
 
-    public void setChoice(Choice choice) {
+    public void setChoice(final Choice choice) {
         this.choice = choice;
     }
 

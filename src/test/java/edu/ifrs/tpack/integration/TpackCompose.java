@@ -41,16 +41,17 @@ public class TpackCompose implements BeforeAllCallback, AfterAllCallback {
     public static MySQLContainer<?> mysql;
 
     @Override
-    public void beforeAll(ExtensionContext context) throws Exception {
+    public void beforeAll(final ExtensionContext context) throws Exception {
 
         // Create a private network for the containers
-        Network network = Network.newNetwork();
+        final Network network = Network.newNetwork();
 
         // Create a MySQL container to work with tpack service
         mysql = new MySQLContainer<>("mysql:latest");
-        mysql.withDatabaseName("tpack");
-        mysql.withUsername("tpack");
-        mysql.withPassword("tpack");
+        final String string = "tpack";
+        mysql.withDatabaseName(string);
+        mysql.withUsername(string);
+        mysql.withPassword(string);
         mysql.withNetworkAliases("db");
         mysql.withExposedPorts(3306);
         mysql.waitingFor(Wait.forListeningPort().withStartupTimeout(Duration.ofSeconds(60)));
@@ -58,7 +59,7 @@ public class TpackCompose implements BeforeAllCallback, AfterAllCallback {
 
         // Set network for tpack service
         tpack.withExposedPorts(9080);
-        tpack.withNetworkAliases("tpack");
+        tpack.withNetworkAliases(string);
         tpack.withNetwork(network);
 
         // Start the containers
