@@ -18,6 +18,10 @@ package edu.ifrs.tpack.data;
 
 import edu.ifrs.tpack.model.Subject;
 
+/**
+ * 
+ * @tested
+ */
 public class DAOSubject extends Repository<Subject> {
 
 }

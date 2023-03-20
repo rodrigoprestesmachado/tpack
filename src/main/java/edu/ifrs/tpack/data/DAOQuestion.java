@@ -18,6 +18,10 @@ package edu.ifrs.tpack.data;
 
 import edu.ifrs.tpack.model.Question;
 
+/**
+ * 
+ * @tested
+ */
 public class DAOQuestion extends Repository<Question> {
 
 }

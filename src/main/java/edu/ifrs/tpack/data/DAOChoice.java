@@ -18,6 +18,10 @@ package edu.ifrs.tpack.data;
 
 import edu.ifrs.tpack.model.Choice;
 
+/**
+ * 
+ * @tested
+ */
 public class DAOChoice extends Repository<Choice> {
 
 }

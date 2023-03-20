@@ -27,25 +27,53 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+/**
+ * 
+ * @tested
+ */
 @Entity
 public class Choice {
 
+/**
+ * 
+ * @tested
+ */
     @Id
     @GeneratedValue
     private long id;
 
+/**
+ * 
+ * @tested
+ */
     private String text;
 
+/**
+ * 
+ * @tested
+ */
     @ManyToOne
     private Question question;
 
+/**
+ * 
+ * @tested
+ */
     @OneToMany(mappedBy = "choice", cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     @JsonbTransient
     private List<Answer> answers;
 
+/**
+ * 
+ * @tested
+ */
     /* used just for multilevel questions */
     private byte level;
 
+/**
+ * 
+ * @tested
+ */
     /* jumps for this level when user choose this choice */
     private byte nextLevel;
 

@@ -31,33 +31,69 @@ import javax.persistence.OneToMany;
 import javax.persistence.PostLoad;
 import javax.persistence.Transient;
 
+/**
+ * 
+ * @tested
+ */
 @Entity
 public class Question {
 
+/**
+ * 
+ * @tested
+ */
     @Id
     @GeneratedValue
     private long id;
 
+/**
+ * 
+ * @tested
+ */
     @Column(name = "TEXT", length = 1500)
     private String text;
 
+/**
+ * 
+ * @tested
+ */
     /* one explanation about the question */
     private String note;
 
+/**
+ * 
+ * @tested
+ */
     /* identify the type of the question */
     private QuestionType type;
 
+/**
+ * 
+ * @tested
+ */
     /* indicates the number os levels in multilevel questions */
     @Transient
     private byte levels;
 
+/**
+ * 
+ * @tested
+ */
     @ManyToOne
     @JoinColumn(name = "SESSION_ID", nullable = false)
     private Session session;
 
+/**
+ * 
+ * @tested
+ */
     @OneToMany(mappedBy = "question", cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     private List<Choice> choices;
 
+/**
+ * 
+ * @tested
+ */
     @OneToMany(mappedBy = "question", cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     @JsonbTransient
     private List<Answer> answers;
