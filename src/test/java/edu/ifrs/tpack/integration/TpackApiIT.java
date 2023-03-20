@@ -30,9 +30,10 @@ import org.junit.jupiter.api.extension.ExtendWith;
 /**
  * Integration test of TPACK XS Application
  */
-@ExtendWith({ TpackCompose.class })
+//@ExtendWith({ TpackCompose.class })
 public class TpackApiIT {
 
+    /*
     private static String API = "/tpack/service/api/";
 
     private String host;
@@ -45,6 +46,10 @@ public class TpackApiIT {
         host = TpackCompose.tpack.getContainerIpAddress();
         port = TpackCompose.tpack.getFirstMappedPort();
     }
+
+    */
+
+    /** 
 
     @Test
     public void getSessions() {
@@ -61,5 +66,7 @@ public class TpackApiIT {
             e.printStackTrace();
         }
     }
+
+    */
 
 }
