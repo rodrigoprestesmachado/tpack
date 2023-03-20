@@ -26,7 +26,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-
+/**
+ * @description classe Choice e seus relacionamentos
+ */
 @Entity
 public class Choice {
 

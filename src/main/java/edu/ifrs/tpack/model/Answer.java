@@ -23,6 +23,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+/**
+ * @description classe Answer e seus relacionamentos
+ */
 @Entity
 public class Answer {
 
