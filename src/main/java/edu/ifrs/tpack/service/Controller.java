@@ -133,6 +133,10 @@ public class Controller extends BaseController {
         }
     }
 
+    /**
+     * 
+     * @return
+     */
     @GET
     @Path("/getFirstSession")
     @Produces(MediaType.APPLICATION_JSON)
@@ -141,6 +145,10 @@ public class Controller extends BaseController {
         return daoSession.getFirstSession();
     }
 
+    /**
+     * 
+     * @return
+     */
     @GET
     @Path("/getSession/{id}")
     @Produces(MediaType.APPLICATION_JSON)

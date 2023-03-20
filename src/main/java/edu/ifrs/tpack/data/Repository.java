@@ -25,11 +25,23 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
+/**
+ * 
+ * @tested
+ */
 public abstract class Repository<T> {
 
+/**
+ * 
+ * @tested
+ */
     @PersistenceContext(name = "TpackDS")
     protected EntityManager em;
 
+/**
+ * 
+ * @tested
+ */
     public T create(final T obj) {
         this.em.persist(obj);
         return obj;

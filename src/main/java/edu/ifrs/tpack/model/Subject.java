@@ -31,19 +31,39 @@ import javax.persistence.OneToMany;
 
 import lombok.Data;
 
+/**
+ * 
+ * @tested
+ */
 @Data
 @Entity
 public class Subject {
 
+/**
+ * 
+ * @tested
+ */
     @Id
     @GeneratedValue
     @JsonbTransient
     private long id;
 
+/**
+ * 
+ * @tested
+ */
     private String token;
 
+/**
+ * 
+ * @tested
+ */
     private Timestamp moment;
 
+/**
+ * 
+ * @tested
+ */
     @OneToMany(mappedBy = "subject", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     private List<Answer> answers;
 

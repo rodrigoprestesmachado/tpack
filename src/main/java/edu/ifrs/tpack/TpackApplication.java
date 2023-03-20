@@ -24,6 +24,10 @@ import javax.ws.rs.core.Application;
 
 import edu.ifrs.tpack.service.Controller;
 
+/**
+ * 
+ * @return
+ */
 @ApplicationPath("/service")
 public class TpackApplication extends Application {
 

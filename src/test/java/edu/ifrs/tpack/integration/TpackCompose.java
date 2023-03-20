@@ -33,11 +33,19 @@ import org.testcontainers.junit.jupiter.Container;
  */
 public class TpackCompose implements BeforeAllCallback, AfterAllCallback {
 
+    /**
+     * 
+     * @return
+     */
     // Configure the a tpack application container from Dockerfile
     @Container
     public static ApplicationContainer tpack = new ApplicationContainer().withAppContextRoot("/tpack")
             .waitingFor(Wait.forHttp("/"));
 
+    /**
+     * 
+     * @return
+     */
     public static MySQLContainer<?> mysql;
 
     @Override
