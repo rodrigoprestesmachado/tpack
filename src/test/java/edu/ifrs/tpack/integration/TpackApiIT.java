@@ -23,10 +23,8 @@ public class TpackApiIT {
 
     /**
     private static String API = "/tpack/service/api/";
-
     private String host;
     private Integer port;
-
     private CloseableHttpClient client;
 
     public TpackApiIT() {
