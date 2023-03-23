@@ -1,18 +1,6 @@
 /**
  * @License
  * Copyright 2020 TPACK XS Application
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
  */
 package edu.ifrs.tpack.service;
 
@@ -62,7 +50,9 @@ public class Controller extends BaseController {
     public Subject save(final String jsonString) {
         String errorMessage = null;
 
-        // converts the json to a map
+        /**
+        * @description converts the json to a map
+        */
         final Jsonb jsonb = JsonbBuilder.create();
         Map<String, String> map = jsonb.fromJson(jsonString, HashMap.class);
 
@@ -133,6 +123,9 @@ public class Controller extends BaseController {
         }
     }
 
+    /**
+    * @description public Session getFirstSession
+    */
     @GET
     @Path("/getFirstSession")
     @Produces(MediaType.APPLICATION_JSON)
@@ -141,6 +134,9 @@ public class Controller extends BaseController {
         return daoSession.getFirstSession();
     }
 
+    /**
+    * @description public Session getSession(@PathParam("id") final long id)
+    */    
     @GET
     @Path("/getSession/{id}")
     @Produces(MediaType.APPLICATION_JSON)

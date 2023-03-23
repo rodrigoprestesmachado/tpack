@@ -1,18 +1,6 @@
 /**
  * @License
  * Copyright 2020 TPACK XS Application
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
  */
 package edu.ifrs.tpack.model;
 
@@ -23,61 +11,108 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+/**
+ * @description public class Answer
+ */
 @Entity
 public class Answer {
-
+    /**
+    * @description GeneratedValue
+    */
     @Id
     @GeneratedValue
     private long id;
 
+    /**
+    * @description ManyToOne(cascade = CascadeType.PERSIST)
+    */
     @ManyToOne(cascade = CascadeType.PERSIST)
     private Subject subject;
 
+    /**
+    * @description ManyToOne(cascade = CascadeType.PERSIST)
+    */
     @ManyToOne(cascade = CascadeType.PERSIST)
     private Question question;
 
+    /**
+    * @description ManyToOne(cascade = CascadeType.PERSIST
+    */
     @ManyToOne(cascade = CascadeType.PERSIST)
     private Choice choice;
 
+    /**
+    * @description String answer
+    */
     private String answer;
 
+    /**
+    * @description long getId() 
+    */
     public long getId() {
         return id;
     }
 
+    /**
+    * @description void setId(long id)
+    */
     public void setId(long id) {
         this.id = id;
     }
 
+    /**
+    * @description Subject getSubject()
+    */
     public Subject getSubject() {
         return subject;
     }
 
+    /**
+    * @description void setSubject(Subject subject)
+    */
     public void setSubject(Subject subject) {
         this.subject = subject;
     }
 
+    /**
+    * @description Question getQuestion()
+    */
     public Question getQuestion() {
         return question;
     }
 
+    /**
+    * @description void setQuestion(Question question)
+    */
     public void setQuestion(Question question) {
         this.question = question;
     }
 
+    /**
+    * @description String getAnswer() 
+    */
     @JsonbTransient
     public String getAnswer() {
         return answer;
     }
 
+    /**
+    * @description void setAnswer(String answer)
+    */
     public void setAnswer(String answer) {
         this.answer = answer;
     }
 
+    /**
+    * @description Choice getChoice()
+    */
     public Choice getChoice() {
         return choice;
     }
 
+    /**
+    * @description void setChoice(Choice choice)
+    */
     public void setChoice(Choice choice) {
         this.choice = choice;
     }
