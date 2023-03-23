@@ -21,21 +21,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 //@ExtendWith({ TpackCompose.class })
 public class TpackApiIT {
 
-    /**
-    private static String API = "/tpack/service/api/";
-    private String host;
-    private Integer port;
-    private CloseableHttpClient client;
-
-    public TpackApiIT() {
-        this.client = HttpClients.createDefault();
-        host = TpackCompose.tpack.getContainerIpAddress();
-        port = TpackCompose.tpack.getFirstMappedPort();
-    }
-
-    */
-
-    /** 
+    
 
     @Test
     public void getSessions() {
